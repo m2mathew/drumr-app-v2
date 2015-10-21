@@ -22,3 +22,11 @@ data models
 ### APIs, Libraries, Plug-ins, and Frameworks
 
 which ones will I use?
+
+### Get in touch to learn more
+
+<a href="http://www.drumsensei.com">Blog</a>
+
+<a href="https://twitter.com/drumsensei">@drumsensei</a> on Twitter
+
+<a href="https://www.linkedin.com/in/m2mathew">Mike Mathew</a> on LinkedIn

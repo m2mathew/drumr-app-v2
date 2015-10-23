@@ -21,11 +21,16 @@ wireframes go here
 
 ### Models
 
-data models
 
 ### APIs, Libraries, Plug-ins, and Frameworks
 
-which ones will I use?
+Wikipedia API
+
+Drummerworld data (after asking permission)
+
+React.js
+
+Bourbon/Neat
 
 ### Get in touch to learn more
 

@@ -10,8 +10,16 @@ var assign = require('lodash.assign');
 var babelify = require('babelify');
 var webserver = require('gulp-webserver');
 var path = require('path');
+var minimist = require('minimist');
+
+var prompt = require('gulp-prompt');
+var rimraf = require('gulp-rimraf');
+var uglify = require('gulp-uglify');
+var minifyCss = require('gulp-minify-css');
 var sass = require('gulp-sass');
 var rename = require('gulp-rename');
+var imagemin = require('gulp-imagemin');
+var ignore = require('gulp-ignore');
 
 // add custom browserify options here
 var customOpts = {
@@ -74,93 +82,109 @@ gulp.task('serve-sass', function() {
 	.pipe(gulp.dest(path.join('styles')));
 });
 
-// gulp.task('build', ['clean', 'copy', 'js', 'css', 'sass', 'images']);
+gulp.task('build', ['clean', 'copy', 'js', 'css', 'sass', 'images']);
 
-// gulp.task('clean', function(cb) {
-// 	var argv = validateCli();
+gulp.task('clean', function(cb) {
+	var argv = validateCli();
 
-// 	return gulp.src(argv.o, {read: false})
-// 	.pipe(prompt.confirm('The output directory "'+path.join(__dirname, argv.o)+'" will be removed. Are you sure you want to do this?'))
-// 	.pipe(rimraf());
-// });
+	var stuffToClean = [
+		'images',
+		'node_modules',
+		'scripts',
+		'styles',
+		'.gitignore',
+		'index.html',
+		'package.json',
+		'README.md'
+	];
 
-// gulp.task('copy', ['clean'], function() {
-// 	var argv = validateCli();
-// 	return gulp.src(['**/*', '!styles/**/*.scss', '!styles/**/*.sass'])
-// 	.pipe(gulp.dest(argv.o));
-// });
+	stuffToClean = stuffToClean.map(function(p) {
+		return path.join(argv.o, p);
+	});
 
-// gulp.task('js', ['copy'], function() {
-// 	var argv = validateCli();
+	return gulp.src(stuffToClean, {read: false})
+	.pipe(prompt.confirm('The output directory "'+path.join(__dirname, argv.o)+'" will be removed. Are you sure you want to do this?'))
+	.pipe(rimraf({ force: true }));
+});
 
-// 	var p = browserify('scripts/main.js', { debug: true })
-// 	.transform(babelify)
-// 	.bundle()
-// 	.pipe(source('bundle.js'))
-// 	.pipe(buffer())
-// 	.on('error', function (err) { console.log('Error : ' + err.message); });
+gulp.task('copy', ['clean'], function() {
+	var argv = validateCli();
+	return gulp.src(['**/*', '!styles/**/*.scss', '!styles/**/*.sass'])
+	.pipe(gulp.dest(argv.o));
+});
 
-// 	if(argv.min) {
-// 		p.pipe(uglify());
-// 	}
+gulp.task('js', ['copy'], function() {
+	var argv = validateCli();
 
-// 	p.pipe(gulp.dest(path.join(argv.o, 'scripts')));
+	var p = browserify({ entries: ['./scripts/main.js'], debug: true })
+	.transform(babelify)
+	.bundle()
+	.on('error', gutil.log.bind(gutil, 'Browserify Error'))
+	.pipe(source('bundle.js'))
+	.pipe(buffer())
+	.on('error', function (err) { console.log('Error : ' + err.message); });
 
-// 	return p;
-// });
+	if(argv.min) {
+		p.pipe(uglify());
+	}
 
-// gulp.task('css', ['copy'], function() {
-// 	var argv = validateCli();
+	p.pipe(gulp.dest(path.join(argv.o, 'scripts')));
 
-// 	if(!argv.min) {
-// 		return false;
-// 	}
+	return p;
+});
 
-// 	return gulp.src('styles/**/*.css')
-// 	.pipe(minifyCss({compatibility: 'ie8'}))
-// 	.pipe(gulp.dest(path.join(argv.o, 'styles')));
-// });
+gulp.task('css', ['copy'], function() {
+	var argv = validateCli();
 
-// gulp.task('sass', ['copy'], function() {
-// 	var argv = validateCli();
+	if(!argv.min) {
+		return false;
+	}
 
-// 	var pi = gulp.src('styles/**/*.{scss,sass}')
-// 	.pipe(sass({
-// 		errLogToConsole: true
-// 	}).on('error', sass.logError))
-// 	.on('error', function(err) {
-// 		console.log(err);
-// 	})
-// 	.pipe(rename(function(p) {
-// 		p.basename += '.sass';
-// 		p.extname = '.css';
-// 	}));
-// 	if(argv.min) {
-// 		pi.pipe(minifyCss({compatibility: 'ie8'}));
-// 	}
-// 	pi.pipe(gulp.dest(path.join(argv.o, 'styles')));
+	return gulp.src('styles/**/*.css')
+	.pipe(minifyCss({compatibility: 'ie8'}))
+	.pipe(gulp.dest(path.join(argv.o, 'styles')));
+});
 
-// 	return pi;
-// });
+gulp.task('sass', ['copy'], function() {
+	var argv = validateCli();
 
-// gulp.task('images', ['copy'], function() {
-// 	var argv = validateCli();
+	var pi = gulp.src('styles/**/*.{scss,sass}')
+	.pipe(sass({
+		errLogToConsole: true
+	}).on('error', sass.logError))
+	.on('error', function(err) {
+		console.log(err);
+	})
+	.pipe(rename(function(p) {
+		p.basename += '.sass';
+		p.extname = '.css';
+	}));
+	if(argv.min) {
+		pi.pipe(minifyCss({compatibility: 'ie8'}));
+	}
+	pi.pipe(gulp.dest(path.join(argv.o, 'styles')));
 
-// 	if(!argv.min) {
-// 		return false;
-// 	}
+	return pi;
+});
 
-// 	return gulp.src('images/**/*')
-//     .pipe(imagemin({
-//         progressive: true
-//     }))
-//     .pipe(gulp.dest(path.join(argv.o, 'images')));
-// });
+gulp.task('images', ['copy'], function() {
+	var argv = validateCli();
 
-// function validateCli() {
-// 	var argv = minimist(process.argv.slice(2));
-// 	if(!argv.o) {
-// 		throw 'You must specify and output directory for `gulp deploy`. Format: `gulp deploy -o outputdir [--minify]`';
-// 	}
-// 	return argv;
-// }
+	if(!argv.min) {
+		return false;
+	}
+
+	return gulp.src('images/**/*')
+    .pipe(imagemin({
+        progressive: true
+    }))
+    .pipe(gulp.dest(path.join(argv.o, 'images')));
+});
+
+function validateCli() {
+	var argv = minimist(process.argv.slice(2));
+	if(!argv.o) {
+		throw 'You must specify and output directory for `gulp deploy`. Format: `gulp deploy -o outputdir [--minify]`';
+	}
+	return argv;
+}

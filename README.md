@@ -21,6 +21,7 @@ wireframes go here
 
 ### Models
 
+<img src=images/eardrum-data-models.png">
 
 ### APIs, Libraries, Plug-ins, and Frameworks
 

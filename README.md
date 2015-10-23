@@ -7,7 +7,7 @@ A song comes on the radio. You recognize that earth-shattering beat pounding on 
 
 You need EarDrum. When you have that burning desire to know which drummer is in your headphones, EarDrum is your new helper.
 
-When you start EarDrum, you enter the band's name to search for the drummer of the group. You are presented with facts about the drummer such as background, bands, recordings, pictures, and videos. This is a great place to learn more about your favorite stick-wielding musician. If you already know the name of a drummer, you can go learn more and impress your friends with the depth of your percussive prowess.
+When you start EarDrum, you enter the band's name to search for the drummer of the group. You are presented with facts about the drummer such as background, bands, recordings, pictures, and videos. This is a great place to learn more about your favorite stick-wielding musician. If you already know the name of a drummer, you can enter it into the search bar and learn more to impress your friends with the depth of your percussive prowess.
 
 Fire up EarDrum to get in touch with your primal instincts and learn more about the drummers that drive your favorite bands.
 
@@ -27,7 +27,7 @@ wireframes go here
 
 Wikipedia API
 
-Drummerworld data (after asking permission)
+Info from drummerworld.com (after asking permission)
 
 React.js
 

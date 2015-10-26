@@ -17,7 +17,7 @@ Fire up EarDrum to get in touch with your primal instincts and learn more about 
 
 ### Wireframes
 
-[Mobile version of wireframes](https://drumsensei.mybalsamiq.com/projects/eardrum/story)
+[All wireframes](https://drumsensei.mybalsamiq.com/projects/eardrum/story) - mobile, tablet, desktop
 
 _Made using Balsamiq Mockup_
 

@@ -13,7 +13,7 @@ Fire up EarDrum to get in touch with your primal instincts and learn more about 
 
 ### User Stories
 
-<a href="https://trello.com/b/55gmtuWb/final-project-the-iron-yard">Trello board</a> for user stories
+[Trello board](https://trello.com/b/55gmtuWb/final-project-the-iron-yard) for user stories
 
 ### Wireframes
 
@@ -37,8 +37,8 @@ Bourbon/Neat
 
 ### Get in touch to learn more
 
-<a href="http://www.drumsensei.com">Blog</a>
+[Blog](http://www.drumsensei.com)
 
-<a href="https://twitter.com/drumsensei">@drumsensei</a> on Twitter
+[@drumsensei](https://twitter.com/drumsensei) on Twitter
 
-<a href="https://www.linkedin.com/in/m2mathew">Mike Mathew</a> on LinkedIn
+[Mike Mathew](https://www.linkedin.com/in/m2mathew) on LinkedIn

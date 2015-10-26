@@ -1,0 +1,40 @@
+body {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  line-height: 1.6; }
+
+#title h1 {
+  margin: 2em; }
+
+main {
+  flex: 1; }
+
+body {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh; }
+
+main {
+  flex: 1; }
+
+footer {
+  background-color: #D5E5F2;
+  margin: 0;
+  padding: 1em; }
+  footer p {
+    padding-left: 2em; }
+    footer p a {
+      color: #0F2859; }
+      footer p a:hover {
+        color: #5EA4BF; }
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 12px rgba(51, 204, 255, 0.1); }
+  50% {
+    -webkit-box-shadow: 0 0 12px rgba(51, 204, 255, 0.99); }
+  100% {
+    -webkit-box-shadow: 0 0 12px rgba(51, 204, 255, 0.1); } }

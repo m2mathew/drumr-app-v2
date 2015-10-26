@@ -1,5 +1,5 @@
 # Final Project
-#### The Iron Yard-Austin
+## The Iron Yard-Austin
 
 ### Description
 
@@ -29,7 +29,7 @@ _Made using Balsamiq Mockup_
 
 Wikipedia API
 
-Info from drummerworld.com (after asking permission)
+Info from drummerworld.com
 
 React.js
 

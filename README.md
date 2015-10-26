@@ -19,6 +19,8 @@ Fire up EarDrum to get in touch with your primal instincts and learn more about 
 
 _Made using Balsamiq Mockup_
 
+[Mobile version of wireframe](images/wireframe-mobile)
+
 [Mobile version](https://drumsensei.mybalsamiq.com/mockups/3699903.png?key=9497d7eb670d0a59148b3437d91a4b5e1d70e561) of home page
 
 ### Models

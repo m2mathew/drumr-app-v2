@@ -1,3 +1,5 @@
+@import 'normalize.scss';
+
 body {
 	display: flex;
 	flex-flow: column;
@@ -7,28 +9,67 @@ body {
 	line-height: 1.6;
 }
 
-#title h1 {
-	margin: 2em;
+nav {
+	padding: 2em;
+	border-bottom: 4px solid #222;
+
+	.nav-wrapper {
+
+		.site-logo {
+			background-image: url(../../images/eardrum-logo.png);
+			text-decoration: none;
+			color: #000;
+		}
+
+		.search-container {
+			margin: 0;
+			padding: 0;
+		}
+	}
 }
 
 main {
 	flex: 1;
-}
+	padding: 2em;
 
-body {
-	display: flex;
-	flex-flow: column;
-	min-height: 100vh;
-}
+	.login-container {
+		background-color: #D5E5F2;
 
-main {
-	flex: 1;
+		.register-box {
+
+			margin: 1em;
+
+			input {
+				margin-top: 0.25em;
+				border: 1px solid #979797;
+				font-size: 1em;
+				background: #fff;
+				width: 40%;
+				padding: 5px 8px;
+				font-size: 1.2em;
+				font-weight: bold;
+				color: #666;
+				border: none;
+				background-color: #fff;
+				border-radius: 4px;
+
+				&:focus {
+					-webkit-box-shadow: 0 0 12px rgba(51, 204, 255, 0.5);
+					-webkit-animation: pulse 1.5s infinite ease-in-out;
+				}
+			}
+
+			.error-box {
+				color: red;
+			}
+		}
+	}
 }
 
 footer {
 	background-color: #D5E5F2;
-        margin: 0;
-        padding: 1em;
+		margin: 0;
+		padding: 1em;
 
 	p {
 		padding-left: 2em;

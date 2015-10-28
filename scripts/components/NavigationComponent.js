@@ -12,7 +12,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
-var SearchComponent = require('./SearchComponent');
 
 module.exports = React.createClass({
 	componentWillMount: function() {
@@ -29,21 +28,21 @@ module.exports = React.createClass({
 		];
 
 		if(currentUser) {
-			links.push(<a href="#favorites" key="fav"><div className={currentPage === 'favorites' ? 'active nav-link' : 'nav-link'}>Favorites</div></a>);
-			links.push(<a href="#logout" key="logout" onClick={this.onLogout}><div className="nav-link">Logout</div></a>);
-			links.push(<div key="username" className="displayedUser">{currentUser.getEmail()}</div>);
+			links.unshift(<a href="#favorites" key="fav"><div className={currentPage === 'favorites' ? 'active nav-link' : 'nav-link'}>Favorites</div></a>);
+			links.unshift(<a href="#logout" key="logout" onClick={this.onLogout}><div className="nav-link">Logout</div></a>);
+			links.unshift(<div key="username" className="displayedUser">{currentUser.getEmail()}</div>);
 		}
 		else {
-			links.push(<a href="#login" key="login"><div className={currentPage === 'login' ? 'active nav-link' : 'nav-link'}>Login</div></a>);
-			links.push(<a href="#register" key="register"><div className={currentPage === 'register' ? 'active nav-link' : 'nav-link'}>Register</div></a>);
+			links.unshift(<a href="#register" key="register"><div className={currentPage === 'register' ? 'active nav-link' : 'nav-link'}>Register</div></a>);
+			links.unshift(<a href="#login" key="login"><div className={currentPage === 'login' ? 'active nav-link' : 'nav-link'}>Login</div></a>);
 		}
 
 		return (
 			<div className="nav-wrapper">
-				<div>
-					<a href="#!" className="site-logo"><h1>earDrum</h1></a>
+				<div className="site-logo">
+					<a href="#!"><h1>Drumr</h1></a>
 				</div>
-				<div className="right hide-on-med-and-down">
+				<div className="nav-links">
 					{links}
 				</div>
 			</div>
@@ -53,7 +52,6 @@ module.exports = React.createClass({
 		e.preventDefault();
 		Parse.User.logOut();
 		this.props.router.navigate('', {trigger: true});
+		this.forceUpdate();
 	}
 });
-
-// <SearchComponent />

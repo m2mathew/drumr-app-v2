@@ -17,7 +17,7 @@ module.exports = React.createClass({
 
 		return (
 			<div>
-				<h1>search results</h1>
+				<h2>search results</h2>
 			</div>
 		);
 	}

@@ -31,9 +31,9 @@ var app = document.getElementById('app');
 var Router = Backbone.Router.extend({
 	routes: {
 		'': 'home',
-		'details:/id': 'details',
-		'favorites/:id': 'favorites',
-		'results/:id': 'results',
+		'details': 'details',
+		'favorites': 'favorites',
+		'results': 'results',
 		'login': 'login',
 		'register': 'register'
 	},
@@ -75,4 +75,9 @@ Backbone.history.start();
 ReactDOM.render(
 	<NavigationComponent router={r} />,
 	document.getElementById('nav')
+	);
+
+ReactDOM.render(
+	<SearchComponent router={r} />,
+	document.getElementById('search')
 	);

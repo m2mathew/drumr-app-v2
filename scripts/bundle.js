@@ -31756,7 +31756,7 @@ module.exports = React.createClass({
 			'div',
 			null,
 			React.createElement(
-				'h1',
+				'h2',
 				null,
 				'drummer icon'
 			)
@@ -31777,6 +31777,7 @@ module.exports = React.createClass({
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var DrummerIconComponent = require('./DrummerIconComponent');
 
 module.exports = React.createClass({
 	displayName: 'exports',
@@ -31790,12 +31791,13 @@ module.exports = React.createClass({
 				'h1',
 				null,
 				'Drummer List here'
-			)
+			),
+			React.createElement(DrummerIconComponent, null)
 		);
 	}
 });
 
-},{"react":160,"react-dom":5}],164:[function(require,module,exports){
+},{"./DrummerIconComponent":162,"react":160,"react-dom":5}],164:[function(require,module,exports){
 /*
  *  Favorite List Component
  *
@@ -31942,7 +31944,6 @@ module.exports = React.createClass({
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
-var SearchComponent = require('./SearchComponent');
 
 module.exports = React.createClass({
 	displayName: 'exports',
@@ -31969,7 +31970,7 @@ module.exports = React.createClass({
 		)];
 
 		if (currentUser) {
-			links.push(React.createElement(
+			links.unshift(React.createElement(
 				'a',
 				{ href: '#favorites', key: 'fav' },
 				React.createElement(
@@ -31978,7 +31979,7 @@ module.exports = React.createClass({
 					'Favorites'
 				)
 			));
-			links.push(React.createElement(
+			links.unshift(React.createElement(
 				'a',
 				{ href: '#logout', key: 'logout', onClick: this.onLogout },
 				React.createElement(
@@ -31987,28 +31988,28 @@ module.exports = React.createClass({
 					'Logout'
 				)
 			));
-			links.push(React.createElement(
+			links.unshift(React.createElement(
 				'div',
 				{ key: 'username', className: 'displayedUser' },
 				currentUser.getEmail()
 			));
 		} else {
-			links.push(React.createElement(
-				'a',
-				{ href: '#login', key: 'login' },
-				React.createElement(
-					'div',
-					{ className: currentPage === 'login' ? 'active nav-link' : 'nav-link' },
-					'Login'
-				)
-			));
-			links.push(React.createElement(
+			links.unshift(React.createElement(
 				'a',
 				{ href: '#register', key: 'register' },
 				React.createElement(
 					'div',
 					{ className: currentPage === 'register' ? 'active nav-link' : 'nav-link' },
 					'Register'
+				)
+			));
+			links.unshift(React.createElement(
+				'a',
+				{ href: '#login', key: 'login' },
+				React.createElement(
+					'div',
+					{ className: currentPage === 'login' ? 'active nav-link' : 'nav-link' },
+					'Login'
 				)
 			));
 		}
@@ -32018,20 +32019,20 @@ module.exports = React.createClass({
 			{ className: 'nav-wrapper' },
 			React.createElement(
 				'div',
-				null,
+				{ className: 'site-logo' },
 				React.createElement(
 					'a',
-					{ href: '#!', className: 'site-logo' },
+					{ href: '#!' },
 					React.createElement(
 						'h1',
 						null,
-						'earDrum'
+						'Drumr'
 					)
 				)
 			),
 			React.createElement(
 				'div',
-				{ className: 'right hide-on-med-and-down' },
+				{ className: 'nav-links' },
 				links
 			)
 		);
@@ -32040,12 +32041,11 @@ module.exports = React.createClass({
 		e.preventDefault();
 		Parse.User.logOut();
 		this.props.router.navigate('', { trigger: true });
+		this.forceUpdate();
 	}
 });
 
-// <SearchComponent />
-
-},{"./SearchComponent":168,"backbone":1,"react":160,"react-dom":5}],167:[function(require,module,exports){
+},{"backbone":1,"react":160,"react-dom":5}],167:[function(require,module,exports){
 /*
  *  Register Component
  *
@@ -32173,8 +32173,22 @@ module.exports = React.createClass({
 		return React.createElement(
 			'div',
 			{ className: 'search-container' },
-			React.createElement('input', { type: 'text', id: 'search-bar', placeholder: 'find a drummer' })
+			React.createElement(
+				'form',
+				{ onSubmit: this.submitSearch },
+				React.createElement('input', { type: 'text', id: 'search-bar', placeholder: 'find a drummer' }),
+				React.createElement(
+					'button',
+					{ className: 'search-button' },
+					'Search'
+				)
+			)
 		);
+	},
+	submitSearch: function submitSearch(e) {
+		e.preventDefault();
+		console.log('searching...');
+		this.props.router.navigate('results', { trigger: true });
 	}
 });
 
@@ -32201,7 +32215,7 @@ module.exports = React.createClass({
 			'div',
 			null,
 			React.createElement(
-				'h1',
+				'h2',
 				null,
 				'search results'
 			)
@@ -32243,9 +32257,9 @@ var app = document.getElementById('app');
 var Router = Backbone.Router.extend({
 	routes: {
 		'': 'home',
-		'details:/id': 'details',
-		'favorites/:id': 'favorites',
-		'results/:id': 'results',
+		'details': 'details',
+		'favorites': 'favorites',
+		'results': 'results',
 		'login': 'login',
 		'register': 'register'
 	},
@@ -32273,6 +32287,8 @@ var r = new Router();
 Backbone.history.start();
 
 ReactDOM.render(React.createElement(NavigationComponent, { router: r }), document.getElementById('nav'));
+
+ReactDOM.render(React.createElement(SearchComponent, { router: r }), document.getElementById('search'));
 
 },{"./components/DrummerDetailsComponent":161,"./components/DrummerIconComponent":162,"./components/DrummerListComponent":163,"./components/FavoriteListComponent":164,"./components/LoginComponent":165,"./components/NavigationComponent":166,"./components/RegisterComponent":167,"./components/SearchComponent":168,"./components/SearchResultsComponent":169,"backbone":1,"jquery":4,"react":160,"react-dom":5}]},{},[170])
 

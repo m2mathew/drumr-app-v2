@@ -17,7 +17,7 @@ module.exports = React.createClass({
 
 		return (
 			<div>
-				<h1>drummer icon</h1>
+				<h2>drummer icon</h2>
 			</div>
 		);
 	}

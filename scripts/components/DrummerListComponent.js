@@ -10,6 +10,7 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var DrummerIconComponent = require('./DrummerIconComponent');
 
 module.exports = React.createClass({
 
@@ -18,6 +19,8 @@ module.exports = React.createClass({
 		return (
 			<div>
 				<h1>Drummer List here</h1>
+
+				<DrummerIconComponent />
 			</div>
 		);
 	}

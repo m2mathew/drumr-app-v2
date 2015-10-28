@@ -364,41 +364,50 @@ body {
   line-height: 1.6; }
 
 nav {
-  padding: 2em;
-  border-bottom: 4px solid #222; }
-  nav .nav-wrapper .site-logo {
-    background-image: url(../../images/eardrum-logo.png);
-    text-decoration: none;
+  border-bottom: 4px solid #555; }
+  nav .nav-wrapper {
+    padding: 0;
     color: #000; }
-  nav .nav-wrapper .search-container {
-    margin: 0;
-    padding: 0; }
+    nav .nav-wrapper .site-logo {
+      padding: 2em;
+      width: 50%;
+      text-decoration: none;
+      display: inline-block; }
+      nav .nav-wrapper .site-logo h1 {
+        margin: 0; }
+    nav .nav-wrapper a {
+      text-decoration: none; }
+      nav .nav-wrapper a:visited {
+        color: #000; }
+      nav .nav-wrapper a .active {
+        background-color: #eee; }
+    nav .nav-wrapper .nav-links {
+      display: inline-block; }
+      nav .nav-wrapper .nav-links a, nav .nav-wrapper .nav-links div {
+        float: right;
+        margin-left: 1em; }
+
+.search-container {
+  text-align: center;
+  border-bottom: 4px solid #555;
+  background-color: #ddd;
+  margin: 0 auto;
+  padding: 0; }
+  .search-container input {
+    margin-top: 0;
+    margin: 0.5em; }
+  .search-container button {
+    margin-top: 0; }
 
 main {
   flex: 1;
   padding: 2em; }
-  main .login-container {
+  main .login-box, main .register-box {
     background-color: #D5E5F2; }
-    main .login-container .register-box {
-      margin: 1em; }
-      main .login-container .register-box input {
-        margin-top: 0.25em;
-        border: 1px solid #979797;
-        font-size: 1em;
-        background: #fff;
-        width: 40%;
-        padding: 5px 8px;
-        font-size: 1.2em;
-        font-weight: bold;
-        color: #666;
-        border: none;
-        background-color: #fff;
-        border-radius: 4px; }
-        main .login-container .register-box input:focus {
-          -webkit-box-shadow: 0 0 12px rgba(51, 204, 255, 0.5);
-          -webkit-animation: pulse 1.5s infinite ease-in-out; }
-      main .login-container .register-box .error-box {
-        color: red; }
+  main .login-container .register-box {
+    margin: 1em; }
+    main .login-container .register-box .error-box {
+      color: red; }
 
 footer {
   background-color: #D5E5F2;
@@ -410,6 +419,73 @@ footer {
       color: #0F2859; }
       footer p a:hover {
         color: #5EA4BF; }
+
+input {
+  margin-top: 0.25em;
+  border: 1px solid #979797;
+  font-size: 1em;
+  background: #fff;
+  width: 60%;
+  padding: 8px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #666;
+  border: none;
+  background-color: #fff;
+  border-radius: 4px; }
+  input:focus {
+    -webkit-box-shadow: 0 0 12px rgba(51, 204, 255, 0.5);
+    -webkit-animation: pulse 1.5s infinite ease-in-out; }
+
+button {
+  margin-top: 2.5em;
+  border: 1px solid #979797;
+  font-size: 1em;
+  padding: 0.5em;
+  background: #fff;
+  width: 20%;
+  padding: 8px 15px;
+  font-weight: bold;
+  line-height: 1;
+  color: #444;
+  border: none;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#bbb));
+  background-color: #fff;
+  border-radius: 23px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); }
+  button:hover, button:focus {
+    -webkit-animation: pulse 1.5s infinite ease-in-out; }
+
+.stripes.bottom {
+  padding-top: 0;
+  display: block;
+  width: 100%; }
+  .stripes.bottom .stripe.d {
+    float: left;
+    background: #00ADEE;
+    height: 1em;
+    width: 20%; }
+  .stripes.bottom .stripe.r {
+    float: left;
+    background: #44C7F4;
+    height: 1em;
+    width: 20%; }
+  .stripes.bottom .stripe.u {
+    float: left;
+    background: #ABE0F9;
+    height: 1em;
+    width: 20%; }
+  .stripes.bottom .stripe.m {
+    float: left;
+    background: #F186B6;
+    height: 1em;
+    width: 20%; }
+  .stripes.bottom .stripe.s {
+    float: left;
+    background: #EB008B;
+    height: 1em;
+    width: 20%; }
 
 @-webkit-keyframes pulse {
   0% {

@@ -17,8 +17,16 @@ module.exports = React.createClass({
 
 		return (
 			<div className="search-container">
-				<input type="text" id="search-bar" placeholder="find a drummer" />
+				<form onSubmit={this.submitSearch}>
+					<input type="text" id="search-bar" placeholder="find a drummer" />
+					<button className="search-button">Search</button>
+				</form>
 			</div>
 		);
+	},
+	submitSearch: function(e) {
+		e.preventDefault();
+		console.log('searching...');
+		this.props.router.navigate('results', {trigger: true});
 	}
 });

@@ -17,7 +17,6 @@ module.exports = React.createClass({
 		return { error: null };
 	},
 	render: function() {
-		console.log('words are here.');
 		var errorElement = null;
 		if(this.state.error) {
 			errorElement = (

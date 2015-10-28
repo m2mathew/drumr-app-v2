@@ -26,7 +26,6 @@ module.exports = React.createClass({
 	},
 	submitSearch: function(e) {
 		e.preventDefault();
-		console.log('searching...');
 		this.props.router.navigate('results', {trigger: true});
 	}
 });

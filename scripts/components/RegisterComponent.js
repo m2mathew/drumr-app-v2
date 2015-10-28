@@ -17,7 +17,6 @@ module.exports = React.createClass({
 		return { error: null };
 	},
 	render: function() {
-		console.log('words are here.');
 		var errorElement = null;
 		if(this.state.error) {
 			errorElement = (
@@ -47,7 +46,6 @@ module.exports = React.createClass({
 	onRegister: function(e) {
 		e.preventDefault();
 		var user = new Parse.User();
-		console.log(this.refs.email.value);
 		user.signUp(
 			{
 				username: this.refs.email.value,

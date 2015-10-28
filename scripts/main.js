@@ -31,7 +31,7 @@ var app = document.getElementById('app');
 var Router = Backbone.Router.extend({
 	routes: {
 		'': 'home',
-		'details': 'details',
+		'details/:id': 'details',
 		'favorites': 'favorites',
 		'results': 'results',
 		'login': 'login',
@@ -42,9 +42,9 @@ var Router = Backbone.Router.extend({
 			<DrummerListComponent router={r} />, app
 		);
 	},
-	details: function(){
+	details: function(id){
 		ReactDOM.render(
-			<DrummerDetailsComponent router={r} />, app
+			<DrummerDetailsComponent drummer={id} />, app
 		);
 	},
 	favorites: function(){

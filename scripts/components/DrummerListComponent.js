@@ -18,7 +18,7 @@ module.exports = React.createClass({
 
 		return (
 			<div>
-				<h1>Drummer List here</h1>
+				<h1>Drummers Rule</h1>
 
 				<DrummerIconComponent />
 			</div>

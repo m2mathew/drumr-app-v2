@@ -31715,25 +31715,116 @@ module.exports = require('./lib/React');
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var DrummerModel = require('../models/DrummerModel');
 
 module.exports = React.createClass({
 	displayName: 'exports',
 
+	getInitialState: function getInitialState() {
+		return {
+			drummer: null
+		};
+	},
+	componentWillMount: function componentWillMount() {
+		var _this = this;
+
+		var query = new Parse.Query(DrummerModel);
+		query.get(this.props.drummer).then(function (drmr) {
+			_this.setState({ drummer: drmr });
+		}, function (err) {
+			console.log(err);
+		});
+	},
 	render: function render() {
+		var content = React.createElement(
+			'p',
+			null,
+			'loading...'
+		);
+
+		if (this.state.drummer) {
+			content = React.createElement(
+				'div',
+				null,
+				React.createElement(
+					'h1',
+					null,
+					this.state.drummer.get('name')
+				),
+				React.createElement(
+					'div',
+					null,
+					React.createElement('img', { src: this.state.drummer.get('photos') })
+				),
+				React.createElement(
+					'div',
+					null,
+					this.state.drummer.get('years')
+				),
+				React.createElement(
+					'div',
+					null,
+					React.createElement(
+						'h2',
+						null,
+						'Bands'
+					),
+					React.createElement(
+						'div',
+						null,
+						this.state.drummer.get('bands')
+					)
+				),
+				React.createElement(
+					'div',
+					null,
+					React.createElement(
+						'h2',
+						null,
+						'Years active'
+					),
+					React.createElement(
+						'p',
+						null,
+						this.state.drummer.get('yearsActive')
+					),
+					React.createElement(
+						'h2',
+						null,
+						'Background'
+					),
+					React.createElement(
+						'div',
+						null,
+						this.state.drummer.get('background')
+					),
+					React.createElement(
+						'h2',
+						null,
+						'Videos'
+					),
+					React.createElement(
+						'a',
+						{ href: this.state.drummer.get('videos') },
+						'watch this drummer!'
+					)
+				)
+			);
+		}
 
 		return React.createElement(
 			'div',
 			null,
 			React.createElement(
-				'h1',
+				'div',
 				null,
-				'drummer details'
+				content
 			)
 		);
 	}
 });
 
-},{"react":160,"react-dom":5}],162:[function(require,module,exports){
+},{"../models/DrummerModel":171,"react":160,"react-dom":5}],162:[function(require,module,exports){
 /*
  *  Drummer Icon Component
  *
@@ -31746,25 +31837,64 @@ module.exports = React.createClass({
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var DrummerModel = require('../models/DrummerModel');
 
 module.exports = React.createClass({
 	displayName: 'exports',
 
+	getInitialState: function getInitialState() {
+		return {
+			drummers: []
+		};
+	},
+	componentWillMount: function componentWillMount() {
+		var _this = this;
+
+		var query = new Parse.Query(DrummerModel);
+		query.find().then(function (drummer) {
+			_this.setState({ drummers: drummer });
+		}, function (err) {
+			console.log(err);
+		});
+	},
 	render: function render() {
+		var content = React.createElement(
+			'div',
+			null,
+			' loading... '
+		);
+
+		if (this.state.drummers) {
+			content = this.state.drummers.map(function (drummer) {
+				var photo = drummer.get('photos');
+				var name = drummer.get('name');
+				var id = drummer.get('objectId');
+				return React.createElement(
+					'div',
+					{ key: drummer.id, className: 'icon-box' },
+					React.createElement(
+						'a',
+						{ href: "#details/" + drummer.id },
+						React.createElement('img', { src: photo }),
+						React.createElement(
+							'h3',
+							null,
+							name
+						)
+					)
+				);
+			});
+		}
 
 		return React.createElement(
 			'div',
-			null,
-			React.createElement(
-				'h2',
-				null,
-				'drummer icon'
-			)
+			{ className: 'icon-big-box' },
+			content
 		);
 	}
 });
 
-},{"react":160,"react-dom":5}],163:[function(require,module,exports){
+},{"../models/DrummerModel":171,"react":160,"react-dom":5}],163:[function(require,module,exports){
 /*
  *  Drummer List Component
  *
@@ -31790,7 +31920,7 @@ module.exports = React.createClass({
 			React.createElement(
 				'h1',
 				null,
-				'Drummer List here'
+				'Drummers Rule'
 			),
 			React.createElement(DrummerIconComponent, null)
 		);
@@ -31850,7 +31980,6 @@ module.exports = React.createClass({
 		return { error: null };
 	},
 	render: function render() {
-		console.log('words are here.');
 		var errorElement = null;
 		if (this.state.error) {
 			errorElement = React.createElement(
@@ -32026,7 +32155,7 @@ module.exports = React.createClass({
 					React.createElement(
 						'h1',
 						null,
-						'Drumr'
+						'drumr'
 					)
 				)
 			),
@@ -32067,7 +32196,6 @@ module.exports = React.createClass({
 		return { error: null };
 	},
 	render: function render() {
-		console.log('words are here.');
 		var errorElement = null;
 		if (this.state.error) {
 			errorElement = React.createElement(
@@ -32133,7 +32261,6 @@ module.exports = React.createClass({
 
 		e.preventDefault();
 		var user = new Parse.User();
-		console.log(this.refs.email.value);
 		user.signUp({
 			username: this.refs.email.value,
 			password: this.refs.password.value,
@@ -32187,7 +32314,6 @@ module.exports = React.createClass({
 	},
 	submitSearch: function submitSearch(e) {
 		e.preventDefault();
-		console.log('searching...');
 		this.props.router.navigate('results', { trigger: true });
 	}
 });
@@ -32257,7 +32383,7 @@ var app = document.getElementById('app');
 var Router = Backbone.Router.extend({
 	routes: {
 		'': 'home',
-		'details': 'details',
+		'details/:id': 'details',
 		'favorites': 'favorites',
 		'results': 'results',
 		'login': 'login',
@@ -32266,8 +32392,8 @@ var Router = Backbone.Router.extend({
 	home: function home() {
 		ReactDOM.render(React.createElement(DrummerListComponent, { router: r }), app);
 	},
-	details: function details() {
-		ReactDOM.render(React.createElement(DrummerDetailsComponent, { router: r }), app);
+	details: function details(id) {
+		ReactDOM.render(React.createElement(DrummerDetailsComponent, { drummer: id }), app);
 	},
 	favorites: function favorites() {
 		ReactDOM.render(React.createElement(FavoriteListComponent, { router: r }), app);
@@ -32290,7 +32416,14 @@ ReactDOM.render(React.createElement(NavigationComponent, { router: r }), documen
 
 ReactDOM.render(React.createElement(SearchComponent, { router: r }), document.getElementById('search'));
 
-},{"./components/DrummerDetailsComponent":161,"./components/DrummerIconComponent":162,"./components/DrummerListComponent":163,"./components/FavoriteListComponent":164,"./components/LoginComponent":165,"./components/NavigationComponent":166,"./components/RegisterComponent":167,"./components/SearchComponent":168,"./components/SearchResultsComponent":169,"backbone":1,"jquery":4,"react":160,"react-dom":5}]},{},[170])
+},{"./components/DrummerDetailsComponent":161,"./components/DrummerIconComponent":162,"./components/DrummerListComponent":163,"./components/FavoriteListComponent":164,"./components/LoginComponent":165,"./components/NavigationComponent":166,"./components/RegisterComponent":167,"./components/SearchComponent":168,"./components/SearchResultsComponent":169,"backbone":1,"jquery":4,"react":160,"react-dom":5}],171:[function(require,module,exports){
+'use strict';
+
+module.exports = Parse.Object.extend({
+	className: 'Drummer'
+});
+
+},{}]},{},[170])
 
 
 //# sourceMappingURL=bundle.js.map

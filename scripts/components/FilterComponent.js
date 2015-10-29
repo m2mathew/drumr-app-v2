@@ -37,7 +37,12 @@ module.exports = React.createClass({
 		return (
 			<div className="search-container">
 				<form onSubmit={this.submitSearch}>
-					<input onChange={this.constantSearch} type="text" id="search-bar" ref="searchBar" placeholder="find a drummer" />
+					<input type="text"
+							id="search-bar"
+							ref="filterInput"
+							placeholder="find a drummer"
+							value={this.props.filterVal}
+							onChange={this.constantSearch} />
 					<button className="search-button">Search</button>
 				</form>
 			</div>

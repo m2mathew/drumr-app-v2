@@ -21,6 +21,7 @@ module.exports = React.createClass({
 	componentWillMount: function() {
 		var query = new Parse.Query(DrummerModel);
 		query
+		.ascending('name')
 		.find().then(
 			(drummer) => {
 				this.setState({ drummers: drummer });

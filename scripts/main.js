@@ -17,7 +17,7 @@ window.$ = require('jquery');
 window.jQuery = $;
 
 var NavigationComponent = require('./components/NavigationComponent');
-var SearchComponent = require('./components/SearchComponent');
+var FilterComponent = require('./components/FilterComponent');
 var DrummerListComponent = require('./components/DrummerListComponent');
 var DrummerIconComponent = require('./components/DrummerIconComponent');
 var DrummerDetailsComponent = require('./components/DrummerDetailsComponent');
@@ -78,6 +78,6 @@ ReactDOM.render(
 	);
 
 ReactDOM.render(
-	<SearchComponent router={r} />,
+	<FilterComponent router={r} filterVal={this.props.data} filterUpdate={this.state.filterText} />,
 	document.getElementById('search')
 	);

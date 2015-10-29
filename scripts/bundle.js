@@ -31847,7 +31847,7 @@ module.exports = React.createClass({
 		var _this = this;
 
 		var query = new Parse.Query(DrummerModel);
-		query.find().then(function (drummer) {
+		query.ascending('name').find().then(function (drummer) {
 			_this.setState({ drummers: drummer });
 		}, function (err) {
 			console.log(err);
@@ -31956,6 +31956,78 @@ module.exports = React.createClass({
 
 },{"react":160,"react-dom":5}],165:[function(require,module,exports){
 /*
+ *  Search Component
+ *
+ *		React
+ *		ReactDOM
+ *
+ */
+
+'use strict';
+
+var React = require('react');
+var ReactDOM = require('react-dom');
+var Backbone = require('backbone');
+var DrummerModel = require('../models/DrummerModel');
+
+module.exports = React.createClass({
+	displayName: 'exports',
+
+	getInitialState: function getInitialState() {
+		return {
+			drummers: []
+		};
+	},
+	componentWillMount: function componentWillMount() {
+		var _this = this;
+
+		var query = new Parse.Query(DrummerModel);
+		query.find().then(function (drummer) {
+			_this.setState({ drummers: drummer });
+		}, function (err) {
+			console.log(err);
+		});
+	},
+	render: function render() {
+
+		return React.createElement(
+			'div',
+			{ className: 'search-container' },
+			React.createElement(
+				'form',
+				{ onSubmit: this.submitSearch },
+				React.createElement('input', { type: 'text',
+					id: 'search-bar',
+					ref: 'filterInput',
+					placeholder: 'find a drummer',
+					value: this.props.filterVal,
+					onChange: this.constantSearch }),
+				React.createElement(
+					'button',
+					{ className: 'search-button' },
+					'Search'
+				)
+			)
+		);
+	},
+	constantSearch: function constantSearch(e) {
+		e.preventDefault();
+
+		// grab value of the input as the user is typing in real time
+		var searchForThis = this.refs.searchBar.value;
+		var query = new Parse.Query(DrummerModel);
+		query.startsWith("name", searchForThis);
+		console.log('Searching as you type!');
+	},
+	submitSearch: function submitSearch(e) {
+		e.preventDefault();
+
+		this.props.router.navigate('results', { trigger: true });
+	}
+});
+
+},{"../models/DrummerModel":171,"backbone":1,"react":160,"react-dom":5}],166:[function(require,module,exports){
+/*
  *  Login Component
  *
  *		React
@@ -32054,7 +32126,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":160,"react-dom":5}],166:[function(require,module,exports){
+},{"backbone":1,"react":160,"react-dom":5}],167:[function(require,module,exports){
 /*
  *  Navigation Component
  *
@@ -32166,7 +32238,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":160,"react-dom":5}],167:[function(require,module,exports){
+},{"backbone":1,"react":160,"react-dom":5}],168:[function(require,module,exports){
 /*
  *  Register Component
  *
@@ -32270,74 +32342,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":160,"react-dom":5}],168:[function(require,module,exports){
-/*
- *  Search Component
- *
- *		React
- *		ReactDOM
- *
- */
-
-'use strict';
-
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Backbone = require('backbone');
-var DrummerModel = require('../models/DrummerModel');
-
-module.exports = React.createClass({
-	displayName: 'exports',
-
-	getInitialState: function getInitialState() {
-		return {
-			drummers: []
-		};
-	},
-	componentWillMount: function componentWillMount() {
-		var _this = this;
-
-		var query = new Parse.Query(DrummerModel);
-		query.find().then(function (drummer) {
-			_this.setState({ drummers: drummer });
-		}, function (err) {
-			console.log(err);
-		});
-	},
-	render: function render() {
-
-		return React.createElement(
-			'div',
-			{ className: 'search-container' },
-			React.createElement(
-				'form',
-				{ onSubmit: this.submitSearch },
-				React.createElement('input', { onChange: this.constantSearch, type: 'text', id: 'search-bar', ref: 'searchBar', placeholder: 'find a drummer' }),
-				React.createElement(
-					'button',
-					{ className: 'search-button' },
-					'Search'
-				)
-			)
-		);
-	},
-	constantSearch: function constantSearch(e) {
-		e.preventDefault();
-
-		// grab value of the input as the user is typing in real time
-		var searchForThis = this.refs.searchBar.value;
-		var query = new Parse.Query(DrummerModel);
-		query.startsWith("name", searchForThis);
-		console.log('Searching as you type!');
-	},
-	submitSearch: function submitSearch(e) {
-		e.preventDefault();
-
-		this.props.router.navigate('results', { trigger: true });
-	}
-});
-
-},{"../models/DrummerModel":171,"backbone":1,"react":160,"react-dom":5}],169:[function(require,module,exports){
+},{"backbone":1,"react":160,"react-dom":5}],169:[function(require,module,exports){
 /*
  *  Search Results Component
  *
@@ -32435,7 +32440,7 @@ window.$ = require('jquery');
 window.jQuery = $;
 
 var NavigationComponent = require('./components/NavigationComponent');
-var SearchComponent = require('./components/SearchComponent');
+var FilterComponent = require('./components/FilterComponent');
 var DrummerListComponent = require('./components/DrummerListComponent');
 var DrummerIconComponent = require('./components/DrummerIconComponent');
 var DrummerDetailsComponent = require('./components/DrummerDetailsComponent');
@@ -32480,9 +32485,9 @@ Backbone.history.start();
 
 ReactDOM.render(React.createElement(NavigationComponent, { router: r }), document.getElementById('nav'));
 
-ReactDOM.render(React.createElement(SearchComponent, { router: r }), document.getElementById('search'));
+ReactDOM.render(React.createElement(FilterComponent, { router: r, filterVal: undefined.props.data, filterUpdate: undefined.state.filterText }), document.getElementById('search'));
 
-},{"./components/DrummerDetailsComponent":161,"./components/DrummerIconComponent":162,"./components/DrummerListComponent":163,"./components/FavoriteListComponent":164,"./components/LoginComponent":165,"./components/NavigationComponent":166,"./components/RegisterComponent":167,"./components/SearchComponent":168,"./components/SearchResultsComponent":169,"backbone":1,"jquery":4,"react":160,"react-dom":5}],171:[function(require,module,exports){
+},{"./components/DrummerDetailsComponent":161,"./components/DrummerIconComponent":162,"./components/DrummerListComponent":163,"./components/FavoriteListComponent":164,"./components/FilterComponent":165,"./components/LoginComponent":166,"./components/NavigationComponent":167,"./components/RegisterComponent":168,"./components/SearchResultsComponent":169,"backbone":1,"jquery":4,"react":160,"react-dom":5}],171:[function(require,module,exports){
 'use strict';
 
 module.exports = Parse.Object.extend({

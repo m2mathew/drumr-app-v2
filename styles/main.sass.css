@@ -369,7 +369,7 @@ nav {
     padding: 0;
     color: #000; }
     nav .nav-wrapper .site-logo {
-      padding: 2em;
+      padding: 1em 0 0 2em;
       width: 50%;
       text-decoration: none;
       display: inline-block; }

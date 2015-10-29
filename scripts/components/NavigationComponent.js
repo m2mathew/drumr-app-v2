@@ -40,7 +40,7 @@ module.exports = React.createClass({
 		return (
 			<div className="nav-wrapper">
 				<div className="site-logo">
-					<a href="#!"><h1>drumr</h1></a>
+					<a href="#!"><img src="../../images/drumr-logo2.png" /></a>
 				</div>
 				<div className="nav-links">
 					{links}

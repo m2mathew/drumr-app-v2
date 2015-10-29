@@ -33,7 +33,7 @@ var Router = Backbone.Router.extend({
 		'': 'home',
 		'details/:id': 'details',
 		'favorites': 'favorites',
-		'results': 'results',
+		'results': 'search',
 		'login': 'login',
 		'register': 'register'
 	},
@@ -52,9 +52,9 @@ var Router = Backbone.Router.extend({
 			<FavoriteListComponent router={r} />, app
 		);
 	},
-	results: function(){
+	search: function(id){
 		ReactDOM.render(
-			<SearchResultsComponent router={r} />, app
+			<SearchResultsComponent drummer={id} />, app
 		);
 	},
 	login: function(){

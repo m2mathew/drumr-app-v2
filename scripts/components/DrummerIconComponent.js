@@ -31,7 +31,7 @@ module.exports = React.createClass({
 		);
 	},
 	render: function() {
-		var content = (<div> loading... </div>);
+		var content = (<div>loading... </div>);
 
 		if(this.state.drummers) {
 			content = this.state.drummers.map(function(drummer) {

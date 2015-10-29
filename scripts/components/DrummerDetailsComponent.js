@@ -57,9 +57,7 @@ module.exports = React.createClass({
 
 		return (
 			<div>
-				<div>
-					{content}
-				</div>
+				{content}
 			</div>
 		);
 	}

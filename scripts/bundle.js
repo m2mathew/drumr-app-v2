@@ -31815,11 +31815,7 @@ module.exports = React.createClass({
 		return React.createElement(
 			'div',
 			null,
-			React.createElement(
-				'div',
-				null,
-				content
-			)
+			content
 		);
 	}
 });
@@ -31861,7 +31857,7 @@ module.exports = React.createClass({
 		var content = React.createElement(
 			'div',
 			null,
-			' loading... '
+			'loading... '
 		);
 
 		if (this.state.drummers) {
@@ -32152,11 +32148,7 @@ module.exports = React.createClass({
 				React.createElement(
 					'a',
 					{ href: '#!' },
-					React.createElement(
-						'h1',
-						null,
-						'drumr'
-					)
+					React.createElement('img', { src: '../../images/drumr-logo2.png' })
 				)
 			),
 			React.createElement(
@@ -32291,10 +32283,27 @@ module.exports = React.createClass({
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var Backbone = require('backbone');
+var DrummerModel = require('../models/DrummerModel');
 
 module.exports = React.createClass({
 	displayName: 'exports',
 
+	getInitialState: function getInitialState() {
+		return {
+			drummers: []
+		};
+	},
+	componentWillMount: function componentWillMount() {
+		var _this = this;
+
+		var query = new Parse.Query(DrummerModel);
+		query.find().then(function (drummer) {
+			_this.setState({ drummers: drummer });
+		}, function (err) {
+			console.log(err);
+		});
+	},
 	render: function render() {
 
 		return React.createElement(
@@ -32303,7 +32312,7 @@ module.exports = React.createClass({
 			React.createElement(
 				'form',
 				{ onSubmit: this.submitSearch },
-				React.createElement('input', { type: 'text', id: 'search-bar', placeholder: 'find a drummer' }),
+				React.createElement('input', { onChange: this.constantSearch, type: 'text', id: 'search-bar', ref: 'searchBar', placeholder: 'find a drummer' }),
 				React.createElement(
 					'button',
 					{ className: 'search-button' },
@@ -32312,13 +32321,23 @@ module.exports = React.createClass({
 			)
 		);
 	},
+	constantSearch: function constantSearch(e) {
+		e.preventDefault();
+
+		// grab value of the input as the user is typing in real time
+		var searchForThis = this.refs.searchBar.value;
+		var query = new Parse.Query(DrummerModel);
+		query.startsWith("name", searchForThis);
+		console.log('Searching as you type!');
+	},
 	submitSearch: function submitSearch(e) {
 		e.preventDefault();
+
 		this.props.router.navigate('results', { trigger: true });
 	}
 });
 
-},{"react":160,"react-dom":5}],169:[function(require,module,exports){
+},{"../models/DrummerModel":171,"backbone":1,"react":160,"react-dom":5}],169:[function(require,module,exports){
 /*
  *  Search Results Component
  *
@@ -32331,11 +32350,56 @@ module.exports = React.createClass({
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var DrummerIconComponent = require('./DrummerIconComponent');
+var DrummerModel = require('../models/DrummerModel');
 
 module.exports = React.createClass({
 	displayName: 'exports',
 
+	getInitialState: function getInitialState() {
+		return {
+			drummer: null
+		};
+	},
+	componentWillMount: function componentWillMount() {
+		// var query = new Parse.Query(DrummerModel);
+		// query
+		// .startsWith('name', this.props.drummer)
+		// .then(
+		// 	(drmr) => {
+		// 		this.setState({ drummer: drmr });
+		// 	},
+		// 	(err) => {
+		// 		console.log(err);
+		// 	}
+		// );
+	},
 	render: function render() {
+		var content = React.createElement(
+			'p',
+			null,
+			'loading...'
+		);
+
+		// if(this.state.drummer) {
+		// 	content = (
+		// 		<div>
+		// 			<h1>{this.state.drummer.get('name')}</h1>
+		// 			<div><img src={this.state.drummer.get('photos')} /></div>
+		// 			<div>{this.state.drummer.get('years')}</div>
+		// 			<div>
+		// 				<h2>Bands</h2>
+		// 				<div>{this.state.drummer.get('bands')}</div>
+		// 			</div>
+		// 			<div>
+		// 				<h2>Years active</h2><p>{this.state.drummer.get('yearsActive')}</p>
+		// 				<h2>Background</h2>
+		// 				<div>{this.state.drummer.get('background')}</div>
+		// 				<h2>Videos</h2><a href={this.state.drummer.get('videos')}>watch this drummer!</a>
+		// 			</div>
+		// 		</div>
+		// 	);
+		// }
 
 		return React.createElement(
 			'div',
@@ -32344,12 +32408,14 @@ module.exports = React.createClass({
 				'h2',
 				null,
 				'search results'
-			)
+			),
+			content,
+			React.createElement(DrummerIconComponent, null)
 		);
 	}
 });
 
-},{"react":160,"react-dom":5}],170:[function(require,module,exports){
+},{"../models/DrummerModel":171,"./DrummerIconComponent":162,"react":160,"react-dom":5}],170:[function(require,module,exports){
 /*
  *  earDrum main.js
  *
@@ -32385,7 +32451,7 @@ var Router = Backbone.Router.extend({
 		'': 'home',
 		'details/:id': 'details',
 		'favorites': 'favorites',
-		'results': 'results',
+		'results': 'search',
 		'login': 'login',
 		'register': 'register'
 	},
@@ -32398,8 +32464,8 @@ var Router = Backbone.Router.extend({
 	favorites: function favorites() {
 		ReactDOM.render(React.createElement(FavoriteListComponent, { router: r }), app);
 	},
-	results: function results() {
-		ReactDOM.render(React.createElement(SearchResultsComponent, { router: r }), app);
+	search: function search(id) {
+		ReactDOM.render(React.createElement(SearchResultsComponent, { drummer: id }), app);
 	},
 	login: function login() {
 		ReactDOM.render(React.createElement(LoginComponent, { router: r }), app);

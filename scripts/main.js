@@ -17,12 +17,13 @@ window.$ = require('jquery');
 window.jQuery = $;
 
 var NavigationComponent = require('./components/NavigationComponent');
+var FilterBoxComponent = require('./components/FilterBoxComponent');
 var FilterComponent = require('./components/FilterComponent');
+var FilterResultsComponent = require('./components/FilterResultsComponent');
 var DrummerListComponent = require('./components/DrummerListComponent');
 var DrummerIconComponent = require('./components/DrummerIconComponent');
 var DrummerDetailsComponent = require('./components/DrummerDetailsComponent');
 var FavoriteListComponent = require('./components/FavoriteListComponent');
-var SearchResultsComponent = require('./components/SearchResultsComponent');
 var LoginComponent = require('./components/LoginComponent');
 var RegisterComponent = require('./components/RegisterComponent');
 
@@ -54,7 +55,7 @@ var Router = Backbone.Router.extend({
 	},
 	search: function(id){
 		ReactDOM.render(
-			<SearchResultsComponent drummer={id} />, app
+			<FilterResultsComponent drummer={id} />, app
 		);
 	},
 	login: function(){
@@ -78,6 +79,6 @@ ReactDOM.render(
 	);
 
 ReactDOM.render(
-	<FilterComponent router={r} filterVal={this.props.data} filterUpdate={this.state.filterText} />,
+	<FilterBoxComponent router={r} />,
 	document.getElementById('search')
 	);

@@ -13,15 +13,14 @@ var ReactDOM = require('react-dom');
 var DrummerModel = require('../models/DrummerModel');
 
 module.exports = React.createClass({
-	getInitialState: function() {
+	getInitialState() {
 		return {
 			drummers: []
 		};
 	},
-	componentWillMount: function() {
+	componentWillMount() {
 		var query = new Parse.Query(DrummerModel);
 		query
-		.ascending('name')
 		.find().then(
 			(drummer) => {
 				this.setState({ drummers: drummer });
@@ -31,7 +30,7 @@ module.exports = React.createClass({
 			}
 		);
 	},
-	render: function() {
+	render() {
 		var content = (<div>loading... </div>);
 
 		if(this.state.drummers) {

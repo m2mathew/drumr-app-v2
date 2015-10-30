@@ -13,8 +13,7 @@ var ReactDOM = require('react-dom');
 var DrummerIconComponent = require('./DrummerIconComponent');
 
 module.exports = React.createClass({
-
-	render: function() {
+	render() {
 
 		return (
 			<div>

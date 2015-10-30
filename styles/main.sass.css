@@ -387,16 +387,16 @@ nav {
         float: right;
         margin-left: 1em; }
 
-.search-container {
+.filter-container {
   text-align: center;
   border-bottom: 4px solid #555;
   background-color: #D5E5F2;
   margin: 0 auto;
   padding: 0; }
-  .search-container input {
+  .filter-container input {
     margin-top: 0;
     margin: 0.5em; }
-  .search-container button {
+  .filter-container button {
     margin-top: 0; }
 
 main {

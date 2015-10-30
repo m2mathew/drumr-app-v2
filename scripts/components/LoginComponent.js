@@ -13,10 +13,10 @@ var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 
 module.exports = React.createClass({
-	getInitialState: function() {
+	getInitialState() {
 		return { error: null };
 	},
-	render: function() {
+	render() {
 		var errorElement = null;
 		if(this.state.error) {
 			errorElement = (
@@ -43,7 +43,7 @@ module.exports = React.createClass({
 			</div>
 		);
 	},
-	onLogin: function(e) {
+	onLogin(e) {
 		e.preventDefault();
 		var user = new Parse.User();
 		Parse.User.logIn(

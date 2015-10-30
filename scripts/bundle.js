@@ -31820,7 +31820,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":171,"react":160,"react-dom":5}],162:[function(require,module,exports){
+},{"../models/DrummerModel":172,"react":160,"react-dom":5}],162:[function(require,module,exports){
 /*
  *  Drummer Icon Component
  *
@@ -31847,7 +31847,7 @@ module.exports = React.createClass({
 		var _this = this;
 
 		var query = new Parse.Query(DrummerModel);
-		query.ascending('name').find().then(function (drummer) {
+		query.find().then(function (drummer) {
 			_this.setState({ drummers: drummer });
 		}, function (err) {
 			console.log(err);
@@ -31890,7 +31890,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":171,"react":160,"react-dom":5}],163:[function(require,module,exports){
+},{"../models/DrummerModel":172,"react":160,"react-dom":5}],163:[function(require,module,exports){
 /*
  *  Drummer List Component
  *
@@ -31941,7 +31941,6 @@ module.exports = React.createClass({
 	displayName: 'exports',
 
 	render: function render() {
-
 		return React.createElement(
 			'div',
 			null,
@@ -31956,7 +31955,57 @@ module.exports = React.createClass({
 
 },{"react":160,"react-dom":5}],165:[function(require,module,exports){
 /*
- *  Search Component
+ *  Filter Box Component
+ *
+ *		React
+ *		ReactDOM
+ *
+ */
+
+'use strict';
+
+var React = require('react');
+var ReactDOM = require('react-dom');
+var Backbone = require('backbone');
+var FilterComponent = require('./FilterComponent');
+var FilterResultsComponent = require('./FilterResultsComponent');
+var DrummerModel = require('../models/DrummerModel');
+
+module.exports = React.createClass({
+	displayName: 'exports',
+
+	getInitialState: function getInitialState() {
+		return {
+			drummers: [],
+			filterText: ''
+		};
+	},
+	componentWillMount: function componentWillMount() {
+		var _this = this;
+
+		var query = new Parse.Query(DrummerModel);
+		query.find().then(function (drummer) {
+			_this.setState({ drummers: drummer });
+		}, function (err) {
+			console.log(err);
+		});
+	},
+	stateUpdate: function stateUpdate(value) {
+		this.setState({ filterText: value });
+	},
+	render: function render() {
+		return React.createElement(
+			'div',
+			null,
+			React.createElement(FilterComponent, { filterVal: this.state.filterText, filterUpdate: this.stateUpdate }),
+			React.createElement(FilterResultsComponent, { filter: this.state.filterText, drummers: this.state.drummers })
+		);
+	}
+});
+
+},{"../models/DrummerModel":172,"./FilterComponent":166,"./FilterResultsComponent":167,"backbone":1,"react":160,"react-dom":5}],166:[function(require,module,exports){
+/*
+ *  Filter Component
  *
  *		React
  *		ReactDOM
@@ -31973,35 +32022,20 @@ var DrummerModel = require('../models/DrummerModel');
 module.exports = React.createClass({
 	displayName: 'exports',
 
-	getInitialState: function getInitialState() {
-		return {
-			drummers: []
-		};
-	},
-	componentWillMount: function componentWillMount() {
-		var _this = this;
-
-		var query = new Parse.Query(DrummerModel);
-		query.find().then(function (drummer) {
-			_this.setState({ drummers: drummer });
-		}, function (err) {
-			console.log(err);
-		});
-	},
 	render: function render() {
 
 		return React.createElement(
 			'div',
-			{ className: 'search-container' },
+			{ className: 'filter-container' },
 			React.createElement(
 				'form',
 				{ onSubmit: this.submitSearch },
 				React.createElement('input', { type: 'text',
-					id: 'search-bar',
+					id: 'filter-input',
 					ref: 'filterInput',
 					placeholder: 'find a drummer',
 					value: this.props.filterVal,
-					onChange: this.constantSearch }),
+					onChange: this.filterTrigger }),
 				React.createElement(
 					'button',
 					{ className: 'search-button' },
@@ -32010,23 +32044,57 @@ module.exports = React.createClass({
 			)
 		);
 	},
-	constantSearch: function constantSearch(e) {
-		e.preventDefault();
-
-		// grab value of the input as the user is typing in real time
-		var searchForThis = this.refs.searchBar.value;
-		var query = new Parse.Query(DrummerModel);
-		query.startsWith("name", searchForThis);
-		console.log('Searching as you type!');
-	},
-	submitSearch: function submitSearch(e) {
-		e.preventDefault();
-
-		this.props.router.navigate('results', { trigger: true });
+	filterTrigger: function filterTrigger() {
+		// run the stateUpdate method from the FilterBox component using the current value of the <input> field
+		this.props.filterUpdate(this.refs.filterInput.value);
 	}
 });
 
-},{"../models/DrummerModel":171,"backbone":1,"react":160,"react-dom":5}],166:[function(require,module,exports){
+},{"../models/DrummerModel":172,"backbone":1,"react":160,"react-dom":5}],167:[function(require,module,exports){
+/*
+ *  Filter Results Component
+ *
+ *		React
+ *		ReactDOM
+ *
+ */
+
+'use strict';
+
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+module.exports = React.createClass({
+	displayName: 'exports',
+
+	render: function render() {
+		if (this.props.drummers) {
+			// this is grabbing the input correctly and converting it to lower case
+			var input = this.props.filter.toLowerCase();
+			console.log(input);
+
+			var filteredContent = this.props.drummers.map(function (drummer, key) {
+				if (drummer.get('name').toLowerCase().indexOf(input)) {
+					return;
+				} else {
+					return React.createElement(
+						'div',
+						{ className: 'icon-box', key: key },
+						drummer.get('name')
+					);
+				}
+			});
+		}
+
+		return React.createElement(
+			'div',
+			null,
+			filteredContent
+		);
+	}
+});
+
+},{"react":160,"react-dom":5}],168:[function(require,module,exports){
 /*
  *  Login Component
  *
@@ -32126,7 +32194,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":160,"react-dom":5}],167:[function(require,module,exports){
+},{"backbone":1,"react":160,"react-dom":5}],169:[function(require,module,exports){
 /*
  *  Navigation Component
  *
@@ -32238,7 +32306,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":160,"react-dom":5}],168:[function(require,module,exports){
+},{"backbone":1,"react":160,"react-dom":5}],170:[function(require,module,exports){
 /*
  *  Register Component
  *
@@ -32342,85 +32410,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":160,"react-dom":5}],169:[function(require,module,exports){
-/*
- *  Search Results Component
- *
- *		React
- *		ReactDOM
- *
- */
-
-'use strict';
-
-var React = require('react');
-var ReactDOM = require('react-dom');
-var DrummerIconComponent = require('./DrummerIconComponent');
-var DrummerModel = require('../models/DrummerModel');
-
-module.exports = React.createClass({
-	displayName: 'exports',
-
-	getInitialState: function getInitialState() {
-		return {
-			drummer: null
-		};
-	},
-	componentWillMount: function componentWillMount() {
-		// var query = new Parse.Query(DrummerModel);
-		// query
-		// .startsWith('name', this.props.drummer)
-		// .then(
-		// 	(drmr) => {
-		// 		this.setState({ drummer: drmr });
-		// 	},
-		// 	(err) => {
-		// 		console.log(err);
-		// 	}
-		// );
-	},
-	render: function render() {
-		var content = React.createElement(
-			'p',
-			null,
-			'loading...'
-		);
-
-		// if(this.state.drummer) {
-		// 	content = (
-		// 		<div>
-		// 			<h1>{this.state.drummer.get('name')}</h1>
-		// 			<div><img src={this.state.drummer.get('photos')} /></div>
-		// 			<div>{this.state.drummer.get('years')}</div>
-		// 			<div>
-		// 				<h2>Bands</h2>
-		// 				<div>{this.state.drummer.get('bands')}</div>
-		// 			</div>
-		// 			<div>
-		// 				<h2>Years active</h2><p>{this.state.drummer.get('yearsActive')}</p>
-		// 				<h2>Background</h2>
-		// 				<div>{this.state.drummer.get('background')}</div>
-		// 				<h2>Videos</h2><a href={this.state.drummer.get('videos')}>watch this drummer!</a>
-		// 			</div>
-		// 		</div>
-		// 	);
-		// }
-
-		return React.createElement(
-			'div',
-			null,
-			React.createElement(
-				'h2',
-				null,
-				'search results'
-			),
-			content,
-			React.createElement(DrummerIconComponent, null)
-		);
-	}
-});
-
-},{"../models/DrummerModel":171,"./DrummerIconComponent":162,"react":160,"react-dom":5}],170:[function(require,module,exports){
+},{"backbone":1,"react":160,"react-dom":5}],171:[function(require,module,exports){
 /*
  *  earDrum main.js
  *
@@ -32440,12 +32430,13 @@ window.$ = require('jquery');
 window.jQuery = $;
 
 var NavigationComponent = require('./components/NavigationComponent');
+var FilterBoxComponent = require('./components/FilterBoxComponent');
 var FilterComponent = require('./components/FilterComponent');
+var FilterResultsComponent = require('./components/FilterResultsComponent');
 var DrummerListComponent = require('./components/DrummerListComponent');
 var DrummerIconComponent = require('./components/DrummerIconComponent');
 var DrummerDetailsComponent = require('./components/DrummerDetailsComponent');
 var FavoriteListComponent = require('./components/FavoriteListComponent');
-var SearchResultsComponent = require('./components/SearchResultsComponent');
 var LoginComponent = require('./components/LoginComponent');
 var RegisterComponent = require('./components/RegisterComponent');
 
@@ -32470,7 +32461,7 @@ var Router = Backbone.Router.extend({
 		ReactDOM.render(React.createElement(FavoriteListComponent, { router: r }), app);
 	},
 	search: function search(id) {
-		ReactDOM.render(React.createElement(SearchResultsComponent, { drummer: id }), app);
+		ReactDOM.render(React.createElement(FilterResultsComponent, { drummer: id }), app);
 	},
 	login: function login() {
 		ReactDOM.render(React.createElement(LoginComponent, { router: r }), app);
@@ -32485,16 +32476,16 @@ Backbone.history.start();
 
 ReactDOM.render(React.createElement(NavigationComponent, { router: r }), document.getElementById('nav'));
 
-ReactDOM.render(React.createElement(FilterComponent, { router: r, filterVal: undefined.props.data, filterUpdate: undefined.state.filterText }), document.getElementById('search'));
+ReactDOM.render(React.createElement(FilterBoxComponent, { router: r }), document.getElementById('search'));
 
-},{"./components/DrummerDetailsComponent":161,"./components/DrummerIconComponent":162,"./components/DrummerListComponent":163,"./components/FavoriteListComponent":164,"./components/FilterComponent":165,"./components/LoginComponent":166,"./components/NavigationComponent":167,"./components/RegisterComponent":168,"./components/SearchResultsComponent":169,"backbone":1,"jquery":4,"react":160,"react-dom":5}],171:[function(require,module,exports){
+},{"./components/DrummerDetailsComponent":161,"./components/DrummerIconComponent":162,"./components/DrummerListComponent":163,"./components/FavoriteListComponent":164,"./components/FilterBoxComponent":165,"./components/FilterComponent":166,"./components/FilterResultsComponent":167,"./components/LoginComponent":168,"./components/NavigationComponent":169,"./components/RegisterComponent":170,"backbone":1,"jquery":4,"react":160,"react-dom":5}],172:[function(require,module,exports){
 'use strict';
 
 module.exports = Parse.Object.extend({
 	className: 'Drummer'
 });
 
-},{}]},{},[170])
+},{}]},{},[171])
 
 
 //# sourceMappingURL=bundle.js.map

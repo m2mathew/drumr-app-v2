@@ -14,12 +14,12 @@ var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 
 module.exports = React.createClass({
-	componentWillMount: function() {
+	componentWillMount() {
 		this.props.router.on('route', () => {
 			this.forceUpdate();
 		});
 	},
-	render: function() {
+	render() {
 		var currentUser = Parse.User.current();
 		var currentPage = Backbone.history.getFragment();
 
@@ -48,7 +48,7 @@ module.exports = React.createClass({
 			</div>
 		);
 	},
-	onLogout: function(e) {
+	onLogout(e) {
 		e.preventDefault();
 		Parse.User.logOut();
 		this.props.router.navigate('', {trigger: true});

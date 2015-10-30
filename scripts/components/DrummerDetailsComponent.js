@@ -13,12 +13,12 @@ var ReactDOM = require('react-dom');
 var DrummerModel = require('../models/DrummerModel');
 
 module.exports = React.createClass({
-	getInitialState: function() {
+	getInitialState() {
 		return {
 			drummer: null
 		}
 	},
-	componentWillMount: function() {
+	componentWillMount() {
 		var query = new Parse.Query(DrummerModel);
 		query
 		.get(this.props.drummer).then(
@@ -30,7 +30,7 @@ module.exports = React.createClass({
 			}
 		);
 	},
-	render: function() {
+	render() {
 		var content = (
 			<p>loading...</p>
 		);

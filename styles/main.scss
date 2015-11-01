@@ -100,15 +100,15 @@ main {
 		.icon-big-box {
 			// text-align: left;
 			padding: 0.75em;
-			// margin: 2em;
 			box-shadow: -2px 2px 7px #aaa;
-			margin: 0 auto;
+			margin: 0 auto 2em auto;
 
 			.icon-box {
-				margin: auto;
+				margin: 0 auto;
+				text-align: center;
 
 				.photo-box {
-					text-align: left;
+					text-align: center;
 
 					a, a:visited {
 						color: #000;

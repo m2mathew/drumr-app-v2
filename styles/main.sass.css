@@ -417,11 +417,12 @@ main {
     main .icon-container .icon-big-box {
       padding: 0.75em;
       box-shadow: -2px 2px 7px #aaa;
-      margin: 0 auto; }
+      margin: 0 auto 2em auto; }
       main .icon-container .icon-big-box .icon-box {
-        margin: auto; }
+        margin: 0 auto;
+        text-align: center; }
         main .icon-container .icon-big-box .icon-box .photo-box {
-          text-align: left; }
+          text-align: center; }
           main .icon-container .icon-big-box .icon-box .photo-box a, main .icon-container .icon-big-box .icon-box .photo-box a:visited {
             color: #000;
             text-decoration: none; }

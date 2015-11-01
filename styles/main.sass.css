@@ -401,15 +401,13 @@ nav {
 
 main {
   flex: 1;
-  padding: 2em;
-  margin: 0 auto; }
+  padding: 2em; }
   main h1 {
     margin-top: 0; }
   main .login-box, main .register-box {
-    background-color: #D5E5F2; }
-  main .login-container .register-box {
-    margin: 1em; }
-    main .login-container .register-box .error-box {
+    background-color: #D5E5F2;
+    padding: 1em; }
+    main .login-box .error-box, main .register-box .error-box {
       color: red; }
   main .icon-container {
     padding: 2em;

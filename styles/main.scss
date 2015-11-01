@@ -71,7 +71,7 @@ nav {
 main {
 	flex: 1;
 	padding: 2em;
-	margin: 0 auto;
+	// margin: 0 auto;
 
 	h1 {
 		margin-top: 0;
@@ -79,17 +79,10 @@ main {
 
 	.login-box, .register-box {
 		background-color: #D5E5F2;
-	}
+		padding: 1em;
 
-	.login-container {
-
-		.register-box {
-
-			margin: 1em;
-
-			.error-box {
-				color: red;
-			}
+		.error-box {
+			color: red;
 		}
 	}
 

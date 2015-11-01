@@ -401,7 +401,8 @@ nav {
 
 main {
   flex: 1;
-  padding: 2em; }
+  padding: 2em;
+  margin: 0 auto; }
   main h1 {
     margin-top: 0; }
   main .login-box, main .register-box {
@@ -410,11 +411,27 @@ main {
     margin: 1em; }
     main .login-container .register-box .error-box {
       color: red; }
-  main .icon-big-box {
-    margin: 1em; }
-    main .icon-big-box .icon-box {
-      max-width: 80%;
-      max-height: 25%; }
+  main .icon-container {
+    padding: 2em;
+    margin: 0 auto; }
+    main .icon-container .icon-big-box {
+      padding: 0.75em;
+      box-shadow: -2px 2px 7px #aaa;
+      margin: 0 auto; }
+      main .icon-container .icon-big-box .icon-box {
+        margin: auto; }
+        main .icon-container .icon-big-box .icon-box .photo-box {
+          text-align: left; }
+          main .icon-container .icon-big-box .icon-box .photo-box a, main .icon-container .icon-big-box .icon-box .photo-box a:visited {
+            color: #000;
+            text-decoration: none; }
+          main .icon-container .icon-big-box .icon-box .photo-box img {
+            max-width: 100%; }
+          main .icon-container .icon-big-box .icon-box .photo-box p {
+            padding-top: 0.5em;
+            margin: 0;
+            font-weight: bold;
+            font-size: 1.5em; }
 
 footer {
   background-color: #D5E5F2;

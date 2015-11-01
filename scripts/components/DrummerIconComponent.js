@@ -21,6 +21,7 @@ module.exports = React.createClass({
 	componentWillMount() {
 		var query = new Parse.Query(DrummerModel);
 		query
+		.descending('createdAt')
 		.find().then(
 			(drummer) => {
 				this.setState({ drummers: drummer });
@@ -39,18 +40,22 @@ module.exports = React.createClass({
 				var name = drummer.get('name');
 				var id = drummer.get('objectId');
 				return (
-					<div key={drummer.id} className="icon-box">
-						<a href={"#details/" + drummer.id}>
-							<img src={photo} />
-							<h3>{name}</h3>
-						</a>
+					<div key={drummer.id} className="icon-big-box">
+						<div className="icon-box">
+							<div className="photo-box">
+								<a href={"#details/" + drummer.id}>
+									<img src={photo} />
+									<p>{name}</p>
+								</a>
+							</div>
+						</div>
 					</div>
 				);
 			});
 		}
 
 		return (
-			<div className="icon-big-box">
+			<div className="icon-container">
 				{content}
 			</div>
 		);

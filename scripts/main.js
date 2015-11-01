@@ -12,6 +12,7 @@ Parse.initialize("WyJ1nIiGhD3Dbm9bDzM7oX51MCEmaM716376q6wE", "CwqeTVxr7zr7BtORZo
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
+var _ = require('backbone/node_modules/underscore/underscore-min');
 
 window.$ = require('jquery');
 window.jQuery = $;

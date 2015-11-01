@@ -71,6 +71,7 @@ nav {
 main {
 	flex: 1;
 	padding: 2em;
+	margin: 0 auto;
 
 	h1 {
 		margin-top: 0;
@@ -92,12 +93,40 @@ main {
 		}
 	}
 
-	.icon-big-box {
-		margin: 1em;
+	.icon-container {
+		padding: 2em;
+		margin: 0 auto;
 
-		.icon-box {
-			max-width: 80%;
-			max-height: 25%;
+		.icon-big-box {
+			// text-align: left;
+			padding: 0.75em;
+			// margin: 2em;
+			box-shadow: -2px 2px 7px #aaa;
+			margin: 0 auto;
+
+			.icon-box {
+				margin: auto;
+
+				.photo-box {
+					text-align: left;
+
+					a, a:visited {
+						color: #000;
+						text-decoration: none;
+					}
+
+					img {
+						max-width: 100%;
+					}
+
+					p {
+						padding-top: 0.5em;
+						margin: 0;
+						font-weight: bold;
+						font-size: 1.5em;
+					}
+				}
+			}
 		}
 	}
 }

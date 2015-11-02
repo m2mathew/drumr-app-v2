@@ -518,3 +518,12 @@ button {
     -webkit-box-shadow: 0 0 12px rgba(51, 204, 255, 0.99); }
   100% {
     -webkit-box-shadow: 0 0 12px rgba(51, 204, 255, 0.1); } }
+
+@media screen and (min-width: 778px) {
+  .icon-big-box {
+    float: left;
+    margin-left: 2em;
+    margin-right: 2em; }
+    .icon-big-box .icon-box {
+      margin: 0 auto;
+      text-align: center; } }

@@ -71,7 +71,6 @@ nav {
 main {
 	flex: 1;
 	padding: 2em;
-	// margin: 0 auto;
 
 	h1 {
 		margin-top: 0;
@@ -91,7 +90,6 @@ main {
 		margin: 0 auto;
 
 		.icon-big-box {
-			// text-align: left;
 			padding: 0.75em;
 			box-shadow: -2px 2px 7px #aaa;
 			margin: 0 auto 2em auto;
@@ -239,4 +237,17 @@ button {
 	100% {
 		-webkit-box-shadow: 0 0 12px rgba(51, 204, 255, 0.1);
 	}
+}
+
+@media screen and (min-width: 778px) {
+	.icon-big-box {
+			float: left;
+			margin-left: 2em;
+			margin-right: 2em;
+
+			.icon-box {
+				margin: 0 auto;
+				text-align: center;
+			}
+		}
 }

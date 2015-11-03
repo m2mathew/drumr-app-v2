@@ -1,5 +1,5 @@
 /*
- *  Filter Component
+ *  Filter Box Component
  *
  *		React
  *		ReactDOM
@@ -10,7 +10,7 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Backbone = require('backbone');
+var FilterComponent = require('./FilterComponent');
 var DrummerModel = require('../models/DrummerModel');
 
 module.exports = React.createClass({
@@ -18,19 +18,19 @@ module.exports = React.createClass({
 
 		return (
 			<div className="filter-container">
-				<form onSubmit={this.submitSearch}>
+				<form>
 					<input type="text"
 							id="filter-input"
 							ref="filterInput"
-							placeholder="find a drummer"
+							placeholder="enter a drummer name"
 							value={this.props.filterVal}
 							onChange={this.filterTrigger} />
-					<button className="search-button">Search</button>
 				</form>
 			</div>
 		);
 	},
-	filterTrigger() {
+	filterTrigger(e) {
+		e.preventDefault();
 		// run the stateUpdate method from the FilterBox component using the current value of the <input> field
 		this.props.filterUpdate(this.refs.filterInput.value);
 	}

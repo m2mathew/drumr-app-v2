@@ -36,27 +36,37 @@ module.exports = React.createClass({
 		);
 
 		if(this.state.drummer) {
+			var name = (this.state.drummer.get('name'));
+			var photos = (this.state.drummer.get('photos'));
+			var years = (this.state.drummer.get('dates'));
+			var bands = (this.state.drummer.get('bands'));
+			var yearsActive = (this.state.drummer.get('yearsActive'));
+			var background = (this.state.drummer.get('background'));
+			var videos = (this.state.drummer.get('videos'));
+			var videoPic = (this.state.drummer.get('videoPic'));
+
 			content = (
 				<div>
-					<h1>{this.state.drummer.get('name')}</h1>
-					<div><img src={this.state.drummer.get('photos')} /></div>
-					<div>{this.state.drummer.get('years')}</div>
+					<h1 className="detail-title">{name}</h1>
+					<div className="detail-years">{years}</div>
+					<div><img src={photos} /></div>
 					<div>
 						<h2>Bands</h2>
-						<div>{this.state.drummer.get('bands')}</div>
+						<div>{bands}</div>
 					</div>
 					<div>
-						<h2>Years active</h2><p>{this.state.drummer.get('yearsActive')}</p>
+						<h2>Years active</h2><p>{yearsActive}</p>
 						<h2>Background</h2>
-						<div>{this.state.drummer.get('background')}</div>
-						<h2>Videos</h2><a href={this.state.drummer.get('videos')}>watch this drummer!</a>
+						<div>{background}</div>
+						<h2>Videos</h2>
+						<a href={videos}><img src={videoPic} alt='watch this drummer!'/></a>
 					</div>
 				</div>
 			);
 		}
 
 		return (
-			<div>
+			<div className="details-container">
 				{content}
 			</div>
 		);

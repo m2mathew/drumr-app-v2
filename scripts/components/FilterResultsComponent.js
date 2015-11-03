@@ -16,19 +16,16 @@ module.exports = React.createClass({
 		if(this.props.drummers) {
 			// this is grabbing the input correctly and converting it to lower case
 			var input = this.props.filter.toLowerCase();
-			// console.log(input);
 
-			var filteredContent = this.props.drummers.map(function(drummer, key) {
-				if(drummer.get('name').toLowerCase().indexOf(input)) {
-					return;
-				}
-				else {
-					return (
-					<div className="icon-box" key={key}>
+			var filteredContent = this.props.drummers.filter(function(drummer) {
+				return (drummer.get('name').toLowerCase().indexOf(input) != -1);
+			})
+			.map(function(drummer) {
+				return (
+					<div className="icon-box" key={drummer.id}>
 						{drummer.get('name')}
 					</div>
-					);
-				}
+				);
 			});
 		}
 

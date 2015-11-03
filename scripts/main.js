@@ -18,30 +18,27 @@ window.$ = require('jquery');
 window.jQuery = $;
 
 var NavigationComponent = require('./components/NavigationComponent');
-var FilterBoxComponent = require('./components/FilterBoxComponent');
-var FilterComponent = require('./components/FilterComponent');
-var FilterResultsComponent = require('./components/FilterResultsComponent');
-var DrummerListComponent = require('./components/DrummerListComponent');
+var HomeComponent = require('./components/HomeComponent');
 var DrummerIconComponent = require('./components/DrummerIconComponent');
 var DrummerDetailsComponent = require('./components/DrummerDetailsComponent');
-var FavoriteListComponent = require('./components/FavoriteListComponent');
+var FavoritesComponent = require('./components/FavoritesComponent');
 var LoginComponent = require('./components/LoginComponent');
 var RegisterComponent = require('./components/RegisterComponent');
 
 var app = document.getElementById('app');
+var currentuser = Parse.User.current();
 
 var Router = Backbone.Router.extend({
 	routes: {
 		'': 'home',
 		'details/:id': 'details',
-		'favorites': 'favorites',
-		'results': 'search',
+		'favorites(/:id)': 'favorites',
 		'login': 'login',
 		'register': 'register'
 	},
 	home: function(){
 		ReactDOM.render(
-			<DrummerListComponent router={r} />, app
+			<HomeComponent router={r} />, app
 		);
 	},
 	details: function(id){
@@ -50,14 +47,18 @@ var Router = Backbone.Router.extend({
 		);
 	},
 	favorites: function(){
-		ReactDOM.render(
-			<FavoriteListComponent router={r} />, app
-		);
-	},
-	search: function(id){
-		ReactDOM.render(
-			<FilterResultsComponent drummer={id} />, app
-		);
+		if(currentuser === true) {
+			console.log('You no logged in!');
+			console.log(currentuser);
+			ReactDOM.render(
+				<FavoritesComponent router={r} />, app
+			);
+		}
+		else {
+			ReactDOM.render(
+				<HomeComponent router={r} />, app
+			);
+		}
 	},
 	login: function(){
 		ReactDOM.render(
@@ -77,9 +78,4 @@ Backbone.history.start();
 ReactDOM.render(
 	<NavigationComponent router={r} />,
 	document.getElementById('nav')
-	);
-
-ReactDOM.render(
-	<FilterBoxComponent router={r} />,
-	document.getElementById('search')
 	);

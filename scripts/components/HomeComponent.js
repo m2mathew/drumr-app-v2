@@ -1,5 +1,5 @@
 /*
- *  Filter Box Component
+ *  Home Component
  *
  *		React
  *		ReactDOM
@@ -10,9 +10,8 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Backbone = require('backbone');
 var FilterComponent = require('./FilterComponent');
-var FilterResultsComponent = require('./FilterResultsComponent');
+var ListComponent = require('./ListComponent');
 var DrummerModel = require('../models/DrummerModel');
 
 module.exports = React.createClass({
@@ -35,13 +34,19 @@ module.exports = React.createClass({
 		);
 	},
 	stateUpdate(value) {
-		this.setState( { filterText: value } );
+		this.setState({ filterText: value });
 	},
 	render() {
+
 		return (
-			<div>
-				<FilterComponent filterVal={this.state.filterText} filterUpdate={this.stateUpdate} />
-				<FilterResultsComponent filter={this.state.filterText} drummers={this.state.drummers} />
+			<div className="home-container">
+				<div className="filter-container">
+					<FilterComponent filterVal={this.state.filterText} filterUpdate={this.stateUpdate} />
+				</div>
+
+				<h1>Drummers Rule</h1>
+
+				<ListComponent filter={this.state.filterText} drummers={this.state.drummers} />
 			</div>
 		);
 	}

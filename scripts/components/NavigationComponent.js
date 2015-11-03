@@ -24,27 +24,27 @@ module.exports = React.createClass({
 		var currentPage = Backbone.history.getFragment();
 
 		var links = [
-			<a href="#" key="home"><div className={currentPage === '' ? 'active nav-link' : 'nav-link'}>Top Drummers</div></a>,
+			<li key="home" className={currentPage === '' ? 'active nav-link' : 'nav-link'}><a href="#">Top Drummers</a></li>
 		];
 
 		if(currentUser) {
-			links.unshift(<a href="#favorites" key="fav"><div className={currentPage === 'favorites' ? 'active nav-link' : 'nav-link'}>Favorites</div></a>);
-			links.unshift(<a href="#logout" key="logout" onClick={this.onLogout}><div className="nav-link">Logout</div></a>);
-			links.unshift(<div key="username" className="displayedUser">{currentUser.getEmail()}</div>);
+			links.push(<li key="fav" className={currentPage === 'favorites' ? 'active nav-link' : 'nav-link'}><a href="#favorites">Favorites</a></li>);
+			links.push(<li key="logout" className="nav-link"><a href="#logout" onClick={this.onLogout}>Logout</a></li>);
+			links.push(<li key="username" className="displayedUser">{currentUser.getEmail()}</li>);
 		}
 		else {
-			links.unshift(<a href="#register" key="register"><div className={currentPage === 'register' ? 'active nav-link' : 'nav-link'}>Register</div></a>);
-			links.unshift(<a href="#login" key="login"><div className={currentPage === 'login' ? 'active nav-link' : 'nav-link'}>Login</div></a>);
+			links.push(<li key="register" className={currentPage === 'register' ? 'active nav-link' : 'nav-link'}><a href="#register">Register</a></li>);
+			links.push(<li key="login" className={currentPage === 'login' ? 'active nav-link' : 'nav-link'}><a href="#login">Login</a></li>);
 		}
 
 		return (
 			<div className="nav-wrapper">
 				<div className="site-logo">
-					<a href="#!"><img src="../../images/drumr-logo2.png" /></a>
+					<a href="#"><img src="../../images/drumr-logo.png" /></a>
 				</div>
-				<div className="nav-links">
+				<ul className="nav-links">
 					{links}
-				</div>
+				</ul>
 			</div>
 		);
 	},

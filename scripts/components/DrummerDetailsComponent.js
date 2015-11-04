@@ -11,6 +11,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var DrummerModel = require('../models/DrummerModel');
+var FavoriteModel = require('../models/FavoriteModel');
 
 module.exports = React.createClass({
 	getInitialState() {
@@ -31,6 +32,7 @@ module.exports = React.createClass({
 		);
 	},
 	render() {
+		var favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
 		var content = (
 			<p>loading...</p>
 		);
@@ -48,6 +50,7 @@ module.exports = React.createClass({
 			content = (
 				<div>
 					<h1 className="detail-title">{name}</h1>
+					<p onClick={this.addFavorite}>{favStar}</p>
 					<div className="detail-years">{years}</div>
 					<div><img src={photos} /></div>
 					<div>
@@ -70,5 +73,25 @@ module.exports = React.createClass({
 				{content}
 			</div>
 		);
+	},
+	addFavorite(e) {
+		e.preventDefault();
+		var currentUser = Parse.User.current();
+		var drummer = new DrummerModel({
+			objectId: this.state.drummer.id
+		});
+		var favorite = new FavoriteModel;
+
+		var favQuery = new Parse.Query(FavoriteModel);
+
+		favQuery
+		.contains('username', currentUser.id)
+		.contains('favoritedDrummer', this.state.drummer.id);
+
+		console.log(favQuery);
+
+		// favorite.set('username', currentUser)
+		// .set('favoritedDrummer', drummer)
+		// .save();
 	}
 });

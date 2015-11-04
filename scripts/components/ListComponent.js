@@ -10,16 +10,47 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var DrummerIconComponent = require('./DrummerIconComponent');
+var DrummerModel = require('../models/DrummerModel');
+var FavoriteModel = require('../models/FavoriteModel');
 
 module.exports = React.createClass({
+	getInitialState() {
+	    return {
+	        favDrummers: [],
+	    };
+	},
+	componentWillMount() {
+		var currentUser = Parse.User.current();
+		var favQuery = new Parse.Query(FavoriteModel);
+
+		favQuery
+		.equalTo('username', currentUser)
+		.include('favoritedDrummer')
+		.find().then(
+			(drummer) => {
+				this.setState({ favDrummers: drummer });
+
+			},
+			(err) => {
+				console.log(err);
+			}
+		);
+	},
 	render() {
 		var content = (<div>loading...</div>);
-		var favStar = (<i className="material-icons md-36">star_border</i>);
+		var favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
 		var currentUser = Parse.User.current();
 
-		console.log(this.props.drummers);
-		if(this.props.drummers) {
+
+
+
+
+
+		// if(this.props.drummers) {
+			if(this.state.favDrummers.length > 0) {
+
+
+
 			// this is grabbing the input correctly and converting it to lower case
 			var input = this.props.filter.toLowerCase();
 
@@ -52,4 +83,3 @@ module.exports = React.createClass({
 	}
 });
 
-// <DrummerIconComponent content={content} />

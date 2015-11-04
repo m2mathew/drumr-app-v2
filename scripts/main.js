@@ -48,8 +48,6 @@ var Router = Backbone.Router.extend({
 	},
 	favorites: function(){
 		if(!currentuser) {
-			console.log('You no logged in!');
-			console.log(currentuser);
 			ReactDOM.render(
 				<HomeComponent router={r} />, app
 			);

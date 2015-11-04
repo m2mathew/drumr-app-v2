@@ -76,6 +76,7 @@ module.exports = React.createClass({
 	},
 	addFavorite(e) {
 		e.preventDefault();
+		var hasFavorite = '';
 		var currentUser = Parse.User.current();
 		var drummer = new DrummerModel({
 			objectId: this.state.drummer.id
@@ -90,8 +91,8 @@ module.exports = React.createClass({
 
 		console.log(favQuery);
 
-		// favorite.set('username', currentUser)
-		// .set('favoritedDrummer', drummer)
-		// .save();
+		favorite.set('username', currentUser)
+		.set('favoritedDrummer', drummer)
+		.save();
 	}
 });

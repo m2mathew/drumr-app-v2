@@ -31847,6 +31847,7 @@ module.exports = React.createClass({
 	},
 	addFavorite: function addFavorite(e) {
 		e.preventDefault();
+		var hasFavorite = '';
 		var currentUser = Parse.User.current();
 		var drummer = new DrummerModel({
 			objectId: this.state.drummer.id
@@ -31859,9 +31860,7 @@ module.exports = React.createClass({
 
 		console.log(favQuery);
 
-		// favorite.set('username', currentUser)
-		// .set('favoritedDrummer', drummer)
-		// .save();
+		favorite.set('username', currentUser).set('favoritedDrummer', drummer).save();
 	}
 });
 
@@ -32126,6 +32125,10 @@ module.exports = React.createClass({
  *
  *		React
  *		ReactDOM
+ *		Backbone
+ *		Underscore
+ *		Drummer Model
+ *		Favorite Model
  *
  */
 
@@ -32135,49 +32138,66 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var DrummerModel = require('../models/DrummerModel');
 var FavoriteModel = require('../models/FavoriteModel');
+var Backbone = require('backbone');
+var _ = require('backbone/node_modules/underscore');
 
 module.exports = React.createClass({
 	displayName: 'exports',
 
 	getInitialState: function getInitialState() {
 		return {
-			favDrummers: []
+			favDrummers: null
 		};
 	},
 	componentWillMount: function componentWillMount() {
 		var _this = this;
 
 		var currentUser = Parse.User.current();
+		var list;
 		var favQuery = new Parse.Query(FavoriteModel);
 
-		favQuery.equalTo('username', currentUser).include('favoritedDrummer').find().then(function (drummer) {
-			_this.setState({ favDrummers: drummer });
+		favQuery.equalTo('username', currentUser).include('favoritedDrummer').find().then(function (favorites) {
+			var drummerIds = _.groupBy(favorites, function (favorite) {
+				return favorite.get('favoritedDrummer').id;
+			});
+
+			_this.setState({ favDrummers: drummerIds });
 		}, function (err) {
 			console.log(err);
 		});
 	},
 	render: function render() {
+		var _this2 = this;
+
 		var content = React.createElement(
 			'div',
 			null,
 			'loading...'
 		);
-		var favStar = React.createElement(
-			'i',
-			{ className: 'favStar' },
-			React.createElement('img', { src: '../../images/full-star.png' })
-		);
+		var favStar = '';
 		var currentUser = Parse.User.current();
 
-		// if(this.props.drummers) {
-		if (this.state.favDrummers.length > 0) {
-
+		if (this.state.favDrummers != null) {
 			// this is grabbing the input correctly and converting it to lower case
 			var input = this.props.filter.toLowerCase();
 
 			var content = this.props.drummers.filter(function (drummer) {
 				return drummer.get('name').toLowerCase().indexOf(input) != -1;
 			}).map(function (drummer) {
+				if (_this2.state.favDrummers.hasOwnProperty(drummer.id)) {
+					favStar = React.createElement(
+						'i',
+						{ className: 'favStar' },
+						React.createElement('img', { src: '../../images/full-star.png' })
+					);
+				} else {
+					favStar = React.createElement(
+						'i',
+						{ className: 'favStar' },
+						React.createElement('img', { src: '../../images/empty-star.png' })
+					);
+				}
+
 				return React.createElement(
 					'div',
 					{ key: drummer.id, className: 'icon-big-box' },
@@ -32217,7 +32237,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":172,"../models/FavoriteModel":173,"react":161,"react-dom":6}],168:[function(require,module,exports){
+},{"../models/DrummerModel":172,"../models/FavoriteModel":173,"backbone":1,"backbone/node_modules/underscore":3,"react":161,"react-dom":6}],168:[function(require,module,exports){
 /*
  *  Login Component
  *
@@ -32580,8 +32600,6 @@ var Router = Backbone.Router.extend({
 	},
 	favorites: function favorites() {
 		if (!currentuser) {
-			console.log('You no logged in!');
-			console.log(currentuser);
 			ReactDOM.render(React.createElement(HomeComponent, { router: r }), app);
 		} else {
 			ReactDOM.render(React.createElement(FavoritesComponent, { router: r }), app);

@@ -3,6 +3,10 @@
  *
  *		React
  *		ReactDOM
+ *		Backbone
+ *		Underscore
+ *		Drummer Model
+ *		Favorite Model
  *
  */
 
@@ -12,24 +16,30 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var DrummerModel = require('../models/DrummerModel');
 var FavoriteModel = require('../models/FavoriteModel');
+var Backbone = require('backbone');
+var _ = require('backbone/node_modules/underscore');
 
 module.exports = React.createClass({
 	getInitialState() {
 	    return {
-	        favDrummers: [],
+	        favDrummers: null
 	    };
 	},
 	componentWillMount() {
 		var currentUser = Parse.User.current();
+		var list
 		var favQuery = new Parse.Query(FavoriteModel);
 
 		favQuery
 		.equalTo('username', currentUser)
 		.include('favoritedDrummer')
 		.find().then(
-			(drummer) => {
-				this.setState({ favDrummers: drummer });
+			(favorites) => {
+				var drummerIds = _.groupBy(favorites, function(favorite) {
+					return favorite.get('favoritedDrummer').id;
+				})
 
+				this.setState({ favDrummers: drummerIds });
 			},
 			(err) => {
 				console.log(err);
@@ -38,26 +48,24 @@ module.exports = React.createClass({
 	},
 	render() {
 		var content = (<div>loading...</div>);
-		var favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
+		var favStar = '';
 		var currentUser = Parse.User.current();
 
-
-
-
-
-
-		// if(this.props.drummers) {
-			if(this.state.favDrummers.length > 0) {
-
-
-
+		if(this.state.favDrummers != null) {
 			// this is grabbing the input correctly and converting it to lower case
 			var input = this.props.filter.toLowerCase();
 
 			var content = this.props.drummers.filter(function(drummer) {
 				return (drummer.get('name').toLowerCase().indexOf(input) != -1);
 			})
-			.map(function(drummer) {
+			.map( (drummer) => {
+				if(this.state.favDrummers.hasOwnProperty(drummer.id)) {
+					favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
+				}
+				else {
+					favStar = (<i className="favStar"><img src="../../images/empty-star.png" /></i>);
+				}
+
 				return (
 					<div key={drummer.id} className="icon-big-box">
 						<div className="icon-box">

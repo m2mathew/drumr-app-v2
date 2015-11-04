@@ -89,14 +89,13 @@ main {
 		}
 	}
 
-
 	.home-container, .favorites-container {
 
 		h1 {
 			padding: 1em 0 0 2em;
 		}
 
-		.filter-container {
+		.filter-container.filter-container {
 			text-align: center;
 			border-bottom: 4px solid #555;
 			background-color: #D5E5F2;
@@ -115,7 +114,7 @@ main {
 	}
 
 	.details-container {
-		margin: 2em;
+		margin: 4em;
 
 		.detail-title {
 			text-shadow: 0 1px 1px rgba(0, 0, 255, 0.5);
@@ -129,7 +128,6 @@ main {
 }
 
 .list-container, .favorites-container {
-	margin: 2em;
 
 	.icon-container {
 		padding: 2em;
@@ -173,6 +171,10 @@ main {
 			}
 		}
 	}
+}
+
+.list-container {
+	margin: 2em;
 }
 
 footer {

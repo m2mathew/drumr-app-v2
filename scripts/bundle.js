@@ -31880,6 +31880,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var FilterComponent = require('./FilterComponent');
 var DrummerIconComponent = require('./DrummerIconComponent');
+var ListComponent = require('./ListComponent');
 var DrummerModel = require('../models/DrummerModel');
 var FavoriteModel = require('../models/FavoriteModel');
 
@@ -31888,18 +31889,22 @@ module.exports = React.createClass({
 
 	getInitialState: function getInitialState() {
 		return {
-			favDrummers: []
+			favDrummers: [],
+			filterText: ''
 		};
 	},
 	componentWillMount: function componentWillMount() {
 		var _this = this;
 
 		var currentUser = Parse.User.current();
+		console.log(currentUser);
 
-		var innerQuery = new Parse.Query(DrummerModel);
+		// var innerQuery = new Parse.Query(DrummerModel);
 		var query = new Parse.Query(FavoriteModel);
 
-		query.matchesQuery('favoritedDrummer', innerQuery).include('favoritedDrummer').find().then(function (drummer) {
+		query.equalTo('username', currentUser)
+		// .matchesQuery('favoritedDrummer', innerQuery)
+		.include('favoritedDrummer').find().then(function (drummer) {
 			_this.setState({ favDrummers: drummer });
 		}, function (err) {
 			console.log(err);
@@ -31917,7 +31922,7 @@ module.exports = React.createClass({
 			'star_border'
 		);
 
-		if (!this.state.favDrummers) {
+		if (this.state.favDrummers.length === 0) {
 			content = React.createElement(
 				'h2',
 				null,
@@ -31930,7 +31935,8 @@ module.exports = React.createClass({
 				' or search for a drummer above'
 			);
 		}
-		if (this.state.favDrummers) {
+		if (this.state.favDrummers.length > 0) {
+			console.log('there are drummers!');
 			content = this.state.favDrummers.map(function (drummer) {
 				var photo = drummer.get('favoritedDrummer').get('photos');
 				var name = drummer.get('favoritedDrummer').get('name');
@@ -31973,14 +31979,19 @@ module.exports = React.createClass({
 			React.createElement(
 				'h1',
 				null,
-				'favorites list'
+				'Favorites list'
 			),
-			React.createElement(DrummerIconComponent, { content: content })
+			content
 		);
+	},
+	stateUpdate: function stateUpdate(value) {
+		this.setState({ filterText: value });
 	}
 });
 
-},{"../models/DrummerModel":172,"../models/FavoriteModel":173,"./DrummerIconComponent":163,"./FilterComponent":165,"react":161,"react-dom":6}],165:[function(require,module,exports){
+// <ListComponent filter={this.state.filterText} drummers={content} />
+
+},{"../models/DrummerModel":172,"../models/FavoriteModel":173,"./DrummerIconComponent":163,"./FilterComponent":165,"./ListComponent":167,"react":161,"react-dom":6}],165:[function(require,module,exports){
 /*
  *  Filter Box Component
  *
@@ -32151,10 +32162,16 @@ module.exports = React.createClass({
 		return React.createElement(
 			'div',
 			{ className: 'list-container' },
-			React.createElement(DrummerIconComponent, { content: content })
+			React.createElement(
+				'div',
+				{ className: 'icon-container' },
+				content
+			)
 		);
 	}
 });
+
+// <DrummerIconComponent content={content} />
 
 },{"./DrummerIconComponent":163,"react":161,"react-dom":6}],168:[function(require,module,exports){
 /*
@@ -32518,12 +32535,12 @@ var Router = Backbone.Router.extend({
 		ReactDOM.render(React.createElement(DrummerDetailsComponent, { drummer: id }), app);
 	},
 	favorites: function favorites() {
-		if (currentuser === true) {
+		if (!currentuser) {
 			console.log('You no logged in!');
 			console.log(currentuser);
-			ReactDOM.render(React.createElement(FavoritesComponent, { router: r }), app);
-		} else {
 			ReactDOM.render(React.createElement(HomeComponent, { router: r }), app);
+		} else {
+			ReactDOM.render(React.createElement(FavoritesComponent, { router: r }), app);
 		}
 	},
 	login: function login() {

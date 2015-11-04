@@ -44,8 +44,12 @@ module.exports = React.createClass({
 
 		return (
 			<div className="list-container">
-				<DrummerIconComponent content={content} />
+				<div className="icon-container">
+					{content}
+				</div>
 			</div>
 		);
 	}
 });
+
+// <DrummerIconComponent content={content} />

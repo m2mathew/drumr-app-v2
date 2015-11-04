@@ -47,16 +47,16 @@ var Router = Backbone.Router.extend({
 		);
 	},
 	favorites: function(){
-		if(currentuser === true) {
+		if(!currentuser) {
 			console.log('You no logged in!');
 			console.log(currentuser);
 			ReactDOM.render(
-				<FavoritesComponent router={r} />, app
+				<HomeComponent router={r} />, app
 			);
 		}
 		else {
 			ReactDOM.render(
-				<HomeComponent router={r} />, app
+				<FavoritesComponent router={r} />, app
 			);
 		}
 	},

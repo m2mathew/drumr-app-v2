@@ -374,14 +374,6 @@ nav {
       display: inline-block; }
       nav .nav-wrapper .site-logo h1 {
         margin: 0; }
-    nav .nav-wrapper li:hover ul {
-      display: block; }
-    nav .nav-wrapper a {
-      text-decoration: none; }
-      nav .nav-wrapper a:visited {
-        color: #000; }
-      nav .nav-wrapper a .active {
-        border-bottom: 2px solid #191959; }
     nav .nav-wrapper .nav-links {
       font-size: 1.25em;
       float: right; }
@@ -389,10 +381,14 @@ nav {
         list-style: none;
         float: left;
         margin-right: 1em; }
+        nav .nav-wrapper .nav-links li.active.nav-link {
+          border-bottom: 2px solid #191959; }
         nav .nav-wrapper .nav-links li a {
           display: block;
           height: 2em;
           text-decoration: none; }
+          nav .nav-wrapper .nav-links li a:visited {
+            color: #000; }
 
 main {
   flex: 1; }
@@ -402,6 +398,11 @@ main {
     background-color: #D5E5F2;
     padding: 2em;
     margin: 2em; }
+    main .login-box p, main .register-box p, main .add-box p {
+      margin-bottom: 0;
+      font-size: 1.2em; }
+    main .login-box input, main .register-box input, main .add-box input {
+      margin-bottom: 0.5em; }
     main .login-box .error-box, main .register-box .error-box, main .add-box .error-box {
       color: red; }
   main .home-container h1, main .favorites-container h1 {
@@ -466,20 +467,19 @@ footer {
       footer p a:hover {
         color: #5EA4BF; }
 
-input {
+input, textarea {
   margin-top: 0.25em;
   border: 1px solid #979797;
-  font-size: 1em;
   background: #fff;
   width: 60%;
   padding: 8px;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bold;
   color: #666;
   border: none;
   background-color: #fff;
   border-radius: 4px; }
-  input:focus {
+  input:focus, textarea:focus {
     -webkit-box-shadow: 0 0 12px rgba(51, 204, 255, 0.5);
     -webkit-animation: pulse 1.5s infinite ease-in-out; }
 
@@ -489,7 +489,7 @@ button {
   font-size: 1em;
   padding: 0.5em;
   background: #fff;
-  width: 20%;
+  width: 40%;
   padding: 8px 15px;
   font-weight: bold;
   line-height: 1;

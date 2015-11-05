@@ -26,9 +26,9 @@ nav {
 			}
 		}
 
-		& li:hover ul {
-			display: block;
-		}
+		// & li:hover ul {
+		// 	display: block;
+		// }
 
 		ul {
 			// position: absolute;
@@ -37,18 +37,6 @@ nav {
 
 			& li a {
 				// width: 80px;
-			}
-		}
-
-		a {
-			text-decoration: none;
-
-			&:visited {
-				color: #000;
-			}
-
-			& .active {
-				border-bottom: 2px solid #191959;
 			}
 		}
 
@@ -61,10 +49,18 @@ nav {
 				float: left;
 				margin-right: 1em;
 
+				&.active.nav-link {
+						border-bottom: 2px solid #191959;
+					}
+
 				a {
 					display: block;
 					height: 2em;
 					text-decoration: none;
+
+					&:visited {
+						color: #000;
+					}
 				}
 			}
 		}
@@ -83,6 +79,15 @@ main {
 		background-color: #D5E5F2;
 		padding: 2em;
 		margin: 2em;
+
+		p {
+			margin-bottom: 0;
+			font-size: 1.2em;
+		}
+
+		input {
+			margin-bottom: 0.5em;
+		}
 
 		.error-box {
 			color: red;
@@ -196,14 +201,13 @@ footer {
 	}
 }
 
-input {
+input, textarea {
 	margin-top: 0.25em;
 	border: 1px solid #979797;
-	font-size: 1em;
 	background: #fff;
 	width: 60%;
 	padding: 8px;
-	font-size: 1.2em;
+	font-size: 1em;
 	font-weight: bold;
 	color: #666;
 	border: none;
@@ -222,7 +226,7 @@ button {
 	font-size: 1em;
 	padding: 0.5em;
 	background: #fff;
-	width: 20%;
+	width: 40%;
 	padding: 8px 15px;
 	font-weight: bold;
 	line-height: 1;

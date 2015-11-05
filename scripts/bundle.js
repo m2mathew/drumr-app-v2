@@ -31729,10 +31729,55 @@ module.exports = React.createClass({
 	displayName: 'exports',
 
 	getInitialState: function getInitialState() {
-		return { error: null };
+		return { error: null, counter: 0, title: '', buttons: '' };
 	},
 	render: function render() {
 		var errorElement = null;
+		this.state.buttons = React.createElement(
+			'button',
+			{ className: 'add-button' },
+			'Add Drummer'
+		);
+
+		if (this.state.counter === 0) {
+			this.state.title = 'Add a Drummer';
+		} else if (this.state.counter === 1) {
+			this.state.title = 'Add another Drummer';
+			this.state.buttons = React.createElement(
+				'button',
+				{ className: 'add-button' },
+				'Add Another Drummer'
+			);
+		} else if (this.state.counter === 2) {
+			this.state.title = 'Add yet another Drummer';
+			this.state.buttons = React.createElement(
+				'button',
+				{ className: 'add-button' },
+				'Add yet another Drummer'
+			);
+		} else if (this.state.counter === 3) {
+			this.state.title = 'Are you still adding Drummers?';
+			this.state.buttons = React.createElement(
+				'button',
+				{ className: 'add-button' },
+				'Are you still adding Drummers?'
+			);
+		} else if (this.state.counter === 4) {
+			this.state.title = 'You really like the Drummers, huh?';
+			this.state.buttons = React.createElement(
+				'button',
+				{ className: 'add-button' },
+				'You really like the Drummers, huh?'
+			);
+		} else if (this.state.counter >= 4) {
+			this.state.title = 'Add all the Drummers!';
+			this.state.buttons = React.createElement(
+				'button',
+				{ className: 'add-button' },
+				'Add all the Drummers!'
+			);
+		}
+
 		if (this.state.error) {
 			errorElement = React.createElement(
 				'p',
@@ -31749,7 +31794,7 @@ module.exports = React.createClass({
 				React.createElement(
 					'h1',
 					null,
-					'Login'
+					this.state.title
 				),
 				errorElement,
 				React.createElement(
@@ -31768,7 +31813,7 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'name', className: 'validate', id: 'email' })
+					React.createElement('input', { autofocus: 'true', type: 'text', ref: 'name', className: 'validate', id: 'email', placeholder: 'Sammy Cymbal' })
 				),
 				React.createElement(
 					'div',
@@ -31778,16 +31823,20 @@ module.exports = React.createClass({
 						null,
 						React.createElement(
 							'label',
-							{ htmlFor: 'band' },
+							{ htmlFor: 'bands' },
 							React.createElement(
 								'strong',
 								null,
 								'Band(s) '
 							),
-							'separated by commas'
+							React.createElement(
+								'small',
+								null,
+								'separated by commas'
+							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'band', className: 'validate' })
+					React.createElement('input', { type: 'text', ref: 'bands', className: 'validate', placeholder: 'Drumm Beet' })
 				),
 				React.createElement(
 					'div',
@@ -31802,11 +31851,10 @@ module.exports = React.createClass({
 								'strong',
 								null,
 								'Dates '
-							),
-							'example: born September 12, 1952'
+							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'dates', className: 'validate' })
+					React.createElement('input', { type: 'text', ref: 'dates', className: 'validate', placeholder: 'born July 4, 1976' })
 				),
 				React.createElement(
 					'div',
@@ -31824,7 +31872,7 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'active', className: 'validate' })
+					React.createElement('input', { type: 'text', ref: 'active', className: 'validate', placeholder: '1993 to present' })
 				),
 				React.createElement(
 					'div',
@@ -31842,7 +31890,7 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('textarea', { type: 'text', ref: 'background', className: 'validate' })
+					React.createElement('textarea', { type: 'text', ref: 'background', className: 'validate', placeholder: 'Sammy comes from a musical background, but threw all that away to become a drummer...', rows: '4' })
 				),
 				React.createElement(
 					'div',
@@ -31857,11 +31905,10 @@ module.exports = React.createClass({
 								'strong',
 								null,
 								'Photo link '
-							),
-							'(enter a url in the form of  http://drums.com/jazzdrums.png)'
+							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'photo', className: 'validate' })
+					React.createElement('input', { type: 'text', ref: 'photo', className: 'validate', placeholder: 'http://yourwebsite.com/yourpicture.png' })
 				),
 				React.createElement(
 					'div',
@@ -31876,11 +31923,10 @@ module.exports = React.createClass({
 								'strong',
 								null,
 								'Video link '
-							),
-							'(enter a url in the form of  http://utoob.com/crazydrums)'
+							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'video', className: 'validate' })
+					React.createElement('input', { type: 'text', ref: 'video', className: 'validate', placeholder: 'http://videowebsite.com/yourvideo' })
 				),
 				React.createElement(
 					'div',
@@ -31895,20 +31941,15 @@ module.exports = React.createClass({
 								'strong',
 								null,
 								'Video picture '
-							),
-							'(enter a url in the form of  http://drumstick.com/drummerdood.png)'
+							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'vidpic', className: 'validate' })
+					React.createElement('input', { type: 'text', ref: 'vidpic', className: 'validate', placeholder: 'http://yourwebsite.com/videopicture.png' })
 				),
 				React.createElement(
 					'div',
 					{ className: 'button-container' },
-					React.createElement(
-						'button',
-						{ className: 'register-button' },
-						'Add Drummer'
-					)
+					this.state.buttons
 				)
 			)
 		);
@@ -31916,22 +31957,27 @@ module.exports = React.createClass({
 	addNewDrummer: function addNewDrummer(e) {
 		e.preventDefault();
 
-		if (!this.refs.name.value || !this.refs.band.value || !this.refs.background.value || !this.refs.photo.value || !this.refs.video.value || !this.refs.vidpic.value || !this.refs.active.value || !this.refs.dates.value) {
-			console.log('empty stuff');
+		if (!this.refs.name.value || !this.refs.bands.value || !this.refs.background.value || !this.refs.photo.value || !this.refs.video.value || !this.refs.vidpic.value || !this.refs.active.value || !this.refs.dates.value) {
+			this.setState({ error: 'Please enter data in all fields' });
 		} else {
-			console.log('input has a value');
-		}
+			this.setState({
+				counter: this.state.counter + 1
+			});
 
-		// var drummer = new DrummerModel({
-		// 	name: this.refs.name.value,
-		// 	bands: this.refs.band.value,
-		// 	background: this.refs.background.value,
-		// 	photos: this.refs.photo.value,
-		// 	videos: this.refs.video.value,
-		// 	videoPic: this.refs.vidpic.value,
-		// 	yearsActive: this.refs.active.value,
-		// 	dates: this.refs.dates.value,
-		// });
+			// var drummer = new DrummerModel({
+			// 	name: this.refs.name.value,
+			// 	bands: this.refs.bands.value,
+			// 	background: this.refs.background.value,
+			// 	photos: this.refs.photo.value,
+			// 	videos: this.refs.video.value,
+			// 	videoPic: this.refs.vidpic.value,
+			// 	yearsActive: this.refs.active.value,
+			// 	dates: this.refs.dates.value,
+			// });
+			// drummer.save();
+
+			// this.refs.name.value('');
+		}
 	}
 });
 

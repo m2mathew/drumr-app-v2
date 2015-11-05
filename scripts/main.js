@@ -24,6 +24,7 @@ var DrummerDetailsComponent = require('./components/DrummerDetailsComponent');
 var FavoritesComponent = require('./components/FavoritesComponent');
 var LoginComponent = require('./components/LoginComponent');
 var RegisterComponent = require('./components/RegisterComponent');
+var AddDrummerComponent = require('./components/AddDrummerComponent');
 
 var app = document.getElementById('app');
 var currentuser = Parse.User.current();
@@ -33,20 +34,21 @@ var Router = Backbone.Router.extend({
 		'': 'home',
 		'details/:id': 'details',
 		'favorites(/:id)': 'favorites',
+		'add': 'add',
 		'login': 'login',
 		'register': 'register'
 	},
-	home: function(){
+	home: function() {
 		ReactDOM.render(
 			<HomeComponent router={r} />, app
 		);
 	},
-	details: function(id){
+	details: function(id) {
 		ReactDOM.render(
 			<DrummerDetailsComponent drummer={id} />, app
 		);
 	},
-	favorites: function(){
+	favorites: function() {
 		if(!currentuser) {
 			ReactDOM.render(
 				<HomeComponent router={r} />, app
@@ -58,12 +60,24 @@ var Router = Backbone.Router.extend({
 			);
 		}
 	},
+	add: function() {
+		if(!currentuser) {
+			ReactDOM.render(
+				<HomeComponent router={r} />, app
+			);
+		}
+		else {
+			ReactDOM.render(
+				<AddDrummerComponent router={r} />, app
+			);
+		}
+	},
 	login: function(){
 		ReactDOM.render(
 			<LoginComponent router={r} />, app
 		);
 	},
-	register: function(){
+	register: function() {
 		ReactDOM.render(
 			<RegisterComponent router={r} />, app
 		);

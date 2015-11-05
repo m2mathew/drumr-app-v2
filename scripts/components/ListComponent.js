@@ -21,9 +21,9 @@ var _ = require('backbone/node_modules/underscore');
 
 module.exports = React.createClass({
 	getInitialState() {
-	    return {
-	        favDrummers: null
-	    };
+		return {
+			favDrummers: null
+		};
 	},
 	componentWillMount() {
 		var currentUser = Parse.User.current();

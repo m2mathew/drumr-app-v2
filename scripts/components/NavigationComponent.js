@@ -29,6 +29,7 @@ module.exports = React.createClass({
 
 		if(currentUser) {
 			links.push(<li key="fav" className={currentPage === 'favorites' ? 'active nav-link' : 'nav-link'}><a href="#favorites">Favorites</a></li>);
+			links.push(<li key="add" className={currentPage === 'add' ? 'active nav-link' : 'nav-link'}><a href="#add">Add Drummers</a></li>);
 			links.push(<li key="logout" className="nav-link"><a href="#logout" onClick={this.onLogout}>Logout</a></li>);
 			links.push(<li key="username" className="displayedUser">{currentUser.getEmail()}</li>);
 		}

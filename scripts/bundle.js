@@ -31711,6 +31711,232 @@ module.exports = require('./lib/React');
 
 },{"./lib/React":30}],162:[function(require,module,exports){
 /*
+ *  Add Drummer Component
+ *
+ *		React
+ *		ReactDOM
+ *
+ */
+
+'use strict';
+
+var React = require('react');
+var ReactDOM = require('react-dom');
+var Backbone = require('backbone');
+var DrummerModel = require('../models/DrummerModel');
+
+module.exports = React.createClass({
+	displayName: 'exports',
+
+	getInitialState: function getInitialState() {
+		return { error: null };
+	},
+	render: function render() {
+		var errorElement = null;
+		if (this.state.error) {
+			errorElement = React.createElement(
+				'p',
+				{ className: 'error-box' },
+				this.state.error
+			);
+		}
+		return React.createElement(
+			'div',
+			{ className: 'add-box' },
+			React.createElement(
+				'form',
+				{ className: 'add-form', onSubmit: this.addNewDrummer },
+				React.createElement(
+					'h1',
+					null,
+					'Login'
+				),
+				errorElement,
+				React.createElement(
+					'div',
+					{ className: 'name-input' },
+					React.createElement(
+						'p',
+						null,
+						React.createElement(
+							'label',
+							{ htmlFor: 'name' },
+							React.createElement(
+								'strong',
+								null,
+								'Drummer Name'
+							)
+						)
+					),
+					React.createElement('input', { type: 'text', ref: 'name', className: 'validate', id: 'email' })
+				),
+				React.createElement(
+					'div',
+					{ className: 'band-input' },
+					React.createElement(
+						'p',
+						null,
+						React.createElement(
+							'label',
+							{ htmlFor: 'band' },
+							React.createElement(
+								'strong',
+								null,
+								'Band(s) '
+							),
+							'separated by commas'
+						)
+					),
+					React.createElement('input', { type: 'text', ref: 'band', className: 'validate' })
+				),
+				React.createElement(
+					'div',
+					{ className: 'dates-input' },
+					React.createElement(
+						'p',
+						null,
+						React.createElement(
+							'label',
+							{ htmlFor: 'dates' },
+							React.createElement(
+								'strong',
+								null,
+								'Dates '
+							),
+							'example: born September 12, 1952'
+						)
+					),
+					React.createElement('input', { type: 'text', ref: 'dates', className: 'validate' })
+				),
+				React.createElement(
+					'div',
+					{ className: 'active-input' },
+					React.createElement(
+						'p',
+						null,
+						React.createElement(
+							'label',
+							{ htmlFor: 'active' },
+							React.createElement(
+								'strong',
+								null,
+								'Years Active'
+							)
+						)
+					),
+					React.createElement('input', { type: 'text', ref: 'active', className: 'validate' })
+				),
+				React.createElement(
+					'div',
+					{ className: 'background-input' },
+					React.createElement(
+						'p',
+						null,
+						React.createElement(
+							'label',
+							{ htmlFor: 'background' },
+							React.createElement(
+								'strong',
+								null,
+								'Background'
+							)
+						)
+					),
+					React.createElement('textarea', { type: 'text', ref: 'background', className: 'validate' })
+				),
+				React.createElement(
+					'div',
+					{ className: 'photo-input' },
+					React.createElement(
+						'p',
+						null,
+						React.createElement(
+							'label',
+							{ htmlFor: 'photo' },
+							React.createElement(
+								'strong',
+								null,
+								'Photo link '
+							),
+							'(enter a url in the form of  http://drums.com/jazzdrums.png)'
+						)
+					),
+					React.createElement('input', { type: 'text', ref: 'photo', className: 'validate' })
+				),
+				React.createElement(
+					'div',
+					{ className: 'video-input' },
+					React.createElement(
+						'p',
+						null,
+						React.createElement(
+							'label',
+							{ htmlFor: 'video' },
+							React.createElement(
+								'strong',
+								null,
+								'Video link '
+							),
+							'(enter a url in the form of  http://utoob.com/crazydrums)'
+						)
+					),
+					React.createElement('input', { type: 'text', ref: 'video', className: 'validate' })
+				),
+				React.createElement(
+					'div',
+					{ className: 'vidpic-input' },
+					React.createElement(
+						'p',
+						null,
+						React.createElement(
+							'label',
+							{ htmlFor: 'active' },
+							React.createElement(
+								'strong',
+								null,
+								'Video picture '
+							),
+							'(enter a url in the form of  http://drumstick.com/drummerdood.png)'
+						)
+					),
+					React.createElement('input', { type: 'text', ref: 'vidpic', className: 'validate' })
+				),
+				React.createElement(
+					'div',
+					{ className: 'button-container' },
+					React.createElement(
+						'button',
+						{ className: 'register-button' },
+						'Add Drummer'
+					)
+				)
+			)
+		);
+	},
+	addNewDrummer: function addNewDrummer(e) {
+		e.preventDefault();
+
+		if (!this.refs.name.value || !this.refs.band.value || !this.refs.background.value || !this.refs.photo.value || !this.refs.video.value || !this.refs.vidpic.value || !this.refs.active.value || !this.refs.dates.value) {
+			console.log('empty stuff');
+		} else {
+			console.log('input has a value');
+		}
+
+		// var drummer = new DrummerModel({
+		// 	name: this.refs.name.value,
+		// 	bands: this.refs.band.value,
+		// 	background: this.refs.background.value,
+		// 	photos: this.refs.photo.value,
+		// 	videos: this.refs.video.value,
+		// 	videoPic: this.refs.vidpic.value,
+		// 	yearsActive: this.refs.active.value,
+		// 	dates: this.refs.dates.value,
+		// });
+	}
+});
+
+},{"../models/DrummerModel":173,"backbone":1,"react":161,"react-dom":6}],163:[function(require,module,exports){
+/*
  *  Drummer Details Component
  *
  *		React
@@ -31724,13 +31950,16 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var DrummerModel = require('../models/DrummerModel');
 var FavoriteModel = require('../models/FavoriteModel');
+var Backbone = require('backbone');
+var _ = require('backbone/node_modules/underscore');
 
 module.exports = React.createClass({
 	displayName: 'exports',
 
 	getInitialState: function getInitialState() {
 		return {
-			drummer: null
+			drummer: null,
+			favDrummers: null
 		};
 	},
 	componentWillMount: function componentWillMount() {
@@ -31864,7 +32093,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":172,"../models/FavoriteModel":173,"react":161,"react-dom":6}],163:[function(require,module,exports){
+},{"../models/DrummerModel":173,"../models/FavoriteModel":174,"backbone":1,"backbone/node_modules/underscore":3,"react":161,"react-dom":6}],164:[function(require,module,exports){
 /*
  *  Drummer Icon Component
  *
@@ -31893,7 +32122,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":172,"react":161,"react-dom":6}],164:[function(require,module,exports){
+},{"../models/DrummerModel":173,"react":161,"react-dom":6}],165:[function(require,module,exports){
 /*
  *  Favorite List Component
  *
@@ -32017,7 +32246,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":172,"../models/FavoriteModel":173,"./FilterComponent":165,"./ListComponent":167,"react":161,"react-dom":6}],165:[function(require,module,exports){
+},{"../models/DrummerModel":173,"../models/FavoriteModel":174,"./FilterComponent":166,"./ListComponent":168,"react":161,"react-dom":6}],166:[function(require,module,exports){
 /*
  *  Filter Box Component
  *
@@ -32060,7 +32289,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":172,"./FilterComponent":165,"react":161,"react-dom":6}],166:[function(require,module,exports){
+},{"../models/DrummerModel":173,"./FilterComponent":166,"react":161,"react-dom":6}],167:[function(require,module,exports){
 /*
  *  Home Component
  *
@@ -32119,7 +32348,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":172,"./FilterComponent":165,"./ListComponent":167,"react":161,"react-dom":6}],167:[function(require,module,exports){
+},{"../models/DrummerModel":173,"./FilterComponent":166,"./ListComponent":168,"react":161,"react-dom":6}],168:[function(require,module,exports){
 /*
  *  List Component
  *
@@ -32237,12 +32466,13 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":172,"../models/FavoriteModel":173,"backbone":1,"backbone/node_modules/underscore":3,"react":161,"react-dom":6}],168:[function(require,module,exports){
+},{"../models/DrummerModel":173,"../models/FavoriteModel":174,"backbone":1,"backbone/node_modules/underscore":3,"react":161,"react-dom":6}],169:[function(require,module,exports){
 /*
  *  Login Component
  *
  *		React
  *		ReactDOM
+ *		Backbone
  *
  */
 
@@ -32337,7 +32567,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":161,"react-dom":6}],169:[function(require,module,exports){
+},{"backbone":1,"react":161,"react-dom":6}],170:[function(require,module,exports){
 /*
  *  Navigation Component
  *
@@ -32385,6 +32615,15 @@ module.exports = React.createClass({
 					'a',
 					{ href: '#favorites' },
 					'Favorites'
+				)
+			));
+			links.push(React.createElement(
+				'li',
+				{ key: 'add', className: currentPage === 'add' ? 'active nav-link' : 'nav-link' },
+				React.createElement(
+					'a',
+					{ href: '#add' },
+					'Add Drummers'
 				)
 			));
 			links.push(React.createElement(
@@ -32449,12 +32688,13 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":161,"react-dom":6}],170:[function(require,module,exports){
+},{"backbone":1,"react":161,"react-dom":6}],171:[function(require,module,exports){
 /*
  *  Register Component
  *
  *		React
  *		ReactDOM
+ *		Backbone
  *
  */
 
@@ -32553,7 +32793,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":161,"react-dom":6}],171:[function(require,module,exports){
+},{"backbone":1,"react":161,"react-dom":6}],172:[function(require,module,exports){
 /*
  *  earDrum main.js
  *
@@ -32580,6 +32820,7 @@ var DrummerDetailsComponent = require('./components/DrummerDetailsComponent');
 var FavoritesComponent = require('./components/FavoritesComponent');
 var LoginComponent = require('./components/LoginComponent');
 var RegisterComponent = require('./components/RegisterComponent');
+var AddDrummerComponent = require('./components/AddDrummerComponent');
 
 var app = document.getElementById('app');
 var currentuser = Parse.User.current();
@@ -32589,6 +32830,7 @@ var Router = Backbone.Router.extend({
 		'': 'home',
 		'details/:id': 'details',
 		'favorites(/:id)': 'favorites',
+		'add': 'add',
 		'login': 'login',
 		'register': 'register'
 	},
@@ -32605,6 +32847,13 @@ var Router = Backbone.Router.extend({
 			ReactDOM.render(React.createElement(FavoritesComponent, { router: r }), app);
 		}
 	},
+	add: function add() {
+		if (!currentuser) {
+			ReactDOM.render(React.createElement(HomeComponent, { router: r }), app);
+		} else {
+			ReactDOM.render(React.createElement(AddDrummerComponent, { router: r }), app);
+		}
+	},
 	login: function login() {
 		ReactDOM.render(React.createElement(LoginComponent, { router: r }), app);
 	},
@@ -32618,21 +32867,21 @@ Backbone.history.start();
 
 ReactDOM.render(React.createElement(NavigationComponent, { router: r }), document.getElementById('nav'));
 
-},{"./components/DrummerDetailsComponent":162,"./components/DrummerIconComponent":163,"./components/FavoritesComponent":164,"./components/HomeComponent":166,"./components/LoginComponent":168,"./components/NavigationComponent":169,"./components/RegisterComponent":170,"backbone":1,"backbone/node_modules/underscore/underscore-min":2,"jquery":5,"react":161,"react-dom":6}],172:[function(require,module,exports){
+},{"./components/AddDrummerComponent":162,"./components/DrummerDetailsComponent":163,"./components/DrummerIconComponent":164,"./components/FavoritesComponent":165,"./components/HomeComponent":167,"./components/LoginComponent":169,"./components/NavigationComponent":170,"./components/RegisterComponent":171,"backbone":1,"backbone/node_modules/underscore/underscore-min":2,"jquery":5,"react":161,"react-dom":6}],173:[function(require,module,exports){
 'use strict';
 
 module.exports = Parse.Object.extend({
 	className: 'Drummer'
 });
 
-},{}],173:[function(require,module,exports){
+},{}],174:[function(require,module,exports){
 'use strict';
 
 module.exports = Parse.Object.extend({
 	className: 'Favorites'
 });
 
-},{}]},{},[171])
+},{}]},{},[172])
 
 
 //# sourceMappingURL=bundle.js.map

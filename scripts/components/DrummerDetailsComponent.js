@@ -12,11 +12,14 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var DrummerModel = require('../models/DrummerModel');
 var FavoriteModel = require('../models/FavoriteModel');
+var Backbone = require('backbone');
+var _ = require('backbone/node_modules/underscore');
 
 module.exports = React.createClass({
 	getInitialState() {
 		return {
-			drummer: null
+			drummer: null,
+			favDrummers: null
 		}
 	},
 	componentWillMount() {

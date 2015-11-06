@@ -35873,28 +35873,29 @@ module.exports = React.createClass({
 	componentWillMount: function componentWillMount() {
 		var _this = this;
 
+		var currentUser = Parse.User.current();
+
+		var favQuery = new Parse.Query(FavoriteModel);
 		var query = new Parse.Query(DrummerModel);
 		query.get(this.props.drummer).then(function (drmr) {
 			_this.setState({ drummer: drmr });
-		}, function (err) {
-			console.log(err);
-		});
 
-		var currentUser = Parse.User.current();
-		var favQuery = new Parse.Query(FavoriteModel);
-
-		favQuery.equalTo('username', currentUser).include('favoritedDrummer').find().then(function (favorites) {
-			var drummerIds = _.groupBy(favorites, function (favorite) {
-				return favorite.get('favoritedDrummer').id;
+			favQuery.equalTo('username', currentUser).equalTo('favoritedDrummer', drmr).count().then(function (numfavorites) {
+				console.log(numfavorites);
+				_this.setState({ favoritedDrummer: numfavorites });
+			}, function (err) {
+				console.log(err);
 			});
-
-			_this.setState({ favDrummers: drummerIds });
 		}, function (err) {
 			console.log(err);
 		});
 	},
 	render: function render() {
-		// var favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
+		var favStar = React.createElement(
+			'i',
+			{ className: 'favStar' },
+			React.createElement('img', { src: '../../images/full-star.png' })
+		);
 		var content = React.createElement(
 			'p',
 			null,
@@ -35912,8 +35913,9 @@ module.exports = React.createClass({
 			var videoPic = this.state.drummer.get('videoPic');
 
 			console.log(this.state.favDrummers);
+			console.log(this.state.drummer.id);
 
-			if (this.state.favDrummers.drummerIds === this.state.drummer.id) {
+			if (this.state.favoritedDrummer) {
 				favStar = React.createElement(
 					'i',
 					{ className: 'favStar' },

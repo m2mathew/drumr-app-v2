@@ -23,30 +23,27 @@ module.exports = React.createClass({
 		}
 	},
 	componentWillMount() {
+		var currentUser = Parse.User.current();
+
+		var favQuery = new Parse.Query(FavoriteModel);
 		var query = new Parse.Query(DrummerModel);
 		query
 		.get(this.props.drummer).then(
 			(drmr) => {
 				this.setState({ drummer: drmr });
-			},
-			(err) => {
-				console.log(err);
-			}
-		);
 
-		var currentUser = Parse.User.current();
-		var favQuery = new Parse.Query(FavoriteModel);
-
-		favQuery
-		.equalTo('username', currentUser)
-		.include('favoritedDrummer')
-		.find().then(
-			(favorites) => {
-				var drummerIds = _.groupBy(favorites, function(favorite) {
-					return favorite.get('favoritedDrummer').id;
-				})
-
-				this.setState({ favDrummers: drummerIds });
+				favQuery
+				.equalTo('username', currentUser)
+				.equalTo('favoritedDrummer', drmr)
+				.count().then(
+					(numfavorites) => {
+						console.log(numfavorites)
+						this.setState({ favoritedDrummer: numfavorites });
+					},
+					(err) => {
+						console.log(err);
+					}
+				);
 			},
 			(err) => {
 				console.log(err);
@@ -54,7 +51,7 @@ module.exports = React.createClass({
 		);
 	},
 	render() {
-		// var favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
+		var favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
 		var content = (
 			<p>loading...</p>
 		);
@@ -70,8 +67,9 @@ module.exports = React.createClass({
 			var videoPic = (this.state.drummer.get('videoPic'));
 
 			console.log(this.state.favDrummers);
+			console.log(this.state.drummer.id);
 
-			if(this.state.favDrummers.drummerIds === this.state.drummer.id) {
+			if(this.state.favoritedDrummer) {
 				favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
 				}
 			else {

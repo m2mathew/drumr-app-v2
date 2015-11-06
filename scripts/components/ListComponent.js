@@ -32,7 +32,6 @@ module.exports = React.createClass({
 	},
 	componentWillMount() {
 		var currentUser = Parse.User.current();
-		var list
 		var favQuery = new Parse.Query(FavoriteModel);
 
 		favQuery
@@ -56,8 +55,11 @@ module.exports = React.createClass({
 		var favStar = '';
 		var currentUser = Parse.User.current();
 
+		// if(this.state.favDrummers === null) {
+		// 	content = (<li>Once you are <a href="#login">signed-in</a> then go <a href="#add">add drummers</a> and grow the drumr list!</li>);
+		// }
+
 		if(this.state.favDrummers != null) {
-			// this is grabbing the input correctly and converting it to lower case
 			var input = this.props.filter.toLowerCase();
 
 			var content = this.props.drummers.filter(function(drummer) {

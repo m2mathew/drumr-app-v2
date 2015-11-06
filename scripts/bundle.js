@@ -35867,7 +35867,7 @@ module.exports = React.createClass({
 	getInitialState: function getInitialState() {
 		return {
 			drummer: null,
-			favDrummers: null
+			favDrummers: []
 		};
 	},
 	componentWillMount: function componentWillMount() {
@@ -35879,8 +35879,22 @@ module.exports = React.createClass({
 		}, function (err) {
 			console.log(err);
 		});
+
+		var currentUser = Parse.User.current();
+		var favQuery = new Parse.Query(FavoriteModel);
+
+		favQuery.equalTo('username', currentUser).include('favoritedDrummer').find().then(function (favorites) {
+			var drummerIds = _.groupBy(favorites, function (favorite) {
+				return favorite.get('favoritedDrummer').id;
+			});
+
+			_this.setState({ favDrummers: drummerIds });
+		}, function (err) {
+			console.log(err);
+		});
 	},
 	render: function render() {
+		// var favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
 		var content = React.createElement(
 			'p',
 			null,
@@ -35897,7 +35911,9 @@ module.exports = React.createClass({
 			var videos = this.state.drummer.get('videos');
 			var videoPic = this.state.drummer.get('videoPic');
 
-			if (this.state.favDrummers.hasOwnProperty(drummer.id)) {
+			console.log(this.state.favDrummers);
+
+			if (this.state.favDrummers.drummerIds === this.state.drummer.id) {
 				favStar = React.createElement(
 					'i',
 					{ className: 'favStar' },
@@ -36067,7 +36083,7 @@ module.exports = React.createClass({
 
 	getInitialState: function getInitialState() {
 		return {
-			favDrummers: [],
+			drummers: [],
 			filterText: ''
 		};
 	},
@@ -36077,73 +36093,16 @@ module.exports = React.createClass({
 		var currentUser = Parse.User.current();
 		var query = new Parse.Query(FavoriteModel);
 
-		query.equalTo('username', currentUser).include('favoritedDrummer').find().then(function (drummer) {
-			_this.setState({ favDrummers: drummer });
+		query.equalTo('username', currentUser).include('favoritedDrummer').find().then(function (favorites) {
+			var drummers = favorites.map(function (favorite) {
+				return favorite.get('favoritedDrummer');
+			});
+			_this.setState({ drummers: drummers });
 		}, function (err) {
 			console.log(err);
 		});
 	},
 	render: function render() {
-		var content = React.createElement(
-			'div',
-			null,
-			'loading...'
-		);
-		var favStar = React.createElement(
-			'i',
-			{ className: 'favStar' },
-			React.createElement('img', { src: '../../images/full-star.png' })
-		);
-
-		if (this.state.favDrummers) {
-			if (this.state.favDrummers.length === 0) {
-				content = React.createElement(
-					'h2',
-					null,
-					'Select your favorite drummers from the ',
-					React.createElement(
-						'a',
-						{ href: '#' },
-						'list of drummers'
-					),
-					' or search for a drummer above'
-				);
-			}
-			if (this.state.favDrummers.length > 0) {
-				content = this.state.favDrummers.map(function (drummer) {
-					var photo = drummer.get('favoritedDrummer').get('photos');
-					var name = drummer.get('favoritedDrummer').get('name');
-					var id = drummer.get('favoritedDrummer').get('objectId');
-
-					var band = drummer.get('favoritedDrummer').get('bands').split(',');
-					var band = band[0];
-
-					return React.createElement(
-						'li',
-						{ key: drummer.id, className: 'icon-big-box' },
-						React.createElement(
-							'a',
-							{ href: "#details/" + drummer.get('favoritedDrummer').id },
-							React.createElement('img', { className: 'drummer-pic', src: photo }),
-							React.createElement(
-								'p',
-								{ className: 'drummer-caption' },
-								name,
-								' ',
-								favStar
-							),
-							React.createElement(
-								'p',
-								{ className: 'drummer-band' },
-								'from ',
-								band
-							)
-						)
-					);
-				});
-			}
-		}
-
 		return React.createElement(
 			'div',
 			{ className: 'favorites-container' },
@@ -36157,14 +36116,7 @@ module.exports = React.createClass({
 				null,
 				'Favorites list'
 			),
-			React.createElement(
-				Masonry,
-				{ className: 'my-gallery-class',
-					elementType: 'ul',
-					options: masonryOptions,
-					disableImagesLoaded: false },
-				content
-			)
+			React.createElement(ListComponent, { filter: this.state.filterText, drummers: this.state.drummers })
 		);
 	},
 	stateUpdate: function stateUpdate(value) {
@@ -36313,7 +36265,6 @@ module.exports = React.createClass({
 		var _this = this;
 
 		var currentUser = Parse.User.current();
-		var list;
 		var favQuery = new Parse.Query(FavoriteModel);
 
 		favQuery.equalTo('username', currentUser).include('favoritedDrummer').find().then(function (favorites) {
@@ -36337,8 +36288,11 @@ module.exports = React.createClass({
 		var favStar = '';
 		var currentUser = Parse.User.current();
 
+		// if(this.state.favDrummers === null) {
+		// 	content = (<li>Once you are <a href="#login">signed-in</a> then go <a href="#add">add drummers</a> and grow the drumr list!</li>);
+		// }
+
 		if (this.state.favDrummers != null) {
-			// this is grabbing the input correctly and converting it to lower case
 			var input = this.props.filter.toLowerCase();
 
 			var content = this.props.drummers.filter(function (drummer) {

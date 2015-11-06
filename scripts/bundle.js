@@ -31836,7 +31836,7 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'bands', className: 'bands', placeholder: 'Drumm Beet' })
+					React.createElement('input', { type: 'text', ref: 'bands', className: 'bands', placeholder: 'Band of Drummers' })
 				),
 				React.createElement(
 					'div',
@@ -31854,7 +31854,7 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'dates', className: 'dates', placeholder: 'born July 4, 1976' })
+					React.createElement('input', { type: 'text', ref: 'dates', className: 'dates', placeholder: 'born July 31, 1978' })
 				),
 				React.createElement(
 					'div',

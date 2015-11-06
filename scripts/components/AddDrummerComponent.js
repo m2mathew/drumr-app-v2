@@ -63,11 +63,11 @@ module.exports = React.createClass({
 					</div>
 					<div className="band-input">
 						<p><label htmlFor="bands"><strong>Band(s) </strong><small>separated by commas</small></label></p>
-						<input type="text" ref="bands" className="bands" placeholder="Drumm Beet"/>
+						<input type="text" ref="bands" className="bands" placeholder="Band of Drummers"/>
 					</div>
 					<div className="dates-input">
 						<p><label htmlFor="dates"><strong>Dates </strong></label></p>
-						<input type="text" ref="dates" className="dates" placeholder="born July 4, 1976"/>
+						<input type="text" ref="dates" className="dates" placeholder="born July 31, 1978"/>
 					</div>
 					<div className="active-input">
 						<p><label htmlFor="active"><strong>Years Active</strong></label></p>

@@ -2,6 +2,7 @@
  *  Favorite List Component
  *
  *		React
+ *		React-Masonry
  *		ReactDOM
  *
  */
@@ -9,18 +10,22 @@
 'use strict';
 
 var React = require('react');
+var Masonry = require('react-masonry-component')(React);
 var ReactDOM = require('react-dom');
 var FilterComponent = require('./FilterComponent');
 var ListComponent = require('./ListComponent');
 var DrummerModel = require('../models/DrummerModel');
 var FavoriteModel = require('../models/FavoriteModel');
+var masonryOptions = {
+	transitionDuration: 0
+};
 
 module.exports = React.createClass({
 	getInitialState() {
-	    return {
-	        favDrummers: [],
+		return {
+			favDrummers: [],
 			filterText: ''
-	    };
+		};
 	},
 	componentWillMount() {
 		var currentUser = Parse.User.current();
@@ -53,17 +58,17 @@ module.exports = React.createClass({
 					var name = drummer.get('favoritedDrummer').get('name');
 					var id = drummer.get('favoritedDrummer').get('objectId');
 
+					var band = drummer.get('favoritedDrummer').get('bands').split(',');
+					var band = band[0];
+
 					return (
-						<div key={drummer.id} className="icon-big-box">
-							<div className="icon-box">
-								<div className="photo-box">
-									<a href={"#details/" + drummer.get('favoritedDrummer').id}>
-										<img src={photo} />
-										<p>{name} {favStar}</p>
-									</a>
-								</div>
-							</div>
-						</div>
+						<li key={drummer.id} className="icon-big-box">
+							<a href={"#details/" + drummer.get('favoritedDrummer').id}>
+								<img className="drummer-pic" src={photo} />
+								<p className="drummer-caption">{name} {favStar}</p>
+								<p className="drummer-band">from {band}</p>
+							</a>
+						</li>
 					);
 				});
 			}
@@ -76,9 +81,12 @@ module.exports = React.createClass({
 				</div>
 
 				<h1>Favorites list</h1>
-				<div className="icon-container">
+				<Masonry className={'my-gallery-class'}
+	                elementType={'ul'}
+	                options={masonryOptions}
+	                disableImagesLoaded={false}	>
 					{content}
-				</div>
+				</Masonry>
 			</div>
 		);
 	},

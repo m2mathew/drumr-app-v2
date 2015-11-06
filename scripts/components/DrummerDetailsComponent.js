@@ -35,7 +35,6 @@ module.exports = React.createClass({
 		);
 	},
 	render() {
-		var favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
 		var content = (
 			<p>loading...</p>
 		);
@@ -50,6 +49,13 @@ module.exports = React.createClass({
 			var videos = (this.state.drummer.get('videos'));
 			var videoPic = (this.state.drummer.get('videoPic'));
 
+			if(this.state.favDrummers.hasOwnProperty(drummer.id)) {
+					favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
+				}
+				else {
+					favStar = (<i className="favStar"><img src="../../images/empty-star.png" /></i>);
+				}
+
 			content = (
 				<div>
 					<h1 className="detail-title">{name}</h1>
@@ -61,7 +67,8 @@ module.exports = React.createClass({
 						<div>{bands}</div>
 					</div>
 					<div>
-						<h2>Years active</h2><p>{yearsActive}</p>
+						<h2>Years active</h2>
+						<p>{yearsActive}</p>
 						<h2>Background</h2>
 						<div>{background}</div>
 						<h2>Videos</h2>

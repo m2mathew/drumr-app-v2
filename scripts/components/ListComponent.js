@@ -2,6 +2,7 @@
  *  List Component
  *
  *		React
+ *		React-Masonry
  *		ReactDOM
  *		Backbone
  *		Underscore
@@ -13,11 +14,15 @@
 'use strict';
 
 var React = require('react');
+var Masonry = require('react-masonry-component')(React);
 var ReactDOM = require('react-dom');
 var DrummerModel = require('../models/DrummerModel');
 var FavoriteModel = require('../models/FavoriteModel');
 var Backbone = require('backbone');
 var _ = require('backbone/node_modules/underscore');
+var masonryOptions = {
+	transitionDuration: 0
+};
 
 module.exports = React.createClass({
 	getInitialState() {
@@ -66,27 +71,28 @@ module.exports = React.createClass({
 					favStar = (<i className="favStar"><img src="../../images/empty-star.png" /></i>);
 				}
 
+				var band = drummer.get('bands').split(',');
+				var band = band[0];
+
 				return (
-					<div key={drummer.id} className="icon-big-box">
-						<div className="icon-box">
-							<div className="photo-box">
-								<a href={"#details/" + drummer.id}>
-									<img src={drummer.get('photos')} />
-									<p>{drummer.get('name')} {favStar}</p>
-								</a>
-							</div>
-						</div>
-					</div>
-				);
+					<li key={drummer.id} className="icon-big-box">
+						<a href={"#details/" + drummer.id}>
+							<img className="drummer-pic" src={drummer.get('photos')} />
+							<p className="drummer-caption">{drummer.get('name')} {favStar}</p>
+							<p className="drummer-band">from {band}</p>
+						</a>
+					</li>
+				)
 			});
 		}
 
 		return (
-			<div className="list-container">
-				<div className="icon-container">
+			<Masonry className={'my-gallery-class'}
+					elementType={'ul'}
+					options={masonryOptions}
+					disableImagesLoaded={false}	>
 					{content}
-				</div>
-			</div>
+			</Masonry>
 		);
 	}
 });

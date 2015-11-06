@@ -135,6 +135,15 @@ module.exports = React.createClass({
 				dates: this.refs.dates.value,
 			});
 			drummer.save();
+
+			this.refs.name.value = '';
+			this.refs.bands.value = '';
+			this.refs.background.value = '';
+			this.refs.photo.value = '';
+			this.refs.video.value = '';
+			this.refs.vidpic.value = '';
+			this.refs.active.value = '';
+			this.refs.dates.value = '';
 		}
 	}
 });

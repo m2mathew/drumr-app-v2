@@ -31729,11 +31729,11 @@ module.exports = React.createClass({
 	displayName: 'exports',
 
 	getInitialState: function getInitialState() {
-		return { error: null, counter: 0, title: '', buttons: '' };
+		return { error: null, counter: 0, title: '', button: '' };
 	},
 	render: function render() {
 		var errorElement = null;
-		this.state.buttons = React.createElement(
+		this.state.button = React.createElement(
 			'button',
 			{ className: 'add-button' },
 			'Add Drummer'
@@ -31743,35 +31743,35 @@ module.exports = React.createClass({
 			this.state.title = 'Add a Drummer';
 		} else if (this.state.counter === 1) {
 			this.state.title = 'Add another Drummer';
-			this.state.buttons = React.createElement(
+			this.state.button = React.createElement(
 				'button',
 				{ className: 'add-button' },
 				'Add Another Drummer'
 			);
 		} else if (this.state.counter === 2) {
 			this.state.title = 'Add yet another Drummer';
-			this.state.buttons = React.createElement(
+			this.state.button = React.createElement(
 				'button',
 				{ className: 'add-button' },
 				'Add yet another Drummer'
 			);
 		} else if (this.state.counter === 3) {
 			this.state.title = 'Are you still adding Drummers?';
-			this.state.buttons = React.createElement(
+			this.state.button = React.createElement(
 				'button',
 				{ className: 'add-button' },
 				'Are you still adding Drummers?'
 			);
 		} else if (this.state.counter === 4) {
 			this.state.title = 'You really like the Drummers, huh?';
-			this.state.buttons = React.createElement(
+			this.state.button = React.createElement(
 				'button',
 				{ className: 'add-button' },
 				'You really like the Drummers, huh?'
 			);
 		} else if (this.state.counter >= 4) {
 			this.state.title = 'Add all the Drummers!';
-			this.state.buttons = React.createElement(
+			this.state.button = React.createElement(
 				'button',
 				{ className: 'add-button' },
 				'Add all the Drummers!'
@@ -31813,7 +31813,7 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('input', { autofocus: 'true', type: 'text', ref: 'name', className: 'validate', id: 'email', placeholder: 'Sammy Cymbal' })
+					React.createElement('input', { autofocus: 'true', type: 'text', ref: 'name', className: 'name', placeholder: 'Sammy Cymbal' })
 				),
 				React.createElement(
 					'div',
@@ -31836,7 +31836,7 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'bands', className: 'validate', placeholder: 'Drumm Beet' })
+					React.createElement('input', { type: 'text', ref: 'bands', className: 'bands', placeholder: 'Drumm Beet' })
 				),
 				React.createElement(
 					'div',
@@ -31854,7 +31854,7 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'dates', className: 'validate', placeholder: 'born July 4, 1976' })
+					React.createElement('input', { type: 'text', ref: 'dates', className: 'dates', placeholder: 'born July 4, 1976' })
 				),
 				React.createElement(
 					'div',
@@ -31872,7 +31872,7 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'active', className: 'validate', placeholder: '1993 to present' })
+					React.createElement('input', { type: 'text', ref: 'active', className: 'active', placeholder: '1993 to present' })
 				),
 				React.createElement(
 					'div',
@@ -31890,7 +31890,7 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('textarea', { type: 'text', ref: 'background', className: 'validate', placeholder: 'Sammy comes from a musical background, but threw all that away to become a drummer...', rows: '4' })
+					React.createElement('textarea', { type: 'text', ref: 'background', className: 'background', placeholder: 'Sammy comes from a musical background, but threw all that away to become a drummer...', rows: '4' })
 				),
 				React.createElement(
 					'div',
@@ -31908,7 +31908,7 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'photo', className: 'validate', placeholder: 'http://yourwebsite.com/yourpicture.png' })
+					React.createElement('input', { type: 'text', ref: 'photo', className: 'photo', placeholder: 'http://yourwebsite.com/yourpicture.png' })
 				),
 				React.createElement(
 					'div',
@@ -31926,7 +31926,7 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'video', className: 'validate', placeholder: 'http://videowebsite.com/yourvideo' })
+					React.createElement('input', { type: 'text', ref: 'video', className: 'video', placeholder: 'http://videowebsite.com/yourvideo' })
 				),
 				React.createElement(
 					'div',
@@ -31944,39 +31944,51 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'vidpic', className: 'validate', placeholder: 'http://yourwebsite.com/videopicture.png' })
+					React.createElement('input', { type: 'text', ref: 'vidpic', className: 'vidpic', placeholder: 'http://yourwebsite.com/videopicture.png' })
 				),
 				React.createElement(
 					'div',
 					{ className: 'button-container' },
-					this.state.buttons
+					this.state.button
 				)
 			)
 		);
 	},
 	addNewDrummer: function addNewDrummer(e) {
 		e.preventDefault();
+		this.setState({ error: '' });
+
+		var photoUrl = this.refs.photo.value.toLowerCase();
+		var videoUrl = this.refs.video.value.toLowerCase();
+		var videoPicUrl = this.refs.vidpic.value.toLowerCase();
+		console.log(photoUrl);
+		console.log(videoUrl);
+		console.log(videoPicUrl);
 
 		if (!this.refs.name.value || !this.refs.bands.value || !this.refs.background.value || !this.refs.photo.value || !this.refs.video.value || !this.refs.vidpic.value || !this.refs.active.value || !this.refs.dates.value) {
 			this.setState({ error: 'Please enter data in all fields' });
+		} else if (photoUrl.indexOf('http://') == -1 && photoUrl.indexOf('https://') == -1) {
+			this.setState({ error: 'Photo URL must begin with http:// or https://' });
+		} else if (videoUrl.indexOf('http://') == -1 && videoUrl.indexOf('https://') == -1) {
+			this.setState({ error: 'Video URL must begin with http:// or https://' });
+		} else if (videoPicUrl.indexOf('http://') == -1 && videoPicUrl.indexOf('https://') == -1) {
+			this.setState({ error: 'Video Picture URL must begin with http:// or https://' });
 		} else {
 			this.setState({
 				counter: this.state.counter + 1
 			});
 
-			// var drummer = new DrummerModel({
-			// 	name: this.refs.name.value,
-			// 	bands: this.refs.bands.value,
-			// 	background: this.refs.background.value,
-			// 	photos: this.refs.photo.value,
-			// 	videos: this.refs.video.value,
-			// 	videoPic: this.refs.vidpic.value,
-			// 	yearsActive: this.refs.active.value,
-			// 	dates: this.refs.dates.value,
-			// });
-			// drummer.save();
-
-			// this.refs.name.value('');
+			var drummer = new DrummerModel({
+				name: this.refs.name.value,
+				bands: this.refs.bands.value,
+				background: this.refs.background.value,
+				photos: this.refs.photo.value,
+				videos: this.refs.video.value,
+				videoPic: this.refs.vidpic.value,
+				yearsActive: this.refs.active.value,
+				dates: this.refs.dates.value
+			});
+			drummer.save();
 		}
 	}
 });

@@ -35,10 +35,10 @@ module.exports = React.createClass({
 				favQuery
 				.equalTo('username', currentUser)
 				.equalTo('favoritedDrummer', drmr)
-				.count().then(
-					(numfavorites) => {
-						console.log(numfavorites)
-						this.setState({ favoritedDrummer: numfavorites });
+				.first().then(
+					(fav) => {
+						console.log(fav)
+						this.setState({ favoritedDrummer: fav });
 					},
 					(err) => {
 						console.log(err);
@@ -66,9 +66,6 @@ module.exports = React.createClass({
 			var videos = (this.state.drummer.get('videos'));
 			var videoPic = (this.state.drummer.get('videoPic'));
 
-			console.log(this.state.favDrummers);
-			console.log(this.state.drummer.id);
-
 			if(this.state.favoritedDrummer) {
 				favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
 				}
@@ -79,7 +76,7 @@ module.exports = React.createClass({
 			content = (
 				<div>
 					<h1 className="detail-title">{name}</h1>
-					<p onClick={this.addFavorite}>{favStar}</p>
+					<p onClick={this.toggleFavorite}>{favStar} ← click there to make this drummer a favorite</p>
 					<div className="detail-years">{years}</div>
 					<div><img src={photos} /></div>
 					<div>
@@ -103,25 +100,21 @@ module.exports = React.createClass({
 			</div>
 		);
 	},
-	addFavorite(e) {
+	toggleFavorite(e) {
 		e.preventDefault();
-		var hasFavorite = '';
 		var currentUser = Parse.User.current();
-		var drummer = new DrummerModel({
-			objectId: this.state.drummer.id
-		});
-		var favorite = new FavoriteModel;
+		var favorite = null;
 
-		var favQuery = new Parse.Query(FavoriteModel);
+		if(!this.state.favoritedDrummer) {
+			favorite = new FavoriteModel;
+			favorite.set('username', currentUser)
+			.set('favoritedDrummer', this.state.drummer)
+			.save();
+		}
+		else {
+			this.state.favoritedDrummer.destroy();
 
-		favQuery
-		.contains('username', currentUser.id)
-		.contains('favoritedDrummer', this.state.drummer.id);
-
-		console.log(favQuery);
-
-		favorite.set('username', currentUser)
-		.set('favoritedDrummer', drummer)
-		.save();
+		}
+		this.setState({ favoritedDrummer: favorite });
 	}
 });

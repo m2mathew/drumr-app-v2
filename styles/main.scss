@@ -50,13 +50,14 @@ nav {
 				margin-right: 1em;
 
 				&.active.nav-link {
-						border-bottom: 2px solid #191959;
-					}
+					border-bottom: 2px solid #191959;
+				}
 
 				a {
 					display: block;
 					height: 2em;
 					text-decoration: none;
+					color: #000;
 
 					&:visited {
 						color: #000;
@@ -162,7 +163,7 @@ main {
 
 		.drummer-band {
 			font-size: 1em;
-			padding-left: 1em;
+			// padding-left: 1em;
 		}
 	}
 }
@@ -188,6 +189,7 @@ footer {
 
 input, textarea {
 	margin-top: 0.25em;
+	margin: 0.25em auto 0 auto;
 	border: 1px solid #979797;
 	background: #fff;
 	width: 60%;

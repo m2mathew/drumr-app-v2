@@ -386,7 +386,8 @@ nav {
         nav .nav-wrapper .nav-links li a {
           display: block;
           height: 2em;
-          text-decoration: none; }
+          text-decoration: none;
+          color: #000; }
           nav .nav-wrapper .nav-links li a:visited {
             color: #000; }
 
@@ -447,8 +448,7 @@ main {
       font-weight: bold;
       font-size: 1.5em; }
     .my-gallery-class li .drummer-band {
-      font-size: 1em;
-      padding-left: 1em; }
+      font-size: 1em; }
 
 footer {
   background-color: #D5E5F2;
@@ -464,6 +464,7 @@ footer {
 
 input, textarea {
   margin-top: 0.25em;
+  margin: 0.25em auto 0 auto;
   border: 1px solid #979797;
   background: #fff;
   width: 60%;

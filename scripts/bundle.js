@@ -35880,9 +35880,9 @@ module.exports = React.createClass({
 		query.get(this.props.drummer).then(function (drmr) {
 			_this.setState({ drummer: drmr });
 
-			favQuery.equalTo('username', currentUser).equalTo('favoritedDrummer', drmr).count().then(function (numfavorites) {
-				console.log(numfavorites);
-				_this.setState({ favoritedDrummer: numfavorites });
+			favQuery.equalTo('username', currentUser).equalTo('favoritedDrummer', drmr).first().then(function (fav) {
+				console.log(fav);
+				_this.setState({ favoritedDrummer: fav });
 			}, function (err) {
 				console.log(err);
 			});
@@ -35912,9 +35912,6 @@ module.exports = React.createClass({
 			var videos = this.state.drummer.get('videos');
 			var videoPic = this.state.drummer.get('videoPic');
 
-			console.log(this.state.favDrummers);
-			console.log(this.state.drummer.id);
-
 			if (this.state.favoritedDrummer) {
 				favStar = React.createElement(
 					'i',
@@ -35939,8 +35936,9 @@ module.exports = React.createClass({
 				),
 				React.createElement(
 					'p',
-					{ onClick: this.addFavorite },
-					favStar
+					{ onClick: this.toggleFavorite },
+					favStar,
+					' ← click there to make this drummer a favorite'
 				),
 				React.createElement(
 					'div',
@@ -36009,22 +36007,18 @@ module.exports = React.createClass({
 			content
 		);
 	},
-	addFavorite: function addFavorite(e) {
+	toggleFavorite: function toggleFavorite(e) {
 		e.preventDefault();
-		var hasFavorite = '';
 		var currentUser = Parse.User.current();
-		var drummer = new DrummerModel({
-			objectId: this.state.drummer.id
-		});
-		var favorite = new FavoriteModel();
+		var favorite = null;
 
-		var favQuery = new Parse.Query(FavoriteModel);
-
-		favQuery.contains('username', currentUser.id).contains('favoritedDrummer', this.state.drummer.id);
-
-		console.log(favQuery);
-
-		favorite.set('username', currentUser).set('favoritedDrummer', drummer).save();
+		if (!this.state.favoritedDrummer) {
+			favorite = new FavoriteModel();
+			favorite.set('username', currentUser).set('favoritedDrummer', this.state.drummer).save();
+		} else {
+			this.state.favoritedDrummer.destroy();
+		}
+		this.setState({ favoritedDrummer: favorite });
 	}
 });
 

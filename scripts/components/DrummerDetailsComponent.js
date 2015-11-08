@@ -2,14 +2,16 @@
  *  Drummer Details Component
  *
  *		React
- *		ReactDOM
+ *		Backbone
+ * 		Underscore
+ *		Drummer Model
+ *		Favorite Model
  *
  */
 
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 var DrummerModel = require('../models/DrummerModel');
 var FavoriteModel = require('../models/FavoriteModel');
 var Backbone = require('backbone');

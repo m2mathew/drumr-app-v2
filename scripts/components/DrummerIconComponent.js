@@ -2,14 +2,13 @@
  *  Drummer Icon Component
  *
  *		React
- *		ReactDOM
+ * 		Drummer Model
  *
  */
 
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 var DrummerModel = require('../models/DrummerModel');
 
 module.exports = React.createClass({

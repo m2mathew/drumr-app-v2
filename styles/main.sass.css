@@ -416,7 +416,8 @@ main {
     padding: 0; }
     main .home-container .filter-container.filter-container input, main .favorites-container .filter-container.filter-container input {
       margin-top: 0;
-      margin: 0.5em; }
+      margin: 1.5em;
+      padding: 0.5em; }
     main .home-container .filter-container.filter-container button, main .favorites-container .filter-container.filter-container button {
       margin-top: 0; }
   main .details-container {

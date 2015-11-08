@@ -3,7 +3,10 @@
  *
  *		React
  *		React-Masonry
- *		ReactDOM
+ *		Filter Component
+ *		List Filter Component
+ *		Drummer Model
+ *		Favorite Model
  *
  */
 
@@ -11,7 +14,6 @@
 
 var React = require('react');
 var Masonry = require('react-masonry-component')(React);
-var ReactDOM = require('react-dom');
 var FilterComponent = require('./FilterComponent');
 var ListComponent = require('./ListComponent');
 var DrummerModel = require('../models/DrummerModel');
@@ -36,7 +38,7 @@ module.exports = React.createClass({
 		.include('favoritedDrummer')
 		.find().then(
 			(favorites) => {
-				var drummers = favorites.map((favorite) => {
+				var drummers = favorites.map( (favorite) => {
 					return favorite.get('favoritedDrummer');
 				});
 				this.setState({ drummers: drummers });

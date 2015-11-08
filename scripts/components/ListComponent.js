@@ -3,7 +3,6 @@
  *
  *		React
  *		React-Masonry
- *		ReactDOM
  *		Backbone
  *		Underscore
  *		Drummer Model
@@ -15,7 +14,6 @@
 
 var React = require('react');
 var Masonry = require('react-masonry-component')(React);
-var ReactDOM = require('react-dom');
 var DrummerModel = require('../models/DrummerModel');
 var FavoriteModel = require('../models/FavoriteModel');
 var Backbone = require('backbone');
@@ -39,7 +37,7 @@ module.exports = React.createClass({
 		.include('favoritedDrummer')
 		.find().then(
 			(favorites) => {
-				var drummerIds = _.groupBy(favorites, function(favorite) {
+				var drummerIds = _.groupBy(favorites, (favorite) => {
 					return favorite.get('favoritedDrummer').id;
 				})
 
@@ -55,15 +53,13 @@ module.exports = React.createClass({
 		var favStar = '';
 		var currentUser = Parse.User.current();
 
-		// if(this.state.favDrummers === null) {
-		// 	content = (<li>Once you are <a href="#login">signed-in</a> then go <a href="#add">add drummers</a> and grow the drumr list!</li>);
-		// }
-
-		if(this.state.favDrummers != null) {
+		if(this.state.favDrummers !== null) {
 			var input = this.props.filter.toLowerCase();
 
-			var content = this.props.drummers.filter(function(drummer) {
-				return (drummer.get('name').toLowerCase().indexOf(input) != -1);
+			var content = this.props.drummers.filter( (drummer) => {
+				var name = (drummer.get('name').toLowerCase().indexOf(input) != -1);
+				var bands = (drummer.get('bands').toLowerCase().indexOf(input) != -1);
+				return name + bands;
 			})
 			.map( (drummer) => {
 				if(this.state.favDrummers.hasOwnProperty(drummer.id)) {

@@ -2,14 +2,15 @@
  *  Home Component
  *
  *		React
- *		ReactDOM
+ *		Filter Component
+ *		List Filter Component
+ *		Drummer Model
  *
  */
 
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 var FilterComponent = require('./FilterComponent');
 var ListComponent = require('./ListComponent');
 var DrummerModel = require('../models/DrummerModel');

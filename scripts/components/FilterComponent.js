@@ -1,17 +1,13 @@
 /*
- *  Filter Box Component
+ *  Filter Component
  *
  *		React
- *		ReactDOM
  *
  */
 
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
-var FilterComponent = require('./FilterComponent');
-var DrummerModel = require('../models/DrummerModel');
 
 module.exports = React.createClass({
 	render() {

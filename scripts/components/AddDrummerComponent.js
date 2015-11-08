@@ -2,14 +2,14 @@
  *  Add Drummer Component
  *
  *		React
- *		ReactDOM
+ *		Backbone
+ *		Drummer Model
  *
  */
 
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var DrummerModel = require('../models/DrummerModel');
 

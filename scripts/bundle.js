@@ -35555,14 +35555,14 @@ module.exports = require('./lib/React');
  *  Add Drummer Component
  *
  *		React
- *		ReactDOM
+ *		Backbone
+ *		Drummer Model
  *
  */
 
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var DrummerModel = require('../models/DrummerModel');
 
@@ -35843,19 +35843,21 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":190,"backbone":1,"react":178,"react-dom":6}],180:[function(require,module,exports){
+},{"../models/DrummerModel":190,"backbone":1,"react":178}],180:[function(require,module,exports){
 /*
  *  Drummer Details Component
  *
  *		React
- *		ReactDOM
+ *		Backbone
+ * 		Underscore
+ *		Drummer Model
+ *		Favorite Model
  *
  */
 
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 var DrummerModel = require('../models/DrummerModel');
 var FavoriteModel = require('../models/FavoriteModel');
 var Backbone = require('backbone');
@@ -36022,19 +36024,18 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":190,"../models/FavoriteModel":191,"backbone":1,"backbone/node_modules/underscore":3,"react":178,"react-dom":6}],181:[function(require,module,exports){
+},{"../models/DrummerModel":190,"../models/FavoriteModel":191,"backbone":1,"backbone/node_modules/underscore":3,"react":178}],181:[function(require,module,exports){
 /*
  *  Drummer Icon Component
  *
  *		React
- *		ReactDOM
+ * 		Drummer Model
  *
  */
 
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 var DrummerModel = require('../models/DrummerModel');
 
 module.exports = React.createClass({
@@ -36051,13 +36052,16 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":190,"react":178,"react-dom":6}],182:[function(require,module,exports){
+},{"../models/DrummerModel":190,"react":178}],182:[function(require,module,exports){
 /*
  *  Favorite List Component
  *
  *		React
  *		React-Masonry
- *		ReactDOM
+ *		Filter Component
+ *		List Filter Component
+ *		Drummer Model
+ *		Favorite Model
  *
  */
 
@@ -36065,7 +36069,6 @@ module.exports = React.createClass({
 
 var React = require('react');
 var Masonry = require('react-masonry-component')(React);
-var ReactDOM = require('react-dom');
 var FilterComponent = require('./FilterComponent');
 var ListComponent = require('./ListComponent');
 var DrummerModel = require('../models/DrummerModel');
@@ -36120,21 +36123,17 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":190,"../models/FavoriteModel":191,"./FilterComponent":183,"./ListComponent":185,"react":178,"react-dom":6,"react-masonry-component":7}],183:[function(require,module,exports){
+},{"../models/DrummerModel":190,"../models/FavoriteModel":191,"./FilterComponent":183,"./ListComponent":185,"react":178,"react-masonry-component":7}],183:[function(require,module,exports){
 /*
- *  Filter Box Component
+ *  Filter Component
  *
  *		React
- *		ReactDOM
  *
  */
 
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
-var FilterComponent = require('./FilterComponent');
-var DrummerModel = require('../models/DrummerModel');
 
 module.exports = React.createClass({
 	displayName: 'exports',
@@ -36163,19 +36162,20 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":190,"./FilterComponent":183,"react":178,"react-dom":6}],184:[function(require,module,exports){
+},{"react":178}],184:[function(require,module,exports){
 /*
  *  Home Component
  *
  *		React
- *		ReactDOM
+ *		Filter Component
+ *		List Filter Component
+ *		Drummer Model
  *
  */
 
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 var FilterComponent = require('./FilterComponent');
 var ListComponent = require('./ListComponent');
 var DrummerModel = require('../models/DrummerModel');
@@ -36222,13 +36222,12 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":190,"./FilterComponent":183,"./ListComponent":185,"react":178,"react-dom":6}],185:[function(require,module,exports){
+},{"../models/DrummerModel":190,"./FilterComponent":183,"./ListComponent":185,"react":178}],185:[function(require,module,exports){
 /*
  *  List Component
  *
  *		React
  *		React-Masonry
- *		ReactDOM
  *		Backbone
  *		Underscore
  *		Drummer Model
@@ -36240,7 +36239,6 @@ module.exports = React.createClass({
 
 var React = require('react');
 var Masonry = require('react-masonry-component')(React);
-var ReactDOM = require('react-dom');
 var DrummerModel = require('../models/DrummerModel');
 var FavoriteModel = require('../models/FavoriteModel');
 var Backbone = require('backbone');
@@ -36284,15 +36282,13 @@ module.exports = React.createClass({
 		var favStar = '';
 		var currentUser = Parse.User.current();
 
-		// if(this.state.favDrummers === null) {
-		// 	content = (<li>Once you are <a href="#login">signed-in</a> then go <a href="#add">add drummers</a> and grow the drumr list!</li>);
-		// }
-
-		if (this.state.favDrummers != null) {
+		if (this.state.favDrummers !== null) {
 			var input = this.props.filter.toLowerCase();
 
 			var content = this.props.drummers.filter(function (drummer) {
-				return drummer.get('name').toLowerCase().indexOf(input) != -1;
+				var name = drummer.get('name').toLowerCase().indexOf(input) != -1;
+				var bands = drummer.get('bands').toLowerCase().indexOf(input) != -1;
+				return name + bands;
 			}).map(function (drummer) {
 				if (_this2.state.favDrummers.hasOwnProperty(drummer.id)) {
 					favStar = React.createElement(
@@ -36347,12 +36343,11 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":190,"../models/FavoriteModel":191,"backbone":1,"backbone/node_modules/underscore":3,"react":178,"react-dom":6,"react-masonry-component":7}],186:[function(require,module,exports){
+},{"../models/DrummerModel":190,"../models/FavoriteModel":191,"backbone":1,"backbone/node_modules/underscore":3,"react":178,"react-masonry-component":7}],186:[function(require,module,exports){
 /*
  *  Login Component
  *
  *		React
- *		ReactDOM
  *		Backbone
  *
  */
@@ -36360,7 +36355,6 @@ module.exports = React.createClass({
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 
 module.exports = React.createClass({
@@ -36448,20 +36442,18 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":178,"react-dom":6}],187:[function(require,module,exports){
+},{"backbone":1,"react":178}],187:[function(require,module,exports){
 /*
  *  Navigation Component
  *
  *		React
- *		ReactDOM
- *		Backbone router
+ *		Backbone
  *
  */
 
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 
 module.exports = React.createClass({
@@ -36569,12 +36561,11 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":178,"react-dom":6}],188:[function(require,module,exports){
+},{"backbone":1,"react":178}],188:[function(require,module,exports){
 /*
  *  Register Component
  *
  *		React
- *		ReactDOM
  *		Backbone
  *
  */
@@ -36582,7 +36573,6 @@ module.exports = React.createClass({
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 
 module.exports = React.createClass({
@@ -36674,7 +36664,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":178,"react-dom":6}],189:[function(require,module,exports){
+},{"backbone":1,"react":178}],189:[function(require,module,exports){
 /*
  *  earDrum main.js
  *

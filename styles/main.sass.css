@@ -427,6 +427,8 @@ main {
       margin-bottom: 0.5em; }
     main .details-container .detail-years {
       margin-bottom: 1.5em; }
+  main .favStar img {
+    line-height: 0; }
 
 .my-gallery-class {
   list-style: none;

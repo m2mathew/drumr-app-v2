@@ -64,21 +64,22 @@ module.exports = React.createClass({
 			var years = (this.state.drummer.get('dates'));
 			var bands = (this.state.drummer.get('bands'));
 			var yearsActive = (this.state.drummer.get('yearsActive'));
+			var genres = (this.state.drummer.get('genres'));
 			var background = (this.state.drummer.get('background'));
 			var videos = (this.state.drummer.get('videos'));
 			var videoPic = (this.state.drummer.get('videoPic'));
 
 			if(this.state.favoritedDrummer) {
-				favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
+				favStar = (<i className="favStar"><img src="../../images/full-star-big.png" /></i>);
 				}
 			else {
-				favStar = (<i className="favStar"><img src="../../images/empty-star.png" /></i>);
+				favStar = (<i className="favStar"><img src="../../images/empty-star-big.png" /></i>);
 			}
 
 			content = (
 				<div>
 					<h1 className="detail-title">{name}</h1>
-					<p onClick={this.toggleFavorite}>{favStar} ← click there to make this drummer a favorite</p>
+					<p onClick={this.toggleFavorite}>{favStar} ← click to add or remove to your favorite list</p>
 					<div className="detail-years">{years}</div>
 					<div><img src={photos} /></div>
 					<div>
@@ -86,7 +87,10 @@ module.exports = React.createClass({
 						<div>{bands}</div>
 					</div>
 					<div>
-						<h2>Years active</h2><p>{yearsActive}</p>
+						<h2>Years active</h2>
+						<p>{yearsActive}</p>
+						<h2>Genres</h2>
+						<p>{genres}</p>
 						<h2>Background</h2>
 						<div>{background}</div>
 						<h2>Videos</h2>

@@ -63,10 +63,10 @@ module.exports = React.createClass({
 			})
 			.map( (drummer) => {
 				if(this.state.favDrummers.hasOwnProperty(drummer.id)) {
-					favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
+					favStar = (<i className="favStar"><img src="../../images/full-star-big.png" /></i>);
 				}
 				else {
-					favStar = (<i className="favStar"><img src="../../images/empty-star.png" /></i>);
+					favStar = (<i className="favStar"><img src="../../images/empty-star-big.png" /></i>);
 				}
 
 				var band = drummer.get('bands').split(',');

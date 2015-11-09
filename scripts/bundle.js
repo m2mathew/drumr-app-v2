@@ -35910,6 +35910,7 @@ module.exports = React.createClass({
 			var years = this.state.drummer.get('dates');
 			var bands = this.state.drummer.get('bands');
 			var yearsActive = this.state.drummer.get('yearsActive');
+			var genres = this.state.drummer.get('genres');
 			var background = this.state.drummer.get('background');
 			var videos = this.state.drummer.get('videos');
 			var videoPic = this.state.drummer.get('videoPic');
@@ -35918,13 +35919,13 @@ module.exports = React.createClass({
 				favStar = React.createElement(
 					'i',
 					{ className: 'favStar' },
-					React.createElement('img', { src: '../../images/full-star.png' })
+					React.createElement('img', { src: '../../images/full-star-big.png' })
 				);
 			} else {
 				favStar = React.createElement(
 					'i',
 					{ className: 'favStar' },
-					React.createElement('img', { src: '../../images/empty-star.png' })
+					React.createElement('img', { src: '../../images/empty-star-big.png' })
 				);
 			}
 
@@ -35940,7 +35941,7 @@ module.exports = React.createClass({
 					'p',
 					{ onClick: this.toggleFavorite },
 					favStar,
-					' ← click there to make this drummer a favorite'
+					' ← click to add or remove to your favorite list'
 				),
 				React.createElement(
 					'div',
@@ -35978,6 +35979,16 @@ module.exports = React.createClass({
 						'p',
 						null,
 						yearsActive
+					),
+					React.createElement(
+						'h2',
+						null,
+						'Genres'
+					),
+					React.createElement(
+						'p',
+						null,
+						genres
 					),
 					React.createElement(
 						'h2',
@@ -36294,13 +36305,13 @@ module.exports = React.createClass({
 					favStar = React.createElement(
 						'i',
 						{ className: 'favStar' },
-						React.createElement('img', { src: '../../images/full-star.png' })
+						React.createElement('img', { src: '../../images/full-star-big.png' })
 					);
 				} else {
 					favStar = React.createElement(
 						'i',
 						{ className: 'favStar' },
-						React.createElement('img', { src: '../../images/empty-star.png' })
+						React.createElement('img', { src: '../../images/empty-star-big.png' })
 					);
 				}
 

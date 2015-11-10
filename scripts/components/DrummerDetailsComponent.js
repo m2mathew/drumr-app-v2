@@ -108,16 +108,19 @@ module.exports = React.createClass({
 		var currentUser = Parse.User.current();
 		var favorite = null;
 
-		if(!this.state.favoritedDrummer) {
-			favorite = new FavoriteModel;
-			favorite.set('username', currentUser)
-			.set('favoritedDrummer', this.state.drummer)
-			.save();
-		}
-		else {
-			this.state.favoritedDrummer.destroy();
+		if(currentUser) {
 
+			if(!this.state.favoritedDrummer) {
+				favorite = new FavoriteModel;
+				favorite.set('username', currentUser)
+				.set('favoritedDrummer', this.state.drummer)
+				.save();
+			}
+			else {
+				this.state.favoritedDrummer.destroy();
+
+			}
+			this.setState({ favoritedDrummer: favorite });
 		}
-		this.setState({ favoritedDrummer: favorite });
 	}
 });

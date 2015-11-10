@@ -36023,13 +36023,16 @@ module.exports = React.createClass({
 		var currentUser = Parse.User.current();
 		var favorite = null;
 
-		if (!this.state.favoritedDrummer) {
-			favorite = new FavoriteModel();
-			favorite.set('username', currentUser).set('favoritedDrummer', this.state.drummer).save();
-		} else {
-			this.state.favoritedDrummer.destroy();
+		if (currentUser) {
+
+			if (!this.state.favoritedDrummer) {
+				favorite = new FavoriteModel();
+				favorite.set('username', currentUser).set('favoritedDrummer', this.state.drummer).save();
+			} else {
+				this.state.favoritedDrummer.destroy();
+			}
+			this.setState({ favoritedDrummer: favorite });
 		}
-		this.setState({ favoritedDrummer: favorite });
 	}
 });
 
@@ -36271,7 +36274,7 @@ module.exports = React.createClass({
 				var bands = drummer.get('bands').toLowerCase().indexOf(input) != -1;
 				return name + bands;
 			}).map(function (drummer) {
-				if (_this2.state.favDrummers.hasOwnProperty(drummer.id)) {
+				if (_this2.state.favDrummers.hasOwnProperty(drummer.id) && currentUser) {
 					favStar = React.createElement(
 						'i',
 						{ className: 'favStar' },

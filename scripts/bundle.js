@@ -35883,7 +35883,6 @@ module.exports = React.createClass({
 			_this.setState({ drummer: drmr });
 
 			favQuery.equalTo('username', currentUser).equalTo('favoritedDrummer', drmr).first().then(function (fav) {
-				console.log(fav);
 				_this.setState({ favoritedDrummer: fav });
 			}, function (err) {
 				console.log(err);
@@ -35933,18 +35932,21 @@ module.exports = React.createClass({
 				'div',
 				null,
 				React.createElement(
-					'h1',
-					{ className: 'detail-title' },
-					name
+					'span',
+					null,
+					React.createElement(
+						'h1',
+						{ className: 'detail-title' },
+						name
+					)
+				),
+				React.createElement(
+					'span',
+					{ onClick: this.toggleFavorite },
+					favStar
 				),
 				React.createElement(
 					'p',
-					{ onClick: this.toggleFavorite },
-					favStar,
-					' ← click to add or remove to your favorite list'
-				),
-				React.createElement(
-					'div',
 					{ className: 'detail-years' },
 					years
 				),
@@ -35962,14 +35964,10 @@ module.exports = React.createClass({
 						'Bands'
 					),
 					React.createElement(
-						'div',
+						'p',
 						null,
 						bands
-					)
-				),
-				React.createElement(
-					'div',
-					null,
+					),
 					React.createElement(
 						'h2',
 						null,
@@ -35996,7 +35994,7 @@ module.exports = React.createClass({
 						'Background'
 					),
 					React.createElement(
-						'div',
+						'p',
 						null,
 						background
 					),
@@ -36497,7 +36495,8 @@ module.exports = React.createClass({
 				{ key: 'fav', className: currentPage === 'favorites' ? 'active nav-link' : 'nav-link' },
 				React.createElement(
 					'a',
-					{ href: '#favorites' },
+					{ className: 'fav', href: '#favorites' },
+					React.createElement('img', { src: '../../images/empty-star.png' }),
 					'Favorites'
 				)
 			));

@@ -39,7 +39,6 @@ module.exports = React.createClass({
 				.equalTo('favoritedDrummer', drmr)
 				.first().then(
 					(fav) => {
-						console.log(fav)
 						this.setState({ favoritedDrummer: fav });
 					},
 					(err) => {
@@ -78,21 +77,19 @@ module.exports = React.createClass({
 
 			content = (
 				<div>
-					<h1 className="detail-title">{name}</h1>
-					<p onClick={this.toggleFavorite}>{favStar} ← click to add or remove to your favorite list</p>
-					<div className="detail-years">{years}</div>
+					<span><h1 className="detail-title">{name}</h1></span>
+					<span onClick={this.toggleFavorite}>{favStar}</span>
+					<p className="detail-years">{years}</p>
 					<div><img src={photos} /></div>
 					<div>
 						<h2>Bands</h2>
-						<div>{bands}</div>
-					</div>
-					<div>
+						<p>{bands}</p>
 						<h2>Years active</h2>
 						<p>{yearsActive}</p>
 						<h2>Genres</h2>
 						<p>{genres}</p>
 						<h2>Background</h2>
-						<div>{background}</div>
+						<p>{background}</p>
 						<h2>Videos</h2>
 						<a href={videos}><img src={videoPic} alt='watch this drummer!'/></a>
 					</div>

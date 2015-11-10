@@ -41,13 +41,18 @@ nav {
 		}
 
 		.nav-links {
-			font-size: 1.25em;
+			font-size: 1em;
 			float: right;
 
 			li {
 				list-style: none;
 				float: left;
 				margin-right: 1em;
+
+				.fav, img {
+					display: inline-block;
+					vertical-align: middle;
+				}
 
 				&.active.nav-link {
 					border-bottom: 2px solid #191959;
@@ -121,7 +126,13 @@ main {
 	}
 
 	.details-container {
-		margin: 4em;
+		margin: 6em;
+		margin-top: 3em;
+		white-space: pre-wrap;
+
+		p {
+			font-size: 1.25em;
+		}
 
 		.detail-title {
 			text-shadow: 0 1px 1px rgba(0, 0, 255, 0.5);
@@ -147,7 +158,7 @@ main {
 	box-sizing: border-box;
 
 	li {
-		width: 33%;
+		width: 100%;
 		box-sizing: border-box;
 		padding: 0.75em;
 		box-shadow: -2px 2px 7px #aaa;
@@ -200,7 +211,7 @@ input, textarea {
 	background: #fff;
 	width: 60%;
 	padding: 8px;
-	font-size: 1em;
+	font-size: 1.25em;
 	font-weight: bold;
 	color: #666;
 	border: none;
@@ -306,4 +317,46 @@ button {
 
 @-ms-viewport{
   width: device-width;
+}
+
+@media screen and (min-width: 768px) {
+
+	.my-gallery-class {
+
+		li {
+			width: 50%;
+		}
+	}
+
+	nav.nav-links {
+		font-size: 1.25em;
+	}
+}
+
+@media screen and (min-width: 900px) {
+
+	.my-gallery-class {
+
+		li {
+			width: 33%;
+		}
+	}
+
+	nav.nav-links {
+		font-size: 1.25em;
+	}
+}
+
+@media screen and (min-width: 1220px) {
+
+	.my-gallery-class {
+
+		li {
+			width: 25%;
+		}
+	}
+
+	nav.nav-links {
+		font-size: 1.25em;
+	}
 }

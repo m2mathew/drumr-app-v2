@@ -26,20 +26,6 @@ nav {
 			}
 		}
 
-		// & li:hover ul {
-		// 	display: block;
-		// }
-
-		ul {
-			// position: absolute;
-			// display: none;
-			// z-index: 999;
-
-			& li a {
-				// width: 80px;
-			}
-		}
-
 		.nav-links {
 			font-size: 1em;
 			float: right;
@@ -72,7 +58,6 @@ nav {
 		}
 	}
 }
-
 
 main {
 	flex: 1;
@@ -173,10 +158,17 @@ main {
 		}
 
 		.drummer-caption {
+			display: inline-block;
+			vertical-align: middle;
 			padding-top: 0.5em;
 			margin: 0;
 			font-weight: bold;
 			font-size: 1.5em;
+
+			img {
+				display: inline-block;
+				vertical-align: middle;
+			}
 		}
 
 		.drummer-band {
@@ -302,19 +294,6 @@ button {
 	}
 }
 
-// @media screen and (min-width: 778px) {
-// 	.icon-big-box {
-// 			float: left;
-// 			margin-left: 2em;
-// 			margin-right: 2em;
-
-// 			.icon-box {
-// 				margin: 0 auto;
-// 				text-align: center;
-// 			}
-// 		}
-// }
-
 @-ms-viewport{
   width: device-width;
 }
@@ -328,8 +307,12 @@ button {
 		}
 	}
 
-	nav.nav-links {
-		font-size: 1.25em;
+	nav {
+		.nav-wrapper {
+			.nav-links {
+				font-size: 1.25em;
+			}
+		}
 	}
 }
 
@@ -342,8 +325,13 @@ button {
 		}
 	}
 
-	nav.nav-links {
-		font-size: 1.25em;
+	nav {
+		.nav-wrapper {
+			.nav-links {
+				font-size: 1.25em;
+				margin-top: 2em;
+			}
+		}
 	}
 }
 
@@ -356,7 +344,12 @@ button {
 		}
 	}
 
-	nav.nav-links {
-		font-size: 1.25em;
+	nav {
+		.nav-wrapper {
+			.nav-links {
+				font-size: 1.25em;
+				margin-top: 2em;
+			}
+		}
 	}
 }

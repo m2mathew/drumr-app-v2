@@ -453,10 +453,15 @@ main {
     .my-gallery-class li .drummer-pic, .my-gallery-class li .drummer-caption {
       width: 100%; }
     .my-gallery-class li .drummer-caption {
+      display: inline-block;
+      vertical-align: middle;
       padding-top: 0.5em;
       margin: 0;
       font-weight: bold;
       font-size: 1.5em; }
+      .my-gallery-class li .drummer-caption img {
+        display: inline-block;
+        vertical-align: middle; }
     .my-gallery-class li .drummer-band {
       font-size: 1em; }
 
@@ -553,17 +558,19 @@ button {
 @media screen and (min-width: 768px) {
   .my-gallery-class li {
     width: 50%; }
-  nav.nav-links {
+  nav .nav-wrapper .nav-links {
     font-size: 1.25em; } }
 
 @media screen and (min-width: 900px) {
   .my-gallery-class li {
     width: 33%; }
-  nav.nav-links {
-    font-size: 1.25em; } }
+  nav .nav-wrapper .nav-links {
+    font-size: 1.25em;
+    margin-top: 2em; } }
 
 @media screen and (min-width: 1220px) {
   .my-gallery-class li {
     width: 25%; }
-  nav.nav-links {
-    font-size: 1.25em; } }
+  nav .nav-wrapper .nav-links {
+    font-size: 1.25em;
+    margin-top: 2em; } }

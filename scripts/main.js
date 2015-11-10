@@ -19,7 +19,6 @@ window.jQuery = $;
 
 var NavigationComponent = require('./components/NavigationComponent');
 var HomeComponent = require('./components/HomeComponent');
-var DrummerIconComponent = require('./components/DrummerIconComponent');
 var DrummerDetailsComponent = require('./components/DrummerDetailsComponent');
 var FavoritesComponent = require('./components/FavoritesComponent');
 var LoginComponent = require('./components/LoginComponent');

@@ -35843,7 +35843,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":190,"backbone":1,"react":178}],180:[function(require,module,exports){
+},{"../models/DrummerModel":189,"backbone":1,"react":178}],180:[function(require,module,exports){
 /*
  *  Drummer Details Component
  *
@@ -36033,35 +36033,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":190,"../models/FavoriteModel":191,"backbone":1,"backbone/node_modules/underscore":3,"react":178}],181:[function(require,module,exports){
-/*
- *  Drummer Icon Component
- *
- *		React
- * 		Drummer Model
- *
- */
-
-'use strict';
-
-var React = require('react');
-var DrummerModel = require('../models/DrummerModel');
-
-module.exports = React.createClass({
-	displayName: 'exports',
-
-	render: function render() {
-		var content = this.props.content;
-
-		return React.createElement(
-			'div',
-			{ className: 'icon-container' },
-			content
-		);
-	}
-});
-
-},{"../models/DrummerModel":190,"react":178}],182:[function(require,module,exports){
+},{"../models/DrummerModel":189,"../models/FavoriteModel":190,"backbone":1,"backbone/node_modules/underscore":3,"react":178}],181:[function(require,module,exports){
 /*
  *  Favorite List Component
  *
@@ -36132,7 +36104,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":190,"../models/FavoriteModel":191,"./FilterComponent":183,"./ListComponent":185,"react":178,"react-masonry-component":7}],183:[function(require,module,exports){
+},{"../models/DrummerModel":189,"../models/FavoriteModel":190,"./FilterComponent":182,"./ListComponent":184,"react":178,"react-masonry-component":7}],182:[function(require,module,exports){
 /*
  *  Filter Component
  *
@@ -36171,13 +36143,13 @@ module.exports = React.createClass({
 	}
 });
 
-},{"react":178}],184:[function(require,module,exports){
+},{"react":178}],183:[function(require,module,exports){
 /*
  *  Home Component
  *
  *		React
  *		Filter Component
- *		List Filter Component
+ *		List Component
  *		Drummer Model
  *
  */
@@ -36231,7 +36203,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":190,"./FilterComponent":183,"./ListComponent":185,"react":178}],185:[function(require,module,exports){
+},{"../models/DrummerModel":189,"./FilterComponent":182,"./ListComponent":184,"react":178}],184:[function(require,module,exports){
 /*
  *  List Component
  *
@@ -36352,7 +36324,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"../models/DrummerModel":190,"../models/FavoriteModel":191,"backbone":1,"backbone/node_modules/underscore":3,"react":178,"react-masonry-component":7}],186:[function(require,module,exports){
+},{"../models/DrummerModel":189,"../models/FavoriteModel":190,"backbone":1,"backbone/node_modules/underscore":3,"react":178,"react-masonry-component":7}],185:[function(require,module,exports){
 /*
  *  Login Component
  *
@@ -36451,7 +36423,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":178}],187:[function(require,module,exports){
+},{"backbone":1,"react":178}],186:[function(require,module,exports){
 /*
  *  Navigation Component
  *
@@ -36571,7 +36543,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":178}],188:[function(require,module,exports){
+},{"backbone":1,"react":178}],187:[function(require,module,exports){
 /*
  *  Register Component
  *
@@ -36674,7 +36646,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"backbone":1,"react":178}],189:[function(require,module,exports){
+},{"backbone":1,"react":178}],188:[function(require,module,exports){
 /*
  *  earDrum main.js
  *
@@ -36696,7 +36668,6 @@ window.jQuery = $;
 
 var NavigationComponent = require('./components/NavigationComponent');
 var HomeComponent = require('./components/HomeComponent');
-var DrummerIconComponent = require('./components/DrummerIconComponent');
 var DrummerDetailsComponent = require('./components/DrummerDetailsComponent');
 var FavoritesComponent = require('./components/FavoritesComponent');
 var LoginComponent = require('./components/LoginComponent');
@@ -36748,21 +36719,21 @@ Backbone.history.start();
 
 ReactDOM.render(React.createElement(NavigationComponent, { router: r }), document.getElementById('nav'));
 
-},{"./components/AddDrummerComponent":179,"./components/DrummerDetailsComponent":180,"./components/DrummerIconComponent":181,"./components/FavoritesComponent":182,"./components/HomeComponent":184,"./components/LoginComponent":186,"./components/NavigationComponent":187,"./components/RegisterComponent":188,"backbone":1,"backbone/node_modules/underscore/underscore-min":2,"jquery":5,"react":178,"react-dom":6}],190:[function(require,module,exports){
+},{"./components/AddDrummerComponent":179,"./components/DrummerDetailsComponent":180,"./components/FavoritesComponent":181,"./components/HomeComponent":183,"./components/LoginComponent":185,"./components/NavigationComponent":186,"./components/RegisterComponent":187,"backbone":1,"backbone/node_modules/underscore/underscore-min":2,"jquery":5,"react":178,"react-dom":6}],189:[function(require,module,exports){
 'use strict';
 
 module.exports = Parse.Object.extend({
 	className: 'Drummer'
 });
 
-},{}],191:[function(require,module,exports){
+},{}],190:[function(require,module,exports){
 'use strict';
 
 module.exports = Parse.Object.extend({
 	className: 'Favorites'
 });
 
-},{}]},{},[189])
+},{}]},{},[188])
 
 
 //# sourceMappingURL=bundle.js.map

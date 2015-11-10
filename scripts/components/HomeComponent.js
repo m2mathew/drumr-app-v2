@@ -3,7 +3,7 @@
  *
  *		React
  *		Filter Component
- *		List Filter Component
+ *		List Component
  *		Drummer Model
  *
  */

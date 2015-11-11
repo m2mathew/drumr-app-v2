@@ -395,7 +395,10 @@ nav {
             color: #000; }
 
 main {
-  flex: 1; }
+  flex: 1;
+  width: 100%; }
+  main .details-container {
+    background-color: aqua; }
   main h1 {
     margin-top: 0; }
   main .login-box, main .register-box, main .add-box {
@@ -427,13 +430,21 @@ main {
     margin: 6em;
     margin-top: 3em;
     white-space: pre-wrap; }
+    main .details-container h2 {
+      text-decoration: underline; }
     main .details-container p {
       font-size: 1.25em; }
     main .details-container .detail-title {
       text-shadow: 0 1px 1px rgba(0, 0, 255, 0.5);
-      margin-bottom: 0.5em; }
+      margin-bottom: 0.5em;
+      display: inline-block; }
+    main .details-container .detail-favstar {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 1.5em; }
     main .details-container .detail-years {
-      margin-bottom: 1.5em; }
+      margin: 0;
+      margin-bottom: 1em; }
   main .favStar img {
     line-height: 0; }
 
@@ -557,20 +568,24 @@ button {
 
 @media screen and (min-width: 768px) {
   .my-gallery-class li {
-    width: 50%; }
-  nav .nav-wrapper .nav-links {
-    font-size: 1.25em; } }
+    width: 50%; } }
 
 @media screen and (min-width: 900px) {
   .my-gallery-class li {
     width: 33%; }
   nav .nav-wrapper .nav-links {
     font-size: 1.25em;
-    margin-top: 2em; } }
+    margin-top: 2em; }
+  .details-container {
+    max-width: 800px; } }
 
-@media screen and (min-width: 1220px) {
+@media screen and (min-width: 1200px) {
   .my-gallery-class li {
     width: 25%; }
   nav .nav-wrapper .nav-links {
     font-size: 1.25em;
-    margin-top: 2em; } }
+    margin-top: 2em; }
+  main > .details-container {
+    width: 80%;
+    margin: 0 auto;
+    max-width: 75%; } }

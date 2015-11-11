@@ -77,10 +77,10 @@ module.exports = React.createClass({
 
 			content = (
 				<div>
-					<span><h1 className="detail-title">{name}</h1></span>
-					<span onClick={this.toggleFavorite}>{favStar}</span>
+					<span><h1 className="detail-title">{name}</h1><span className="detail-favstar" onClick={this.toggleFavorite}>{favStar}</span></span>
+
 					<p className="detail-years">{years}</p>
-					<div><img src={photos} /></div>
+					<div className="details-photo"><img src={photos} /></div>
 					<div>
 						<h2>Bands</h2>
 						<p>{bands}</p>

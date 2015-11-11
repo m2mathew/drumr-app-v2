@@ -35938,12 +35938,12 @@ module.exports = React.createClass({
 						'h1',
 						{ className: 'detail-title' },
 						name
+					),
+					React.createElement(
+						'span',
+						{ className: 'detail-favstar', onClick: this.toggleFavorite },
+						favStar
 					)
-				),
-				React.createElement(
-					'span',
-					{ onClick: this.toggleFavorite },
-					favStar
 				),
 				React.createElement(
 					'p',
@@ -35952,7 +35952,7 @@ module.exports = React.createClass({
 				),
 				React.createElement(
 					'div',
-					null,
+					{ className: 'details-photo' },
 					React.createElement('img', { src: photos })
 				),
 				React.createElement(

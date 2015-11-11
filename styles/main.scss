@@ -64,7 +64,7 @@ main {
 	width: 100%;
 
 	.details-container {
-		background-color: aqua;
+		// background-color: aqua;
 	}
 
 	h1 {
@@ -122,10 +122,12 @@ main {
 
 		h2 {
 			text-decoration: underline;
+			margin-bottom: 0;
 		}
 
 		p {
 			font-size: 1.25em;
+			margin-top: 0;
 		}
 
 		.detail-title {
@@ -144,6 +146,10 @@ main {
 			// position: absolute;
 			// top: 0;
 			// right: 0;
+
+			img {
+				border: 1px solid #979797;
+			}
 		}
 
 		.detail-years {
@@ -385,5 +391,6 @@ button {
 		width: 80%;
 		margin: 0 auto;
 		max-width: 75%;
+		padding-top: 2em;
 	}
 }

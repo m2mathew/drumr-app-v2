@@ -1,8 +1,12 @@
 /*
  *  earDrum main.js
  *
+ *		React
+ *		ReactDOM
  *		Parse credentials
  *		Backbone router
+ *		Underscore
+ *		jQuery
  *
  */
 

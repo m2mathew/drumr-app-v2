@@ -426,14 +426,13 @@ main {
     main .home-container .filter-container.filter-container button, main .favorites-container .filter-container.filter-container button {
       margin-top: 0; }
   main .details-container {
-    margin: 6em;
-    margin-top: 3em;
+    margin: 2em;
     white-space: pre-wrap; }
     main .details-container h2 {
       text-decoration: underline;
       margin-bottom: 0; }
     main .details-container p {
-      font-size: 1.25em;
+      font-size: 1em;
       margin-top: 0; }
     main .details-container .details-title {
       text-shadow: 0 1px 1px rgba(0, 0, 255, 0.5);
@@ -624,7 +623,7 @@ button {
     main > .details-container a > img {
       margin-bottom: 2em; }
     main > .details-container .details-content {
+      float: left;
       padding-left: 1.5em;
       box-sizing: border-box;
-      width: 70%;
-      float: left; } }
+      width: 70%; } }

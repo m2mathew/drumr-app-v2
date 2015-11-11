@@ -35654,7 +35654,7 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('input', { autofocus: 'true', type: 'text', ref: 'name', className: 'name', placeholder: 'Sammy Cymbal' })
+					React.createElement('input', { autofocus: 'true', type: 'text', ref: 'name', className: 'name', placeholder: 'Mikey Drumm' })
 				),
 				React.createElement(
 					'div',
@@ -35677,7 +35677,30 @@ module.exports = React.createClass({
 							)
 						)
 					),
-					React.createElement('input', { type: 'text', ref: 'bands', className: 'bands', placeholder: 'Band of Drummers' })
+					React.createElement('input', { type: 'text', ref: 'bands', className: 'bands', placeholder: 'Old Skool' })
+				),
+				React.createElement(
+					'div',
+					{ className: 'genres-input' },
+					React.createElement(
+						'p',
+						null,
+						React.createElement(
+							'label',
+							{ htmlFor: 'genres' },
+							React.createElement(
+								'strong',
+								null,
+								'Genre(s) '
+							),
+							React.createElement(
+								'small',
+								null,
+								'separated by commas'
+							)
+						)
+					),
+					React.createElement('input', { type: 'text', ref: 'genres', className: 'genres', placeholder: 'Rock, latin jazz, salsa' })
 				),
 				React.createElement(
 					'div',
@@ -35827,7 +35850,8 @@ module.exports = React.createClass({
 				videos: this.refs.video.value,
 				videoPic: this.refs.vidpic.value,
 				yearsActive: this.refs.active.value,
-				dates: this.refs.dates.value
+				dates: this.refs.dates.value,
+				genres: this.refs.genres.value
 			});
 			drummer.save();
 
@@ -35839,6 +35863,7 @@ module.exports = React.createClass({
 			this.refs.vidpic.value = '';
 			this.refs.active.value = '';
 			this.refs.dates.value = '';
+			this.refs.genres.value = '';
 		}
 	}
 });
@@ -36223,6 +36248,7 @@ var DrummerModel = require('../models/DrummerModel');
 var FavoriteModel = require('../models/FavoriteModel');
 var Backbone = require('backbone');
 var _ = require('backbone/node_modules/underscore');
+
 var masonryOptions = {
 	transitionDuration: 0
 };
@@ -36649,8 +36675,12 @@ module.exports = React.createClass({
 /*
  *  earDrum main.js
  *
+ *		React
+ *		ReactDOM
  *		Parse credentials
  *		Backbone router
+ *		Underscore
+ *		jQuery
  *
  */
 

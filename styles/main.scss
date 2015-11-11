@@ -113,8 +113,7 @@ main {
 	}
 
 	.details-container {
-		margin: 6em;
-		margin-top: 3em;
+		margin: 2em;
 		white-space: pre-wrap;
 
 		h2 {
@@ -123,7 +122,7 @@ main {
 		}
 
 		p {
-			font-size: 1.25em;
+			font-size: 1em;
 			margin-top: 0;
 		}
 
@@ -424,10 +423,10 @@ button {
 		}
 
 		.details-content {
+			float: left;
 			padding-left: 1.5em;
 			box-sizing: border-box;
 			width: 70%;
-			float: left;
 		}
 	}
 }

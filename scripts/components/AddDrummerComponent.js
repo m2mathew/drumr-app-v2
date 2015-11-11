@@ -59,11 +59,15 @@ module.exports = React.createClass({
 					{errorElement}
 					<div className="name-input">
 						<p><label htmlFor="name"><strong>Drummer Name</strong></label></p>
-						<input autofocus="true" type="text" ref="name" className="name" placeholder="Sammy Cymbal"/>
+						<input autofocus="true" type="text" ref="name" className="name" placeholder="Mikey Drumm"/>
 					</div>
 					<div className="band-input">
 						<p><label htmlFor="bands"><strong>Band(s) </strong><small>separated by commas</small></label></p>
-						<input type="text" ref="bands" className="bands" placeholder="Band of Drummers"/>
+						<input type="text" ref="bands" className="bands" placeholder="Old Skool"/>
+					</div>
+					<div className="genres-input">
+						<p><label htmlFor="genres"><strong>Genre(s) </strong><small>separated by commas</small></label></p>
+						<input type="text" ref="genres" className="genres" placeholder="Rock, latin jazz, salsa"/>
 					</div>
 					<div className="dates-input">
 						<p><label htmlFor="dates"><strong>Dates </strong></label></p>
@@ -133,6 +137,7 @@ module.exports = React.createClass({
 				videoPic: this.refs.vidpic.value,
 				yearsActive: this.refs.active.value,
 				dates: this.refs.dates.value,
+				genres: this.refs.genres.value
 			});
 			drummer.save();
 
@@ -144,6 +149,7 @@ module.exports = React.createClass({
 			this.refs.vidpic.value = '';
 			this.refs.active.value = '';
 			this.refs.dates.value = '';
+			this.refs.genres.value = '';
 		}
 	}
 });

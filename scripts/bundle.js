@@ -35932,41 +35932,27 @@ module.exports = React.createClass({
 				'div',
 				null,
 				React.createElement(
-					'span',
-					null,
-					React.createElement(
-						'h1',
-						{ className: 'detail-title' },
-						name
-					),
-					React.createElement(
-						'span',
-						{ className: 'detail-favstar', onClick: this.toggleFavorite },
-						favStar
-					)
-				),
-				React.createElement(
-					'p',
-					{ className: 'detail-years' },
-					years
-				),
-				React.createElement(
 					'div',
 					{ className: 'details-photo' },
 					React.createElement('img', { src: photos })
 				),
 				React.createElement(
 					'div',
-					null,
+					{ className: 'details-content' },
 					React.createElement(
-						'h2',
-						null,
-						'Bands'
+						'h1',
+						{ className: 'details-title' },
+						name
+					),
+					React.createElement(
+						'span',
+						{ className: 'details-favstar', onClick: this.toggleFavorite },
+						favStar
 					),
 					React.createElement(
 						'p',
-						null,
-						bands
+						{ className: 'details-years' },
+						years
 					),
 					React.createElement(
 						'h2',
@@ -35987,6 +35973,16 @@ module.exports = React.createClass({
 						'p',
 						null,
 						genres
+					),
+					React.createElement(
+						'h2',
+						null,
+						'Bands'
+					),
+					React.createElement(
+						'p',
+						null,
+						bands
 					),
 					React.createElement(
 						'h2',

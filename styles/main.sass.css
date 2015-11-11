@@ -366,6 +366,7 @@ body {
 nav {
   border-bottom: 4px solid #555; }
   nav .nav-wrapper {
+    width: 100%;
     padding: 0;
     color: #000; }
     nav .nav-wrapper .site-logo {
@@ -376,7 +377,8 @@ nav {
         margin: 0; }
     nav .nav-wrapper .nav-links {
       font-size: 1em;
-      float: right; }
+      float: left;
+      display: inline-block; }
       nav .nav-wrapper .nav-links li {
         list-style: none;
         float: left;
@@ -395,8 +397,7 @@ nav {
             color: #000; }
 
 main {
-  flex: 1;
-  width: 100%; }
+  flex: 1; }
   main h1 {
     margin-top: 0; }
   main .login-box, main .register-box, main .add-box {
@@ -434,17 +435,20 @@ main {
     main .details-container p {
       font-size: 1.25em;
       margin-top: 0; }
-    main .details-container .detail-title {
+    main .details-container .details-title {
       text-shadow: 0 1px 1px rgba(0, 0, 255, 0.5);
       margin-bottom: 0.5em;
       display: inline-block; }
-    main .details-container .detail-favstar {
+    main .details-container .details-favstar {
       display: inline-block;
       vertical-align: middle;
       margin-left: 1.5em; }
-    main .details-container .details-photo img {
-      border: 1px solid #979797; }
-    main .details-container .detail-years {
+    main .details-container .details-photo {
+      width: 75%; }
+      main .details-container .details-photo img {
+        border: 1px solid #979797;
+        width: 100%; }
+    main .details-container .details-years {
       margin: 0;
       margin-bottom: 1em; }
   main .favStar img {
@@ -570,25 +574,57 @@ button {
 
 @media screen and (min-width: 768px) {
   .my-gallery-class li {
-    width: 50%; } }
+    width: 50%; }
+  main > .details-container {
+    padding-top: 2em;
+    width: 700px;
+    margin: 0 auto;
+    max-width: 75%; } }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1015px) {
   .my-gallery-class li {
     width: 33%; }
   nav .nav-wrapper .nav-links {
-    font-size: 1.25em;
-    margin-top: 2em; }
-  .details-container {
-    max-width: 800px; } }
+    float: right;
+    margin-top: 2.5em; }
+  main > .details-container {
+    width: 850px;
+    margin: 0 auto;
+    max-width: 75%;
+    padding-top: 2em; }
+    main > .details-container .details-photo {
+      float: left;
+      width: 30%; }
+      main > .details-container .details-photo img {
+        width: 100%; }
+    main > .details-container a > img {
+      margin-bottom: 2em; }
+    main > .details-container .details-content {
+      padding-left: 1.5em;
+      box-sizing: border-box;
+      width: 70%;
+      float: left; } }
 
 @media screen and (min-width: 1200px) {
   .my-gallery-class li {
     width: 25%; }
   nav .nav-wrapper .nav-links {
-    font-size: 1.25em;
+    float: right;
     margin-top: 2em; }
   main > .details-container {
-    width: 80%;
+    width: 1000px;
     margin: 0 auto;
     max-width: 75%;
-    padding-top: 2em; } }
+    padding-top: 2em; }
+    main > .details-container .details-photo {
+      float: left;
+      width: 30%; }
+      main > .details-container .details-photo img {
+        width: 100%; }
+    main > .details-container a > img {
+      margin-bottom: 2em; }
+    main > .details-container .details-content {
+      padding-left: 1.5em;
+      box-sizing: border-box;
+      width: 70%;
+      float: left; } }

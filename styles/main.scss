@@ -13,6 +13,7 @@ nav {
 	border-bottom: 4px solid #555;
 
 	.nav-wrapper {
+		width: 100%;
 		padding: 0;
 		color: #000;
 
@@ -28,7 +29,8 @@ nav {
 
 		.nav-links {
 			font-size: 1em;
-			float: right;
+			float: left;
+			display: inline-block;
 
 			li {
 				list-style: none;
@@ -61,11 +63,6 @@ nav {
 
 main {
 	flex: 1;
-	width: 100%;
-
-	.details-container {
-		// background-color: aqua;
-	}
 
 	h1 {
 		margin-top: 0;
@@ -130,29 +127,28 @@ main {
 			margin-top: 0;
 		}
 
-		.detail-title {
+		.details-title {
 			text-shadow: 0 1px 1px rgba(0, 0, 255, 0.5);
 			margin-bottom: 0.5em;
 			display: inline-block;
 		}
 
-		.detail-favstar {
+		.details-favstar {
 			display: inline-block;
 			vertical-align: middle;
 			margin-left: 1.5em;
 		}
 
 		.details-photo {
-			// position: absolute;
-			// top: 0;
-			// right: 0;
+			width: 75%;
 
 			img {
 				border: 1px solid #979797;
+				width: 100%;
 			}
 		}
 
-		.detail-years {
+		.details-years {
 			margin: 0;
 			margin-bottom: 1em;
 		}
@@ -336,16 +332,15 @@ button {
 		}
 	}
 
-	// nav {
-	// 	.nav-wrapper {
-	// 		.nav-links {
-	// 			font-size: 1.25em;
-	// 		}
-	// 	}
-	// }
+	main > .details-container {
+		padding-top: 2em;
+		width: 700px;
+		margin: 0 auto;
+		max-width: 75%;
+	}
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1015px) {
 
 	.my-gallery-class {
 
@@ -356,16 +351,38 @@ button {
 
 	nav {
 		.nav-wrapper {
-
 			.nav-links {
-				font-size: 1.25em;
-				margin-top: 2em;
+				float: right;
+				margin-top: 2.5em;
 			}
 		}
 	}
 
-	.details-container {
-		max-width: 800px;
+	main > .details-container {
+		width: 850px;
+		margin: 0 auto;
+		max-width: 75%;
+		padding-top: 2em;
+
+		.details-photo {
+			float: left;
+			width: 30%;
+
+			img {
+				width: 100%;
+			}
+		}
+
+		a > img {
+			margin-bottom: 2em;
+		}
+
+		.details-content {
+			padding-left: 1.5em;
+			box-sizing: border-box;
+			width: 70%;
+			float: left;
+		}
 	}
 }
 
@@ -381,16 +398,36 @@ button {
 	nav {
 		.nav-wrapper {
 			.nav-links {
-				font-size: 1.25em;
+				float: right;
 				margin-top: 2em;
 			}
 		}
 	}
 
 	main > .details-container {
-		width: 80%;
+		width: 1000px;
 		margin: 0 auto;
 		max-width: 75%;
 		padding-top: 2em;
+
+		.details-photo {
+			float: left;
+			width: 30%;
+
+			img {
+				width: 100%;
+			}
+		}
+
+		a > img {
+			margin-bottom: 2em;
+		}
+
+		.details-content {
+			padding-left: 1.5em;
+			box-sizing: border-box;
+			width: 70%;
+			float: left;
+		}
 	}
 }

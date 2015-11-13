@@ -1,9 +1,9 @@
-# Final Project
-## The Iron Yard-Austin
+# Drumr app
+## The Iron Yard-Austin Final Project - continuing work
 
 ### Live Site
 
-[Hosted on Get Forge](http://drumr.getforge.io/)
+Original project [hosted on Get Forge](http://drumr.getforge.io/)
 
 ### Description
 

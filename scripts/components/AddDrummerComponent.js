@@ -62,7 +62,7 @@ module.exports = React.createClass({
 						<input autofocus="true" type="text" ref="name" className="name" placeholder="Mikey Drumm"/>
 					</div>
 					<div className="band-input">
-						<p><label htmlFor="bands"><strong>Band(s) </strong><small>separated by commas</small></label></p>
+						<p><label htmlFor="bands"><strong>Band(s) </strong><small>separated by commas - a user can search for any band name, but only the first listed band will show on the main screen</small></label></p>
 						<input type="text" ref="bands" className="bands" placeholder="Old Skool"/>
 					</div>
 					<div className="genres-input">

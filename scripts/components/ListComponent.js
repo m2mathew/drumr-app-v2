@@ -33,6 +33,17 @@ module.exports = React.createClass({
 		var currentUser = Parse.User.current();
 		var favQuery = new Parse.Query(FavoriteModel);
 
+		// favQuery
+		// .count('favoritedDrummer')
+		// .find().then(
+		// 	(favorites) => {
+
+		// 	},
+		// 	(err) => {
+		// 		console.log(err);
+		// 	}
+		// );
+
 		favQuery
 		.equalTo('username', currentUser)
 		.include('favoritedDrummer')
@@ -53,6 +64,7 @@ module.exports = React.createClass({
 		var content = (<div>loading...</div>);
 		var favStar = '';
 		var currentUser = Parse.User.current();
+		var favNum = null;
 
 		if(this.state.favDrummers !== null) {
 			var input = this.props.filter.toLowerCase();

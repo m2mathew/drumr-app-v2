@@ -1,5 +1,5 @@
 /*
- *  earDrum main.js
+ *  drumr main.js
  *
  *		React
  *		ReactDOM

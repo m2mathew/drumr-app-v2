@@ -237,7 +237,8 @@ select {
  *    `input` and others.
  */
 button,
-html input[type="button"], input[type="reset"],
+html input[type="button"],
+input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
   /* 2 */
@@ -537,27 +538,27 @@ button {
   .stripes.bottom .stripe.d {
     float: left;
     background: #00ADEE;
-    height: 0.75em;
+    height: 1em;
     width: 20%; }
   .stripes.bottom .stripe.r {
     float: left;
     background: #44C7F4;
-    height: 0.75em;
+    height: 1em;
     width: 20%; }
   .stripes.bottom .stripe.u {
     float: left;
     background: #ABE0F9;
-    height: 0.75em;
+    height: 1em;
     width: 20%; }
   .stripes.bottom .stripe.m {
     float: left;
     background: #F186B6;
-    height: 0.75em;
+    height: 1em;
     width: 20%; }
   .stripes.bottom .stripe.s {
     float: left;
     background: #EB008B;
-    height: 0.75em;
+    height: 1em;
     width: 20%; }
 
 @-webkit-keyframes pulse {

@@ -36152,7 +36152,7 @@ module.exports = React.createClass({
 		var currentUser = Parse.User.current();
 		var query = new Parse.Query(FavoriteModel);
 
-		query.equalTo('username', currentUser).include('favoritedDrummer').find().then(function (favorites) {
+		query.equalTo('username', currentUser).include('favoritedDrummer').descending('numFav').find().then(function (favorites) {
 			var drummers = favorites.map(function (favorite) {
 				return favorite.get('favoritedDrummer');
 			});
@@ -36253,7 +36253,7 @@ module.exports = React.createClass({
 		var _this = this;
 
 		var query = new Parse.Query(DrummerModel);
-		query.find().then(function (drummer) {
+		query.descending('numFav').find().then(function (drummer) {
 			_this.setState({ drummers: drummer });
 		}, function (err) {
 			console.log(err);
@@ -36322,17 +36322,6 @@ module.exports = React.createClass({
 		var currentUser = Parse.User.current();
 		var favQuery = new Parse.Query(FavoriteModel);
 
-		// favQuery
-		// .count('favoritedDrummer')
-		// .find().then(
-		// 	(favorites) => {
-
-		// 	},
-		// 	(err) => {
-		// 		console.log(err);
-		// 	}
-		// );
-
 		favQuery.equalTo('username', currentUser).include('favoritedDrummer').find().then(function (favorites) {
 			var drummerIds = _.groupBy(favorites, function (favorite) {
 				return favorite.get('favoritedDrummer').id;
@@ -36392,7 +36381,9 @@ module.exports = React.createClass({
 							{ className: 'drummer-caption' },
 							drummer.get('name'),
 							' ',
-							favStar
+							favStar,
+							' ',
+							drummer.get('numFav')
 						),
 						React.createElement(
 							'p',

@@ -33,17 +33,6 @@ module.exports = React.createClass({
 		var currentUser = Parse.User.current();
 		var favQuery = new Parse.Query(FavoriteModel);
 
-		// favQuery
-		// .count('favoritedDrummer')
-		// .find().then(
-		// 	(favorites) => {
-
-		// 	},
-		// 	(err) => {
-		// 		console.log(err);
-		// 	}
-		// );
-
 		favQuery
 		.equalTo('username', currentUser)
 		.include('favoritedDrummer')
@@ -89,7 +78,7 @@ module.exports = React.createClass({
 					<li key={drummer.id} className="icon-big-box">
 						<a href={"#details/" + drummer.id}>
 							<img className="drummer-pic" src={drummer.get('photos')} />
-							<p className="drummer-caption">{drummer.get('name')} {favStar}</p>
+							<p className="drummer-caption">{drummer.get('name')} {favStar} {drummer.get('numFav')}</p>
 							<p className="drummer-band">from {band}</p>
 						</a>
 					</li>

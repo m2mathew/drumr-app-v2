@@ -36152,7 +36152,7 @@ module.exports = React.createClass({
 		var currentUser = Parse.User.current();
 		var query = new Parse.Query(FavoriteModel);
 
-		query.equalTo('username', currentUser).include('favoritedDrummer').descending('numFav').find().then(function (favorites) {
+		query.equalTo('username', currentUser).include('favoritedDrummer').find().then(function (favorites) {
 			var drummers = favorites.map(function (favorite) {
 				return favorite.get('favoritedDrummer');
 			});
@@ -36253,7 +36253,7 @@ module.exports = React.createClass({
 		var _this = this;
 
 		var query = new Parse.Query(DrummerModel);
-		query.descending('numFav').find().then(function (drummer) {
+		query.descending('numFav').limit(15).find().then(function (drummer) {
 			_this.setState({ drummers: drummer });
 		}, function (err) {
 			console.log(err);

@@ -36,7 +36,6 @@ module.exports = React.createClass({
 		query
 		.equalTo('username', currentUser)
 		.include('favoritedDrummer')
-		.descending('numFav')
 		.find().then(
 			(favorites) => {
 				var drummers = favorites.map( (favorite) => {

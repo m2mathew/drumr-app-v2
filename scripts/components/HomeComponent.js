@@ -26,6 +26,7 @@ module.exports = React.createClass({
 		var query = new Parse.Query(DrummerModel);
 		query
 		.descending('numFav')
+		.limit(15)
 		.find().then(
 			(drummer) => {
 				this.setState({ drummers: drummer });

@@ -36078,19 +36078,33 @@ module.exports = React.createClass({
 		e.preventDefault();
 		var currentUser = Parse.User.current();
 		var favorite = null;
-		var numFav = null;
+		var addFav = null;
+
+		console.log(this.state.drummer.get('name'));
 
 		if (currentUser) {
 
 			if (!this.state.favoritedDrummer) {
+				// Add this drummer to the current user's favorite model
 				favorite = new FavoriteModel();
 				favorite.set('username', currentUser).set('favoritedDrummer', this.state.drummer).save();
 
-				numFav = new DrummerModel();
-				numFav
-				// .equalTo('drummer', this.state.drummer.id)
-				.increment('numFav', 1).save();
+				// Increment this drummer's number of favorites by one
+				addFav = this.state.drummer;
+				addFav.save(null, {
+					success: function success(addFav) {
+						addFav.increment('numFav', 1).save();
+					}
+				});
 			} else {
+				// Decrease this drummer's number of favorites by one
+				addFav = this.state.drummer;
+				addFav.save(null, {
+					success: function success(addFav) {
+						addFav.increment('numFav', -1).save();
+					}
+				});
+
 				this.state.favoritedDrummer.destroy();
 			}
 			this.setState({ favoritedDrummer: favorite });
@@ -36726,7 +36740,7 @@ module.exports = React.createClass({
 
 },{"backbone":1,"react":179}],189:[function(require,module,exports){
 /*
- *  earDrum main.js
+ *  drumr main.js
  *
  *		React
  *		ReactDOM

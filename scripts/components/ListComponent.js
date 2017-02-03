@@ -17,7 +17,7 @@ var Masonry = require('react-masonry-component')(React);
 var DrummerModel = require('../models/DrummerModel');
 var FavoriteModel = require('../models/FavoriteModel');
 var Backbone = require('backbone');
-var _ = require('backbone/node_modules/underscore');
+// var _ = require('backbone/node_modules/underscore');
 
 var masonryOptions = {
 	transitionDuration: 0

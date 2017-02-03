@@ -16,7 +16,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
-var _ = require('backbone/node_modules/underscore/underscore-min');
+// var _ = require('backbone/node_modules/underscore/underscore-min');
 
 window.$ = require('jquery');
 window.jQuery = $;
@@ -30,7 +30,7 @@ var RegisterComponent = require('./components/RegisterComponent');
 var AddDrummerComponent = require('./components/AddDrummerComponent');
 
 var app = document.getElementById('app');
-var currentuser = Parse.User.current();
+// var currentuser = Parse.User.current();
 
 var Router = Backbone.Router.extend({
 	routes: {

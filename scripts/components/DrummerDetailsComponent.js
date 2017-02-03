@@ -141,8 +141,8 @@ module.exports = React.createClass({
 				// 		addFav
 				// 		.increment('numFav', -1)
 				// 		.save();
-					}
-				});
+				// 	}
+				// });
 
 				// this.state.favoritedDrummer.destroy();
 			}

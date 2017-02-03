@@ -1,3 +1,3 @@
-module.exports = Parse.Object.extend({
-	className: 'Favorites'
-});
+// module.exports = Parse.Object.extend({
+// 	className: 'Favorites'
+// });

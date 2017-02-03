@@ -30,23 +30,23 @@ module.exports = React.createClass({
 		};
 	},
 	componentWillMount() {
-		var currentUser = Parse.User.current();
-		var query = new Parse.Query(FavoriteModel);
-
-		query
-		.equalTo('username', currentUser)
-		.include('favoritedDrummer')
-		.find().then(
-			(favorites) => {
-				var drummers = favorites.map( (favorite) => {
-					return favorite.get('favoritedDrummer');
-				});
-				this.setState({ drummers: drummers });
-			},
-			(err) => {
-				console.log(err);
-			}
-		);
+		// var currentUser = Parse.User.current();
+		// var query = new Parse.Query(FavoriteModel);
+		//
+		// query
+		// .equalTo('username', currentUser)
+		// .include('favoritedDrummer')
+		// .find().then(
+		// 	(favorites) => {
+		// 		var drummers = favorites.map( (favorite) => {
+		// 			return favorite.get('favoritedDrummer');
+		// 		});
+		// 		this.setState({ drummers: drummers });
+		// 	},
+		// 	(err) => {
+		// 		console.log(err);
+		// 	}
+		// );
 	},
 	render() {
 		return (

@@ -44,20 +44,20 @@ module.exports = React.createClass({
 	},
 	onLogin(e) {
 		e.preventDefault();
-		var user = new Parse.User();
-		Parse.User.logIn(
-			this.refs.email.value,
-			this.refs.password.value,
-			{
-				success: (u) => {
-					this.props.router.navigate('', {trigger: true});
-				},
-				error: (u, error) => {
-					this.setState({
-						error: error.message
-					});
-				}
-			}
-		);
+		// var user = new Parse.User();
+		// Parse.User.logIn(
+		// 	this.refs.email.value,
+		// 	this.refs.password.value,
+		// 	{
+		// 		success: (u) => {
+		// 			this.props.router.navigate('', {trigger: true});
+		// 		},
+		// 		error: (u, error) => {
+		// 			this.setState({
+		// 				error: error.message
+		// 			});
+		// 		}
+		// 	}
+		// );
 	}
 });

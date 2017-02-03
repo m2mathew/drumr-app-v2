@@ -1,4 +1,4 @@
-/*
+// /*
  *  Register Component
  *
  *		React
@@ -44,23 +44,23 @@ module.exports = React.createClass({
 	},
 	onRegister(e) {
 		e.preventDefault();
-		var user = new Parse.User();
-		user.signUp(
-			{
-				username: this.refs.email.value,
-				password: this.refs.password.value,
-				email: this.refs.email.value
-			},
-			{
-				success: (u) => {
-					this.props.router.navigate('', {trigger: true});
-				},
-				error: (u, error) => {
-					this.setState({
-						error: error.message
-					});
-				}
-			}
-		);
+		// var user = new Parse.User();
+		// user.signUp(
+		// 	{
+		// 		username: this.refs.email.value,
+		// 		password: this.refs.password.value,
+		// 		email: this.refs.email.value
+		// 	},
+		// 	{
+		// 		success: (u) => {
+		// 			this.props.router.navigate('', {trigger: true});
+		// 		},
+		// 		error: (u, error) => {
+		// 			this.setState({
+		// 				error: error.message
+		// 			});
+		// 		}
+		// 	}
+		// );
 	}
 });

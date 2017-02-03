@@ -23,18 +23,18 @@ module.exports = React.createClass({
 		};
 	},
 	componentWillMount() {
-		var query = new Parse.Query(DrummerModel);
-		query
-		.descending('numFav')
-		.limit(15)
-		.find().then(
-			(drummer) => {
-				this.setState({ drummers: drummer });
-			},
-			(err) => {
-				console.log(err);
-			}
-		);
+		// var query = new Parse.Query(DrummerModel);
+		// query
+		// .descending('numFav')
+		// .limit(15)
+		// .find().then(
+		// 	(drummer) => {
+		// 		this.setState({ drummers: drummer });
+		// 	},
+		// 	(err) => {
+		// 		console.log(err);
+		// 	}
+		// );
 	},
 	stateUpdate(value) {
 		this.setState({ filterText: value });

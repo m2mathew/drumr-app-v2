@@ -16,11 +16,11 @@ module.exports = React.createClass({
 			<div className="filter-container">
 				<form>
 					<input type="text"
-							id="filter-input"
-							ref="filterInput"
-							placeholder="enter a drummer name"
-							value={this.props.filterVal}
-							onChange={this.filterTrigger} />
+						id="filter-input"
+						ref="filterInput"
+						placeholder="enter a drummer name"
+						value={this.props.filterVal}
+						onChange={this.filterTrigger} />
 				</form>
 			</div>
 		);

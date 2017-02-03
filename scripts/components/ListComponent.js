@@ -30,29 +30,29 @@ module.exports = React.createClass({
 		};
 	},
 	componentWillMount() {
-		var currentUser = Parse.User.current();
-		var favQuery = new Parse.Query(FavoriteModel);
+		// var currentUser = Parse.User.current();
+		// var favQuery = new Parse.Query(FavoriteModel);
 
-		favQuery
-		.equalTo('username', currentUser)
-		.include('favoritedDrummer')
-		.find().then(
-			(favorites) => {
-				var drummerIds = _.groupBy(favorites, (favorite) => {
-					return favorite.get('favoritedDrummer').id;
-				})
-
-				this.setState({ favDrummers: drummerIds });
-			},
-			(err) => {
-				console.log(err);
-			}
-		);
+		// favQuery
+		// .equalTo('username', currentUser)
+		// .include('favoritedDrummer')
+		// .find().then(
+		// 	(favorites) => {
+		// 		var drummerIds = _.groupBy(favorites, (favorite) => {
+		// 			return favorite.get('favoritedDrummer').id;
+		// 		})
+		//
+		// 		this.setState({ favDrummers: drummerIds });
+		// 	},
+		// 	(err) => {
+		// 		console.log(err);
+		// 	}
+		// );
 	},
 	render() {
 		var content = (<div>loading...</div>);
 		var favStar = '';
-		var currentUser = Parse.User.current();
+		// var currentUser = Parse.User.current();
 		var favNum = null;
 
 		if(this.state.favDrummers !== null) {
@@ -96,4 +96,3 @@ module.exports = React.createClass({
 		);
 	}
 });
-

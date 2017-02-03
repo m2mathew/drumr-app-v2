@@ -107,9 +107,6 @@ module.exports = React.createClass({
 		var photoUrl = this.refs.photo.value.toLowerCase();
 		var videoUrl = this.refs.video.value.toLowerCase();
 		var videoPicUrl = this.refs.vidpic.value.toLowerCase();
-		console.log(photoUrl);
-		console.log(videoUrl);
-		console.log(videoPicUrl);
 
 		if(!this.refs.name.value || !this.refs.bands.value || !this.refs.background.value || !this.refs.photo.value || !this.refs.video.value || !this.refs.vidpic.value || !this.refs.active.value || !this.refs.dates.value) {
 			this.setState({ error: 'Please enter data in all fields' });

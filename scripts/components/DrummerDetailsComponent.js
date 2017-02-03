@@ -15,7 +15,7 @@ var React = require('react');
 var DrummerModel = require('../models/DrummerModel');
 var FavoriteModel = require('../models/FavoriteModel');
 var Backbone = require('backbone');
-var _ = require('backbone/node_modules/underscore');
+// var _ = require('backbone/node_modules/underscore');
 
 module.exports = React.createClass({
 	getInitialState() {
@@ -25,31 +25,31 @@ module.exports = React.createClass({
 		}
 	},
 	componentWillMount() {
-		var currentUser = Parse.User.current();
-
-		var favQuery = new Parse.Query(FavoriteModel);
-		var query = new Parse.Query(DrummerModel);
-		query
-		.get(this.props.drummer).then(
-			(drmr) => {
-				this.setState({ drummer: drmr });
-
-				favQuery
-				.equalTo('username', currentUser)
-				.equalTo('favoritedDrummer', drmr)
-				.first().then(
-					(fav) => {
-						this.setState({ favoritedDrummer: fav });
-					},
-					(err) => {
-						console.log(err);
-					}
-				);
-			},
-			(err) => {
-				console.log(err);
-			}
-		);
+		// var currentUser = Parse.User.current();
+		//
+		// var favQuery = new Parse.Query(FavoriteModel);
+		// var query = new Parse.Query(DrummerModel);
+		// query
+		// .get(this.props.drummer).then(
+		// 	(drmr) => {
+		// 		this.setState({ drummer: drmr });
+		//
+		// 		favQuery
+		// 		.equalTo('username', currentUser)
+		// 		.equalTo('favoritedDrummer', drmr)
+		// 		.first().then(
+		// 			(fav) => {
+		// 				this.setState({ favoritedDrummer: fav });
+		// 			},
+		// 			(err) => {
+		// 				console.log(err);
+		// 			}
+		// 		);
+		// 	},
+		// 	(err) => {
+		// 		console.log(err);
+		// 	}
+		// );
 	},
 	render() {
 		var favStar = (<i className="favStar"><img src="../../images/full-star.png" /></i>);
@@ -136,15 +136,15 @@ module.exports = React.createClass({
 			else {
 				// Decrease this drummer's number of favorites by one
 				addFav = this.state.drummer;
-				addFav.save(null, {
-					success: (addFav) => {
-						addFav
-						.increment('numFav', -1)
-						.save();
+				// addFav.save(null, {
+				// 	success: (addFav) => {
+				// 		addFav
+				// 		.increment('numFav', -1)
+				// 		.save();
 					}
 				});
 
-				this.state.favoritedDrummer.destroy();
+				// this.state.favoritedDrummer.destroy();
 			}
 			this.setState({ favoritedDrummer: favorite });
 		}
